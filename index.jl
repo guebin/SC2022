@@ -13,9 +13,8 @@ md"""
 md"""
 ### Contacts
 
-Email: guebin@jbnu.ac.kr 
-
-Kakao: [카카오톡채널](http://pf.kakao.com/_zNQxib/chat)
+- Email: guebin@jbnu.ac.kr 
+- Kakao: [카카오톡채널](http://pf.kakao.com/_zNQxib/chat)
 """
 
 # ╔═╡ f589bb03-2bf2-4f65-b351-0e3c53eae11b
