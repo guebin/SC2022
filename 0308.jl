@@ -27,7 +27,7 @@ md"""
 
 # ╔═╡ fd561cc1-fc59-480e-9dc3-af6252e9f501
 html"""
-<div notthestyle="position: relative; right: 0; top: 0; z-index: 300;"><iframe src="https://www.youtube.com/embed/playlist?list=PLQqh36zP38-wcXVKu5QvvWbAFKGCzJ_vd" width=400 height=250  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div notthestyle="position: relative; right: 0; top: 0; z-index: 300;"><iframe src="https://www.youtube.com/embed/playlist?list=PLQqh36zP38-wcXVKu5QvvWbAFKGCzJ_vd" width=600 height=375  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 """
 
 # ╔═╡ 815fc6f7-8234-44d0-9476-7bd2fec457f4
