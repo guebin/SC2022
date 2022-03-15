@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.18.1
+# v0.18.2
 
 using Markdown
 using InteractiveUtils
@@ -29,6 +29,9 @@ md"""
 [3월8일](https://guebin.github.io/SC2022/0308.html)
 
 [3월10일](https://guebin.github.io/SC2022/0310.html)
+
+[3월15일](https://guebin.github.io/SC2022/0315.html)
+
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
