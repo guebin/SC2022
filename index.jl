@@ -32,6 +32,8 @@ md"""
 
 [3월15일](https://guebin.github.io/SC2022/0315.html)
 
+[3월17일](https://guebin.github.io/SC2022/0317.html)
+
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
