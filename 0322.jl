@@ -14,324 +14,257 @@ macro bind(def, element)
     end
 end
 
-# ╔═╡ 0bf98a42-5ab4-4329-9246-82990dfd9488
-using Plots
+# ╔═╡ 3e7b4e0d-c52e-4214-a8fb-7ae7b03a60e9
+using Distributions, Plots,PlutoUI
 
-# ╔═╡ 4cb7be66-1e1b-48dd-b999-4cc60fbd7339
-using PlutoUI
-
-# ╔═╡ 09cb368b-f689-4c50-adf7-74df18d226dd
+# ╔═╡ 05e369d7-e0b8-4ef4-8831-938423a6717e
 md"""
-# 3월17일 강의영상
+# 3월22일 강의영상
 """
 
-# ╔═╡ f22510af-b047-4e79-8d5d-e8fd11a9eea7
+# ╔═╡ 3e2405d2-5c92-42cd-bbc6-66c1add0d282
 html"""
-<div notthestyle="position: relative; right: 0; top: 0; z-index: 300;"><iframe src="https://youtube.com/embed/playlist?list=PLQqh36zP38-wncjcGApF-lIg9Xibea8cP"width=600 height=375  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div notthestyle="position: relative; right: 0; top: 0; z-index: 300;"><iframe src="https://www.youtube.com/embed/playlist?list=PLQqh36zP38-ycDx8HFZQt_HHG7vLQCHOr" width=600 height=375  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 """
 
-# ╔═╡ 28c74c5b-00ea-4483-951d-5f3ee26fb894
+# ╔═╡ 77c4a801-d098-4f45-9b99-4e7e6f55a10b
 md"""
-# 3월17일 강의노트
+# 3월22일 강의노트 
 """
 
-# ╔═╡ 76c5c29f-a90f-478a-9f98-b3afb11eb0ce
-md"### 숙제풀이"
-
-# ╔═╡ 60556e4f-affb-4f03-8a8a-460fa01eae13
-md"---"
-
-# ╔═╡ 30d0741c-8e74-4d38-908c-e0bcfe4fd5ca
-md"[예비학습] 변수의 범위"
-
-# ╔═╡ 931aa1c2-0186-40a6-a3f2-e8e505682c0c
-z=0
-
-# ╔═╡ d1353080-c111-459e-818e-6e29ae69a714
-function f(z)
-	return z+100 
-	# 위에서 선언한 z를 여기에서 또 사용할수 있다? ==> 여기의 z는 이 함수에서만 효력이 있음
-end
-
-# ╔═╡ 2020a56c-563a-435a-a76d-478ecb16d8ab
-f(3)
-
-# ╔═╡ de6cbedf-99d8-44d0-83ea-818a0a43e47a
-z # z=3 이 아니라 z=0임 
-
-# ╔═╡ 28c91e84-ca8f-41c4-a2eb-a9352accfa0e
-md"---"
-
-# ╔═╡ fd205715-4120-45df-8fe7-343dbcccae5b
+# ╔═╡ 6155f666-e228-463e-9721-39ee899366bf
 Plots.plotly()
 
-# ╔═╡ ccd9234b-d1a0-4236-ae94-6975c02e3e95
-md"(풀이1: 제가 의도한 풀이)"
-
-# ╔═╡ 09583a25-c52a-41ef-a43b-3a49521ee05e
-g = (x -> x^2) ∘ (x -> x-1)
-
-# ╔═╡ 7315268d-1678-4106-affc-31dfa85b9a40
-x=-1:0.1:3; y=[g(x) for x in -1:0.1:3]
-
-# ╔═╡ d597d9f9-e54a-40ec-a6a7-c4ff43474547
-plot(x,y)
-
-# ╔═╡ 2fea6b1e-e64a-4467-8a13-8f60fe91025a
-md"(풀이2)"
-
-# ╔═╡ cbb74ed1-7c47-453f-8ba0-e97456322eb0
-plot(x,g.(x)) # 이게 중요합니다.
-
-# ╔═╡ 9b2fd596-2c96-4a25-bc61-c75237cb6220
-md"(풀이3)"
-
-# ╔═╡ 6173cba2-c0e1-4fba-89f5-0a9061992bd8
-plot(x,g)
-
-# ╔═╡ 37ea5718-2f38-4944-9c8a-7f07b82bdc80
-plot(g,x)
-
-# ╔═╡ 61eb8c21-3de1-47f2-b520-2b428c4d48e0
-plot(x,(x -> x^2) ∘ (x -> x-1))
-
-# ╔═╡ a8357633-10c7-4927-a996-469e0933fdf3
-md"(풀이3의 응용)"
-
-# ╔═╡ e4e87b59-69e9-44ae-b903-5480248a3c66
-plot(x,sin); plot!(x,cos); plot!(x, x-> (x-1)^2)
-
-# ╔═╡ ff80c009-5291-4e1c-94a0-cd35eff7cd09
+# ╔═╡ f94127c6-ca98-4946-babf-cb08768a7b4b
 md"""
-(풀이4) 파이프연산자를 이용
+### 베르누이: $X \sim Bernoulli(p)$ 
 """
 
-# ╔═╡ 0b17375a-b0e2-4c96-b685-09d972572685
-x
-
-# ╔═╡ 3fd41cb7-1b7e-4a59-80d0-905445333701
-plot(x, x .|> x -> x-1 .|> x-> x^2)
-
-# ╔═╡ 82a099f4-f740-4e90-99f4-c1edb3e136eb
-md"(학생풀이1)"
-
-# ╔═╡ 7e90058d-a099-4016-9a61-20ae2af8f526
-g_lee = (x -> x.^2) ∘ (x-> x.-1)
-
-# ╔═╡ fe7616c5-e93c-4f2a-9dcb-69f2ab73f550
-plot(x,g_lee(x))
-
-# ╔═╡ f5b750b6-b09b-4b02-a6a2-b3bc71b9b839
-md"(학생풀이2)"
-
-# ╔═╡ f8cff662-1add-4970-9290-4f034080af1b
-h(x) = (x -> x^2) ∘ (x-> x-1)
-# h(x) = 2x +1 
-# 입력이 x, 출력은 (x -> x^2) ∘ (x-> x-1) 인 함수 = 함수를 뱉는 함수 
-
-# ╔═╡ 776c7951-82ed-48be-a4e7-440244f10009
-h(-1)(1)
-
-# ╔═╡ c46eaba7-d9c3-4423-a51c-3519f994ee6f
-h(1)(1)
-
-# ╔═╡ 1d8417c1-dfbb-48fc-aec2-89bd3b30c450
-h(x)(1)
-
-# ╔═╡ 59898c01-4cd4-4cb0-935f-17c3f15646d8
-plot(x,h(x))
-
-# ╔═╡ f397f89e-90f3-465a-8239-272fb7679be0
-plot(x,h(0))
-
-# ╔═╡ 8c3d3c6f-0c62-4550-8051-0afc77d379a7
-md"(함수를 뱉는 함수)"
-
-# ╔═╡ 2591c80c-233f-40e1-9465-a45524d9d069
-_h(x) = if x>0 x -> x+1  else x -> -x+1 end 
-
-# ╔═╡ c67305de-6168-4f92-9ea7-86deeffc9746
-_h(0.1)(100)
-
-# ╔═╡ f1645b5a-efbe-4612-ab5a-2931bec4c3df
-_h(-0.1)(100)
-
-# ╔═╡ 29015797-b08c-4dd9-be8d-e26a2f7b01c0
-plot(_h(1),-2,2); plot!(_h(-1),-2,2)
-
-# ╔═╡ 9e194198-b101-41e4-b6de-0ffa96afc732
-md"---"
-
-# ╔═╡ 9f336162-5b96-4924-8d12-597d325ee8bf
-md"### 함수고급"
-
-# ╔═╡ beae091e-4edd-4afb-819f-070ed46ad322
-md"##### 연산자는 사실 함수였음"
-
-# ╔═╡ f6e45891-3d89-4890-aa29-045605b7f1c5
-+(2,3)
-
-# ╔═╡ 184926cd-3b17-4fd1-b35f-336f451cb142
-*(2,3)
-
-# ╔═╡ a97b3d06-94fb-47d6-8096-7cd5f2778b88
-myadd = + 
-
-# ╔═╡ 1b88cbac-33a9-48a3-afa6-af9fd2d56a3c
-myadd(1,3)
-
-# ╔═╡ 9f3994fe-03fc-4b82-936d-cce75e6325cc
-md"##### 브로드캐스팅"
-
-# ╔═╡ dd6b49c9-2376-465d-a39d-1fb9c3020c05
-plot(0:0.01:2π, sin.(0:0.01:2π)); plot!(0:0.01:2π, sqrt.(0:0.01:2π))
-
-# ╔═╡ 07c6d5f7-0c6e-4991-80ee-4b7862c40e42
-plot(0:0.01:2π, sin.(0:0.01:2π)); plot!(0:0.01:2π, .√(0:0.01:2π))
-
-# ╔═╡ ec02f852-1c0a-47ed-8d42-20ae7bc43bbc
+# ╔═╡ 74dbc7ae-3293-495b-bb3c-e633bfa76c33
 md"""
-##### 파이프연산자
+`-` 베르누이 분포의 요약 
+- X의의미: 성공확률이 p인 1번의 시행에서 성공한 횟수를 X라고 한다. 
+- X의범위: X=0 or X=1 
+- 파라메터의 의미와 범위: p는 성공확률을 나타냄, p ∈ [0,1].
+- pdf: 
+- mgf: 
+- E(X): p
+- V(X): p(1-p)
 """
 
-# ╔═╡ e30f919d-4387-49e0-8202-c66e179f5c95
+# ╔═╡ a302696f-3667-488c-a2c0-a95eca178801
 md"""
-`-` 파이프연산자의 기본
-- `x |> f` 는 `f(x)` 와 같다. 
-- `x |> f |> g`는 `g(f(x))`와 같다. 
-- `x |> f |> g |> `는 `h(g(f(x)))`와 같다. 
+`-` 베르누이분포에서 100개의 샘플을 뽑는 방법 (p=0.37로 가정)
 """
 
-# ╔═╡ 2ee12f8f-e5d7-4292-b568-2a217a453bdb
-0 |> x -> x-1 |> x -> x^2
-
-# ╔═╡ 7eff8d1c-1ed5-4bc0-abd2-5cf9b0e63a94
-0.5 |> x -> x-1 |> x -> x^2
-
-# ╔═╡ 8c2e4b4c-7f8a-4d70-8bb4-d543e5703f49
+# ╔═╡ caa9606b-a2b9-4d2b-93c5-453f4525b051
 md"""
-`-` 파이프연산자와 브로드캐스트 
+(방법1)
 """
 
-# ╔═╡ 074402aa-dc21-48b3-8152-8eea32d783a4
-[0,0.5] .|> x -> x-1 .|> x -> x^2
+# ╔═╡ b402c405-c6f6-4f53-886b-05b12021b6c3
+rand(Bernoulli(0.37),100)
 
-# ╔═╡ c7849d47-b141-43a4-a1d7-e66a125916c3
+# ╔═╡ bba8738c-2d5c-4d40-bb3d-1a11a57fd9d6
 md"""
-`-` 파이프연산자와 브로드캐스트 ver2 
+(방법2) 균등분포 -> 베르누이분포 
 """
 
-# ╔═╡ 7a708f2f-0a1b-46f3-89ff-8c766d8824f5
-1:4 .|> [x -> x-100, inv, x->3x, -]
+# ╔═╡ 74ab3bea-c2d2-4fe3-acd7-7de9b007b7ef
+rand(100) # 유니폼에서 100개의 샘플 추출
 
-# ╔═╡ e2304bf3-34f5-4def-a6a2-c6a6114b3ca6
+# ╔═╡ 435bbf1e-531b-4a0e-9b69-3b756e2371b3
+rand(100) .< 0.37 # 0.37보다 작은것만 성공
+
+# ╔═╡ 27f8e253-01e9-44e6-bb7d-c1de2a8d37c9
 md"""
-(팁) 브로드캐스팅의 생략
+(방법1,2의 비교)
 """
 
-# ╔═╡ 13def20a-7ba6-4c5b-abbd-550d794df1fc
+# ╔═╡ d0d7b51a-9edf-426b-b3e4-cded5f91e6c7
+let 
+	n=10000
+	p=0.37
+	method1 = rand(Bernoulli(p),n) 
+	method2 = rand(n) .< 0.37 
+	histogram([method1,method2],bin=0:0.02:1.02,alpha=0.3)
+end 
+
+# ╔═╡ 22c636b4-18c8-474b-9328-e124417c4fc1
+let 
+	n=1000
+	p=0.5
+	X=rand(Bernoulli(p),n)
+	md"""
+	`-` 평균과 분산의 추정 
+	- mean: $p
+	- mean est: $(mean(X))
+	- variance: $(p*(1-p))
+	- variance est: $(var(X))
+	"""
+end 
+
+# ╔═╡ 1a2e694b-322d-48e4-b381-ab2cd277366f
 md"""
-`-` 원래는 이렇게 써야한다..
+`-` 분산의 그래프 
 """
 
-# ╔═╡ 391d8ccf-47b5-4367-b7b1-564c848692bd
-sqrt.(0:0.5:2)
+# ╔═╡ de89581f-47fd-48e9-a6d9-d22311700e83
+let 
+	p=0:0.01:1 
+	plot(p, p -> p*(1-p))
+end 
 
-# ╔═╡ 9e571983-ccbc-432b-866c-6fb2e5945864
-.√(0:0.5:2)
-
-# ╔═╡ bd051e91-1f2e-4d09-aff1-7031627243b6
+# ╔═╡ d39cc97b-f7ad-4e54-a6ed-0497d6346acf
 md"""
-`-` 그런데 @.를 앞에 붙이면 모든 연산자, 함수는 브로드캐스팅으로 생각한다. 
+`-` 모수 $p$에 따른 히스토그램 변화관찰 
 """
 
-# ╔═╡ 8c43a1e1-242f-465c-af55-ea068ead309d
-@. sqrt(0:0.5:2)
+# ╔═╡ 579446ac-34d1-4fc6-bf3a-41d1d1f258e4
+@bind p Slider(0:0.01:1, show_value=true)
 
-# ╔═╡ 302440cd-fc4d-4d78-9fbe-157ee2ff37e4
-@. √(0:0.5:2)
+# ╔═╡ c5aaa184-231d-4c8d-8c5d-1123178fc659
+md"모수를 p=$p 로 선택"
 
-# ╔═╡ ea993fd5-988a-4e5d-b226-1be12df9d0e9
-@. 0:0.5:2 |> x-> x-1 |> x-> x^2
+# ╔═╡ b193b333-51e6-44b2-a138-f72bde37010a
+md"히스토그램"
 
-# ╔═╡ 2426e9ce-ae9f-4f19-9eb4-5b9a4895fe80
-@. 0:0.5:2 |> x-> x-1 |> x-> x^2 |> sin |> cos 
+# ╔═╡ 540353a5-3c2e-49fe-83b3-5bc37e8f3655
+histogram(rand(Bernoulli(p),10000),bins=0:0.01:1.01)
 
-# ╔═╡ f0b9e3eb-8df2-48b1-a5dd-23216a69912f
+# ╔═╡ 58a0f08e-d44a-487c-a41e-0ee8053b249c
 md"""
-##### 예제: 피보나치수열을 정의하여 보자. 
+- 분산이 가장 클 경우의 히스토그램을 그려보세요 
+- 히스토그램이 잘 퍼져있는지 확인해보세요 
 """
 
-# ╔═╡ d7125ccc-82d6-4b30-a275-68e08f2ddef2
+# ╔═╡ 78f8e0a8-e1aa-4c70-a460-a179456bd8fc
 md"""
-이걸 왜 하는가? 일반적인 수열과 다르게 일반항형태(=함수의형태)로 표현하기 어려운 수열 
+### 이항분포: $X \sim B(n,p)$ 
 """
 
-# ╔═╡ 89251ebb-33b6-4324-8db9-ae3d723630e7
-n -> 2n-1  # 초항이 1이고 공차가 2인 등차수열을 정의하는 함수
-
-# ╔═╡ d6e31001-5eec-4acb-afd3-c8bb7b822038
-(n -> 2n-1)(3)
-
-# ╔═╡ c19237ce-0e98-4a20-9e64-e3fe06858578
+# ╔═╡ 82b80b24-6fb2-43c4-a72c-d0c7b46c403c
 md"""
-[예비학습] 피보나치수열의 정의 
-
-(1) $a_1=a_2=1$ 
-
-(2) $n\geq 3$일 경우 $a_n=a_{n-1}+a_{n-2}$
+`-` 이항분포의 요약 
+- X의의미: 성공확률이 p인 n번의 시행에서 성공한 횟수를 X라고 한다. 
+- X의범위: X=0,1,...,n
+- 파라메터의 의미와 범위: n은 시행횟수, p는 성공할 확률; n=1,2,3,4,... p ∈ [0,1]
+- pdf:
+- mgf: (베르누이분포의mgf)ⁿ
+- E(X): np
+- V(X): np(1-p)
 """
 
-# ╔═╡ 260a4935-7b4e-4e80-8df2-b85e367fd301
+# ╔═╡ c147f8a3-43b7-447c-9d15-fc6635af4221
 md"""
-[예비학습2] if문
+`-` 대의적정의: $X \sim B(n,p) \Leftrightarrow X \overset{d}{=} Z_1+Z_2+ \dots +Z_n$, where $Z_i \overset{iid}{\sim} Bernoulli(p)$
 """
 
-# ╔═╡ dca32ac5-5403-4660-b5ab-5170e3de39d1
-@bind n Slider(1:10, show_value=true)
+# ╔═╡ 33d3125e-3d5f-467c-8488-2e82f9832e51
+md"""
+`-` 이항분포에서 100개의 샘플을 뽑는 방법 (p=0.37, n=8 이라고 가정)
+"""
 
-# ╔═╡ 72a9be93-4bba-4fa1-b891-b3143ae5bd43
-n≤2 ? println("2보다작거나같음") : println("2보다큼") # if
+# ╔═╡ 69dd4150-f82a-40a7-a1e1-ab2c90f024dd
+md"""
+(방법1) 
+"""
 
-# ╔═╡ be8c34b7-e099-451e-9531-547f5690930b
-if n <= 2
-	 println("2보다작거나같음")
-else
-	println("2보다큼") 
+# ╔═╡ 682bf567-0e62-475c-9078-6d873b6ac911
+rand(Binomial(8,0.37),100)
+
+# ╔═╡ 4b7789e6-ff5f-4000-b8ff-7d888d4e2e97
+md"""
+(방법2) 베르누이 -> 이항분포
+"""
+
+# ╔═╡ a2ca922b-432a-4215-b51b-32db273852d1
+rand(Bernoulli(0.37),8)
+
+# ╔═╡ aa72e48f-9b28-46d8-9cbc-7cd0c1191879
+[rand(Bernoulli(0.37),8) for i in 1:100]
+
+# ╔═╡ e86e0e87-313a-4851-8cc3-00011d7cc252
+[rand(Bernoulli(0.37),8) for i in 1:100] .|> sum
+
+# ╔═╡ 56c84dde-be00-48c4-a074-6f90c39e7092
+md"""
+(방법3) 균등분포 -> 베르누이분포 -> 이항분포 
+"""
+
+# ╔═╡ 3d63d57c-a54f-4571-a514-c686d6415b70
+rand(8) # 유니폼에서 8개를 뽑는다. 
+
+# ╔═╡ ce2c1125-8114-4b74-a86a-2dacffd4a811
+rand(8) .< 0.37 # 성공확률이 0.37인 베르누이에서 8개의 샘플을 뽑은셈 
+
+# ╔═╡ 12d5fd97-7a1c-405f-87d6-fa5317636852
+[rand(8) .< 0.37 for i in 1:100]
+
+# ╔═╡ 87fcf7c3-0659-486f-9924-2978e2fe45b2
+[rand(8) .< 0.37 for i in 1:100] .|> sum # (n,p)=(8,0.37)인 이항분포에서 100개를 뽑은셈 
+
+# ╔═╡ d7fc8444-1a9c-46f4-9681-ba0857d6ffbc
+let 
+	sample_size=1000000
+	n=100
+	p=0.6
+	X=rand(Binomial(n,p),sample_size)
+	md"""
+	`-` 평균과 분산의 추정 
+	- mean: $(n*p)
+	- mean est: $(mean(X))
+	- var: $(n*p*(1-p))
+	- var est: $(var(X))
+	"""
 end
 
-# ╔═╡ d6ba2b43-7cae-4f5d-8c71-7320e8150a4b
+# ╔═╡ d24f2b08-8997-4cc5-8f87-4a5cbd8290f2
 md"""
-(풀이)
+`-` 분산의 그래프 
 """
 
-# ╔═╡ 60e4fb10-ec46-4ca8-89a3-0b6e265aebdb
-a(n) = n ≤ 2 ? 1 : a(n-1)+a(n-2)
+# ╔═╡ 7e1e6e3f-f13a-414d-9b12-b1a610f61444
+let 
+	n = 10 
+	p = 0:0.01:1 
+	plot(p, p-> n*p*(1-p))
+end 
 
-# ╔═╡ 8acede8a-8a46-4c93-8603-9bbe9a3f092c
-scatter(1:8,a)
-
-# ╔═╡ 120291d7-b4c3-47a8-8c10-99382d04df0c
+# ╔═╡ bda96ee2-a212-4a79-b951-20cd16e4ec42
 md"""
-### 숙제
-초항이 2이고 공차가 3인 수열을 점화식의 형태로 정의하여 보라. 
-1항부터 10항지의 출력결과를 시각화하라.
+`-` 모수 (n,p)의 변화에 따른 히스토그램 관찰 
+"""
 
-hint
+# ╔═╡ f2e4d54c-9407-4303-a245-2ee53256fe84
+@bind bin_n Slider(1:50,show_value=true)
 
-(1) $a_1=2$
+# ╔═╡ f188dbc4-d2b4-49dd-a082-a7e7df5f3bdc
+@bind bin_p Slider(0:0.01:1,show_value=true)
 
-(2) $a_n= a_{n-1}+3$
+# ╔═╡ 27723aa3-abcf-4605-a9a9-70b9bdefd2eb
+md"선택된 모수는 (n,p)=($bin_n, $bin_p) 이다."
+
+# ╔═╡ 360bbdcf-0f22-479d-aab3-b7a5f11c8bf4
+histogram(rand(Binomial(bin_n,bin_p),10000))
+
+# ╔═╡ f4cc7df9-02aa-498b-8a22-5d661bd476b0
+md"""
+### 숙제 
+수업시간에 소개한 이항분포를 만드는 3가지 방법으로 (n,p)=(30,0.45)인 이항분포 100를 만들라. 
+세 방법의 히스토그램을 비교해보라. 
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 
 [compat]
-Plots = "~1.27.0"
+Distributions = "~0.25.52"
+Plots = "~1.27.1"
 PlutoUI = "~0.7.37"
 """
 
@@ -374,6 +307,12 @@ deps = ["Artifacts", "Bzip2_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll",
 git-tree-sha1 = "4b859a208b2397a7a623a03449e4636bdb17bcf2"
 uuid = "83423d85-b0ee-5818-9007-b63ccbeb887a"
 version = "1.16.1+1"
+
+[[deps.Calculus]]
+deps = ["LinearAlgebra"]
+git-tree-sha1 = "f641eb0a4f00c343bbc32346e1217b86f3ce9dad"
+uuid = "49dc2e85-a5d0-5ad3-a950-438e2897f1b9"
+version = "0.5.1"
 
 [[deps.ChainRulesCore]]
 deps = ["Compat", "LinearAlgebra", "SparseArrays"]
@@ -445,9 +384,21 @@ uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
 deps = ["Mmap"]
 uuid = "8bb1440f-4735-579b-a4ab-409b98df4dab"
 
+[[deps.DensityInterface]]
+deps = ["InverseFunctions", "Test"]
+git-tree-sha1 = "80c3e8639e3353e5d2912fb3a1916b8455e2494b"
+uuid = "b429d917-457f-4dbc-8f4c-0cc954292b1d"
+version = "0.4.0"
+
 [[deps.Distributed]]
 deps = ["Random", "Serialization", "Sockets"]
 uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
+
+[[deps.Distributions]]
+deps = ["ChainRulesCore", "DensityInterface", "FillArrays", "LinearAlgebra", "PDMats", "Printf", "QuadGK", "Random", "SparseArrays", "SpecialFunctions", "Statistics", "StatsBase", "StatsFuns", "Test"]
+git-tree-sha1 = "c43e992f186abaf9965cc45e372f4693b7754b22"
+uuid = "31c24e10-a181-5473-b8eb-7969acd0382f"
+version = "0.25.52"
 
 [[deps.DocStringExtensions]]
 deps = ["LibGit2"]
@@ -458,6 +409,12 @@ version = "0.8.6"
 [[deps.Downloads]]
 deps = ["ArgTools", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
+
+[[deps.DualNumbers]]
+deps = ["Calculus", "NaNMath", "SpecialFunctions"]
+git-tree-sha1 = "90b158083179a6ccbce2c7eb1446d5bf9d7ae571"
+uuid = "fa6b7ba4-c1ee-5f82-b5fc-ecf0adba8f74"
+version = "0.6.7"
 
 [[deps.EarCut_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -482,6 +439,12 @@ deps = ["Artifacts", "Bzip2_jll", "FreeType2_jll", "FriBidi_jll", "JLLWrappers",
 git-tree-sha1 = "d8a578692e3077ac998b50c0217dfd67f21d1e5f"
 uuid = "b22a6f82-2f65-5046-a5b2-351ab43fb4e5"
 version = "4.4.0+0"
+
+[[deps.FillArrays]]
+deps = ["LinearAlgebra", "Random", "SparseArrays", "Statistics"]
+git-tree-sha1 = "246621d23d1f43e3b9c368bf3b72b2331a27c286"
+uuid = "1a297f60-69ca-5386-bcde-b61e274b549b"
+version = "0.13.2"
 
 [[deps.FixedPointNumbers]]
 deps = ["Statistics"]
@@ -571,6 +534,12 @@ deps = ["Artifacts", "Cairo_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll",
 git-tree-sha1 = "129acf094d168394e80ee1dc4bc06ec835e510a3"
 uuid = "2e76f6c2-a576-52d4-95c1-20adfe4de566"
 version = "2.8.1+1"
+
+[[deps.HypergeometricFunctions]]
+deps = ["DualNumbers", "LinearAlgebra", "SpecialFunctions", "Test"]
+git-tree-sha1 = "65e4589030ef3c44d3b90bdc5aac462b4bb05567"
+uuid = "34004b35-14d8-5ef3-9330-4cdb6864b03a"
+version = "0.3.8"
 
 [[deps.Hyperscript]]
 deps = ["Test"]
@@ -801,11 +770,21 @@ version = "1.3.5+1"
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
 
+[[deps.OpenLibm_jll]]
+deps = ["Artifacts", "Libdl"]
+uuid = "05823500-19ac-5b8b-9628-191a04bc5112"
+
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "ab05aa4cc89736e95915b01e7279e61b1bfe33b8"
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
 version = "1.1.14+0"
+
+[[deps.OpenSpecFun_jll]]
+deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl", "Pkg"]
+git-tree-sha1 = "13652491f6856acfd2db29360e1bbcd4565d04f1"
+uuid = "efe28fd5-8261-553b-a9e1-b2916fc3738e"
+version = "0.5.5+0"
 
 [[deps.Opus_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -823,6 +802,12 @@ deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "b2a7af664e098055a7529ad1a900ded962bca488"
 uuid = "2f80f16e-611a-54ab-bc61-aa92de5b98fc"
 version = "8.44.0+0"
+
+[[deps.PDMats]]
+deps = ["LinearAlgebra", "SparseArrays", "SuiteSparse"]
+git-tree-sha1 = "e8185b83b9fc56eb6456200e873ce598ebc7f262"
+uuid = "90014a1f-27ba-587c-ab20-58faa44d9150"
+version = "0.11.7"
 
 [[deps.Parsers]]
 deps = ["Dates"]
@@ -854,9 +839,9 @@ version = "1.2.0"
 
 [[deps.Plots]]
 deps = ["Base64", "Contour", "Dates", "Downloads", "FFMPEG", "FixedPointNumbers", "GR", "GeometryBasics", "JSON", "Latexify", "LinearAlgebra", "Measures", "NaNMath", "Pkg", "PlotThemes", "PlotUtils", "Printf", "REPL", "Random", "RecipesBase", "RecipesPipeline", "Reexport", "Requires", "Scratch", "Showoff", "SparseArrays", "Statistics", "StatsBase", "UUIDs", "UnicodeFun", "Unzip"]
-git-tree-sha1 = "9213b4c18b57b7020ee20f33a4ba49eb7bef85e0"
+git-tree-sha1 = "1690b713c3b460c955a2957cd7487b1b725878a7"
 uuid = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
-version = "1.27.0"
+version = "1.27.1"
 
 [[deps.PlutoUI]]
 deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "JSON", "Logging", "Markdown", "Random", "Reexport", "UUIDs"]
@@ -879,6 +864,12 @@ deps = ["Artifacts", "CompilerSupportLibraries_jll", "Fontconfig_jll", "Glib_jll
 git-tree-sha1 = "ad368663a5e20dbb8d6dc2fddeefe4dae0781ae8"
 uuid = "ea2cea3b-5b76-57ae-a6ef-0a8af62496e1"
 version = "5.15.3+0"
+
+[[deps.QuadGK]]
+deps = ["DataStructures", "LinearAlgebra"]
+git-tree-sha1 = "78aadffb3efd2155af139781b8a8df1ef279ea39"
+uuid = "1fd47b50-473d-5c70-9696-f719f8f3bcdc"
+version = "2.4.2"
 
 [[deps.REPL]]
 deps = ["InteractiveUtils", "Markdown", "Sockets", "Unicode"]
@@ -916,6 +907,18 @@ git-tree-sha1 = "838a3a4188e2ded87a4f9f184b4b0d78a1e91cb7"
 uuid = "ae029012-a4dd-5104-9daa-d747884805df"
 version = "1.3.0"
 
+[[deps.Rmath]]
+deps = ["Random", "Rmath_jll"]
+git-tree-sha1 = "bf3188feca147ce108c76ad82c2792c57abe7b1f"
+uuid = "79098fc4-a85e-5d69-aa6a-4863f24498fa"
+version = "0.7.0"
+
+[[deps.Rmath_jll]]
+deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
+git-tree-sha1 = "68db32dff12bb6127bac73c209881191bf0efbb7"
+uuid = "f50d1b31-88e8-58de-be2c-1cc44531875f"
+version = "0.3.0+0"
+
 [[deps.SHA]]
 uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
 
@@ -951,6 +954,12 @@ version = "1.0.1"
 deps = ["LinearAlgebra", "Random"]
 uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 
+[[deps.SpecialFunctions]]
+deps = ["ChainRulesCore", "IrrationalConstants", "LogExpFunctions", "OpenLibm_jll", "OpenSpecFun_jll"]
+git-tree-sha1 = "5ba658aeecaaf96923dce0da9e703bd1fe7666f9"
+uuid = "276daf66-3868-5448-9aa4-cd146d93841b"
+version = "2.1.4"
+
 [[deps.StaticArrays]]
 deps = ["LinearAlgebra", "Random", "Statistics"]
 git-tree-sha1 = "6976fab022fea2ffea3d945159317556e5dad87c"
@@ -973,11 +982,21 @@ git-tree-sha1 = "8977b17906b0a1cc74ab2e3a05faa16cf08a8291"
 uuid = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 version = "0.33.16"
 
+[[deps.StatsFuns]]
+deps = ["ChainRulesCore", "HypergeometricFunctions", "InverseFunctions", "IrrationalConstants", "LogExpFunctions", "Reexport", "Rmath", "SpecialFunctions"]
+git-tree-sha1 = "25405d7016a47cf2bd6cd91e66f4de437fd54a07"
+uuid = "4c63d2b9-4356-54db-8cca-17b64c39e42c"
+version = "0.9.16"
+
 [[deps.StructArrays]]
 deps = ["Adapt", "DataAPI", "StaticArrays", "Tables"]
 git-tree-sha1 = "57617b34fa34f91d536eb265df67c2d4519b8b98"
 uuid = "09ab397b-f2b6-538f-b94a-2f83cf4a842a"
 version = "0.6.5"
+
+[[deps.SuiteSparse]]
+deps = ["Libdl", "LinearAlgebra", "Serialization", "SparseArrays"]
+uuid = "4607b0f0-06f3-5cda-b6b1-a6196a1729e9"
 
 [[deps.TOML]]
 deps = ["Dates"]
@@ -1242,89 +1261,53 @@ version = "0.9.1+5"
 """
 
 # ╔═╡ Cell order:
-# ╟─09cb368b-f689-4c50-adf7-74df18d226dd
-# ╟─f22510af-b047-4e79-8d5d-e8fd11a9eea7
-# ╟─28c74c5b-00ea-4483-951d-5f3ee26fb894
-# ╟─76c5c29f-a90f-478a-9f98-b3afb11eb0ce
-# ╟─60556e4f-affb-4f03-8a8a-460fa01eae13
-# ╟─30d0741c-8e74-4d38-908c-e0bcfe4fd5ca
-# ╠═931aa1c2-0186-40a6-a3f2-e8e505682c0c
-# ╠═d1353080-c111-459e-818e-6e29ae69a714
-# ╠═2020a56c-563a-435a-a76d-478ecb16d8ab
-# ╠═de6cbedf-99d8-44d0-83ea-818a0a43e47a
-# ╟─28c91e84-ca8f-41c4-a2eb-a9352accfa0e
-# ╠═0bf98a42-5ab4-4329-9246-82990dfd9488
-# ╠═fd205715-4120-45df-8fe7-343dbcccae5b
-# ╟─ccd9234b-d1a0-4236-ae94-6975c02e3e95
-# ╠═09583a25-c52a-41ef-a43b-3a49521ee05e
-# ╠═7315268d-1678-4106-affc-31dfa85b9a40
-# ╠═d597d9f9-e54a-40ec-a6a7-c4ff43474547
-# ╟─2fea6b1e-e64a-4467-8a13-8f60fe91025a
-# ╠═cbb74ed1-7c47-453f-8ba0-e97456322eb0
-# ╟─9b2fd596-2c96-4a25-bc61-c75237cb6220
-# ╠═6173cba2-c0e1-4fba-89f5-0a9061992bd8
-# ╠═37ea5718-2f38-4944-9c8a-7f07b82bdc80
-# ╠═61eb8c21-3de1-47f2-b520-2b428c4d48e0
-# ╟─a8357633-10c7-4927-a996-469e0933fdf3
-# ╠═e4e87b59-69e9-44ae-b903-5480248a3c66
-# ╟─ff80c009-5291-4e1c-94a0-cd35eff7cd09
-# ╠═0b17375a-b0e2-4c96-b685-09d972572685
-# ╠═3fd41cb7-1b7e-4a59-80d0-905445333701
-# ╟─82a099f4-f740-4e90-99f4-c1edb3e136eb
-# ╠═7e90058d-a099-4016-9a61-20ae2af8f526
-# ╠═fe7616c5-e93c-4f2a-9dcb-69f2ab73f550
-# ╟─f5b750b6-b09b-4b02-a6a2-b3bc71b9b839
-# ╠═f8cff662-1add-4970-9290-4f034080af1b
-# ╠═776c7951-82ed-48be-a4e7-440244f10009
-# ╠═c46eaba7-d9c3-4423-a51c-3519f994ee6f
-# ╠═1d8417c1-dfbb-48fc-aec2-89bd3b30c450
-# ╠═59898c01-4cd4-4cb0-935f-17c3f15646d8
-# ╠═f397f89e-90f3-465a-8239-272fb7679be0
-# ╟─8c3d3c6f-0c62-4550-8051-0afc77d379a7
-# ╠═2591c80c-233f-40e1-9465-a45524d9d069
-# ╠═c67305de-6168-4f92-9ea7-86deeffc9746
-# ╠═f1645b5a-efbe-4612-ab5a-2931bec4c3df
-# ╠═29015797-b08c-4dd9-be8d-e26a2f7b01c0
-# ╟─9e194198-b101-41e4-b6de-0ffa96afc732
-# ╟─9f336162-5b96-4924-8d12-597d325ee8bf
-# ╟─beae091e-4edd-4afb-819f-070ed46ad322
-# ╠═f6e45891-3d89-4890-aa29-045605b7f1c5
-# ╠═184926cd-3b17-4fd1-b35f-336f451cb142
-# ╠═a97b3d06-94fb-47d6-8096-7cd5f2778b88
-# ╠═1b88cbac-33a9-48a3-afa6-af9fd2d56a3c
-# ╟─9f3994fe-03fc-4b82-936d-cce75e6325cc
-# ╠═dd6b49c9-2376-465d-a39d-1fb9c3020c05
-# ╠═07c6d5f7-0c6e-4991-80ee-4b7862c40e42
-# ╟─ec02f852-1c0a-47ed-8d42-20ae7bc43bbc
-# ╟─e30f919d-4387-49e0-8202-c66e179f5c95
-# ╠═2ee12f8f-e5d7-4292-b568-2a217a453bdb
-# ╠═7eff8d1c-1ed5-4bc0-abd2-5cf9b0e63a94
-# ╟─8c2e4b4c-7f8a-4d70-8bb4-d543e5703f49
-# ╠═074402aa-dc21-48b3-8152-8eea32d783a4
-# ╟─c7849d47-b141-43a4-a1d7-e66a125916c3
-# ╠═7a708f2f-0a1b-46f3-89ff-8c766d8824f5
-# ╠═e2304bf3-34f5-4def-a6a2-c6a6114b3ca6
-# ╟─13def20a-7ba6-4c5b-abbd-550d794df1fc
-# ╠═391d8ccf-47b5-4367-b7b1-564c848692bd
-# ╠═9e571983-ccbc-432b-866c-6fb2e5945864
-# ╠═bd051e91-1f2e-4d09-aff1-7031627243b6
-# ╠═8c43a1e1-242f-465c-af55-ea068ead309d
-# ╠═302440cd-fc4d-4d78-9fbe-157ee2ff37e4
-# ╠═ea993fd5-988a-4e5d-b226-1be12df9d0e9
-# ╠═2426e9ce-ae9f-4f19-9eb4-5b9a4895fe80
-# ╟─f0b9e3eb-8df2-48b1-a5dd-23216a69912f
-# ╟─d7125ccc-82d6-4b30-a275-68e08f2ddef2
-# ╠═89251ebb-33b6-4324-8db9-ae3d723630e7
-# ╠═d6e31001-5eec-4acb-afd3-c8bb7b822038
-# ╟─c19237ce-0e98-4a20-9e64-e3fe06858578
-# ╟─260a4935-7b4e-4e80-8df2-b85e367fd301
-# ╠═4cb7be66-1e1b-48dd-b999-4cc60fbd7339
-# ╠═dca32ac5-5403-4660-b5ab-5170e3de39d1
-# ╠═72a9be93-4bba-4fa1-b891-b3143ae5bd43
-# ╠═be8c34b7-e099-451e-9531-547f5690930b
-# ╠═d6ba2b43-7cae-4f5d-8c71-7320e8150a4b
-# ╠═60e4fb10-ec46-4ca8-89a3-0b6e265aebdb
-# ╠═8acede8a-8a46-4c93-8603-9bbe9a3f092c
-# ╟─120291d7-b4c3-47a8-8c10-99382d04df0c
+# ╟─05e369d7-e0b8-4ef4-8831-938423a6717e
+# ╟─3e2405d2-5c92-42cd-bbc6-66c1add0d282
+# ╟─77c4a801-d098-4f45-9b99-4e7e6f55a10b
+# ╠═3e7b4e0d-c52e-4214-a8fb-7ae7b03a60e9
+# ╠═6155f666-e228-463e-9721-39ee899366bf
+# ╟─f94127c6-ca98-4946-babf-cb08768a7b4b
+# ╟─74dbc7ae-3293-495b-bb3c-e633bfa76c33
+# ╟─a302696f-3667-488c-a2c0-a95eca178801
+# ╟─caa9606b-a2b9-4d2b-93c5-453f4525b051
+# ╠═b402c405-c6f6-4f53-886b-05b12021b6c3
+# ╟─bba8738c-2d5c-4d40-bb3d-1a11a57fd9d6
+# ╠═74ab3bea-c2d2-4fe3-acd7-7de9b007b7ef
+# ╠═435bbf1e-531b-4a0e-9b69-3b756e2371b3
+# ╟─27f8e253-01e9-44e6-bb7d-c1de2a8d37c9
+# ╠═d0d7b51a-9edf-426b-b3e4-cded5f91e6c7
+# ╠═22c636b4-18c8-474b-9328-e124417c4fc1
+# ╟─1a2e694b-322d-48e4-b381-ab2cd277366f
+# ╠═de89581f-47fd-48e9-a6d9-d22311700e83
+# ╟─d39cc97b-f7ad-4e54-a6ed-0497d6346acf
+# ╠═c5aaa184-231d-4c8d-8c5d-1123178fc659
+# ╠═579446ac-34d1-4fc6-bf3a-41d1d1f258e4
+# ╟─b193b333-51e6-44b2-a138-f72bde37010a
+# ╠═540353a5-3c2e-49fe-83b3-5bc37e8f3655
+# ╟─58a0f08e-d44a-487c-a41e-0ee8053b249c
+# ╟─78f8e0a8-e1aa-4c70-a460-a179456bd8fc
+# ╟─82b80b24-6fb2-43c4-a72c-d0c7b46c403c
+# ╟─c147f8a3-43b7-447c-9d15-fc6635af4221
+# ╟─33d3125e-3d5f-467c-8488-2e82f9832e51
+# ╟─69dd4150-f82a-40a7-a1e1-ab2c90f024dd
+# ╠═682bf567-0e62-475c-9078-6d873b6ac911
+# ╟─4b7789e6-ff5f-4000-b8ff-7d888d4e2e97
+# ╠═a2ca922b-432a-4215-b51b-32db273852d1
+# ╠═aa72e48f-9b28-46d8-9cbc-7cd0c1191879
+# ╠═e86e0e87-313a-4851-8cc3-00011d7cc252
+# ╟─56c84dde-be00-48c4-a074-6f90c39e7092
+# ╠═3d63d57c-a54f-4571-a514-c686d6415b70
+# ╠═ce2c1125-8114-4b74-a86a-2dacffd4a811
+# ╠═12d5fd97-7a1c-405f-87d6-fa5317636852
+# ╟─87fcf7c3-0659-486f-9924-2978e2fe45b2
+# ╠═d7fc8444-1a9c-46f4-9681-ba0857d6ffbc
+# ╟─d24f2b08-8997-4cc5-8f87-4a5cbd8290f2
+# ╠═7e1e6e3f-f13a-414d-9b12-b1a610f61444
+# ╟─bda96ee2-a212-4a79-b951-20cd16e4ec42
+# ╟─27723aa3-abcf-4605-a9a9-70b9bdefd2eb
+# ╠═f2e4d54c-9407-4303-a245-2ee53256fe84
+# ╠═f188dbc4-d2b4-49dd-a082-a7e7df5f3bdc
+# ╠═360bbdcf-0f22-479d-aab3-b7a5f11c8bf4
+# ╟─f4cc7df9-02aa-498b-8a22-5d661bd476b0
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
