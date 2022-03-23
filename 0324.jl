@@ -14,237 +14,315 @@ macro bind(def, element)
     end
 end
 
-# ╔═╡ 3e7b4e0d-c52e-4214-a8fb-7ae7b03a60e9
-using Distributions, Plots,PlutoUI
+# ╔═╡ 5b49d6c1-f23e-462a-89d4-b94f256f40a6
+using Plots,Distributions,PlutoUI
 
-# ╔═╡ 05e369d7-e0b8-4ef4-8831-938423a6717e
-md"""
-# 3월22일 강의영상
-"""
-
-# ╔═╡ 3e2405d2-5c92-42cd-bbc6-66c1add0d282
-
-
-# ╔═╡ 77c4a801-d098-4f45-9b99-4e7e6f55a10b
-md"""
-# 3월22일 강의노트 
-"""
-
-# ╔═╡ 6155f666-e228-463e-9721-39ee899366bf
+# ╔═╡ 16df0558-714a-4352-b96d-102bc20379d4
 Plots.plotly()
 
-# ╔═╡ f94127c6-ca98-4946-babf-cb08768a7b4b
+# ╔═╡ 3073c0fd-3d92-4659-9e5b-fe3153b0ee66
 md"""
-### 베르누이: $X \sim Bernoulli(p)$ 
+### 포아송분포 
 """
 
-# ╔═╡ 74dbc7ae-3293-495b-bb3c-e633bfa76c33
+# ╔═╡ 18f21493-149d-461c-aea3-098362a3eeb1
 md"""
-`-` 베르누이 분포의 요약 
-- X의의미: 성공확률이 p인 1번의 시행에서 성공한 횟수를 X라고 한다. 
-- X의범위: X=0 or X=1 
-- 파라메터의 의미와 범위: p는 성공확률을 나타냄, p ∈ [0,1].
-- pdf: 
-- mgf: 
-- E(X): p
-- V(X): p(1-p)
+##### 이항분포의 포아송근사
 """
 
-# ╔═╡ a302696f-3667-488c-a2c0-a95eca178801
-md"""
-`-` 베르누이분포에서 100개의 샘플을 뽑는 방법 (p=0.37로 가정)
-"""
+# ╔═╡ 5ad273b0-6003-4d4e-b9b5-51abc56e1b9c
+@bind bin_n Slider(10:500)
 
-# ╔═╡ caa9606b-a2b9-4d2b-93c5-453f4525b051
-md"""
-(방법1)
-"""
-
-# ╔═╡ b402c405-c6f6-4f53-886b-05b12021b6c3
-rand(Bernoulli(0.37),100)
-
-# ╔═╡ bba8738c-2d5c-4d40-bb3d-1a11a57fd9d6
-md"""
-(방법2) 균등분포 -> 베르누이분포 
-"""
-
-# ╔═╡ 74ab3bea-c2d2-4fe3-acd7-7de9b007b7ef
-rand(100) # 유니폼에서 100개의 샘플 추출
-
-# ╔═╡ 435bbf1e-531b-4a0e-9b69-3b756e2371b3
-rand(100) .< 0.37 # 0.37보다 작은것만 성공
-
-# ╔═╡ 27f8e253-01e9-44e6-bb7d-c1de2a8d37c9
-md"""
-(방법1,2의 비교)
-"""
-
-# ╔═╡ d0d7b51a-9edf-426b-b3e4-cded5f91e6c7
+# ╔═╡ b7b947ca-ec7e-456a-bf82-cf3812c8ce12
 let 
-	n=10000
-	p=0.37
-	method1 = rand(Bernoulli(p),n) 
-	method2 = rand(n) .< 0.37 
-	histogram([method1,method2],bin=0:0.02:1.02,alpha=0.3)
+	λ=10 
+	n=500
+	p=λ/n 
+	X = rand(Binomial(n,p),10000)
+	Y = rand(Poisson(λ),10000)
+	p1 = histogram(X)
+	p2 = histogram(Y)
+	plot(p1,p2,layout=(1,2))
 end 
 
-# ╔═╡ 22c636b4-18c8-474b-9328-e124417c4fc1
+# ╔═╡ 73f33d41-3263-473a-8109-a1337eaf56ad
+md"""
+### 지수분포 
+"""
+
+# ╔═╡ 332d8c33-3c12-447a-847f-10af89d78a95
+# 0:0.01: 100 .|> 
+
+# ╔═╡ ef9b70b2-9f21-44e2-a483-826ed7706799
+md"""
+`-` 아래와 같은 2개의 지수분포를 고려하자.
+
+$f(x) = e^{-x}$
+$g(x) = \frac{1}{5}e^{-\frac{1}{5}x}$
+"""
+
+# ╔═╡ a16f16b6-0d12-43ad-b876-c070fe5f47db
+md"""
+`-` 하나는 평균이 1인 지수분포이고, 하나는 평균이 10인 지수분포이다. 
+"""
+
+# ╔═╡ bf8d0027-08d1-4224-a4b8-6f4cf8b3da66
+md"""
+`-` 각각의 pdf를 그리면 아래와 같다. 
+"""
+
+# ╔═╡ 3a5619e4-0340-46b4-a03f-c1758d107eb6
+xend_slider = @bind xend Slider(5:50)
+
+# ╔═╡ be17f4b0-8392-4259-ace1-f8ceaa33e7f4
 let 
-	n=1000
-	p=0.5
-	X=rand(Bernoulli(p),n)
+	p1 = plot(x-> exp(-x),0, xend)
+	p2 = plot(x-> 1/5*exp(-1/5*x), 0, xend)
+	plot(p1,p2,layout=(1,2))
+end 
+
+# ╔═╡ f15abd8d-2359-4416-993b-abbe1e6950b7
+md"""
+`-` 왼쪽의 분포에서 뽑은값이 클까? 오른쪽의 분포에서 뽑은 값이 클까? 
+- 오른쪽이죠? 
+"""
+
+# ╔═╡ bd4c8202-cbef-44d5-9654-b3c5ddd4a879
+md"""
+`-` 이번에는 각각의 cdf를 그려보자.
+
+$F(x)=\int_0^{x} e^{-\tau}d\tau=\left[-e^{-\tau} \right]_0^{x}=-e^{-x}+1$
+
+$G(x)=\int_0^{x} \frac{1}{5}e^{-\tau/5}d\tau=\left[-e^{-\tau/5} \right]_0^{x}=-e^{-x/5}+1$
+
+"""
+
+# ╔═╡ 6759f7e0-5c67-4e66-ae3b-1dced387eb5a
+xend_slider 
+
+# ╔═╡ 91ec411b-3bc9-49dc-8c40-c141ed248238
+let
+	p1 = plot(x-> -exp(-x)+1, 0, xend)
+	p2 = plot(x-> -exp(-x/5)+1, 0, xend)
+	plot(p1,p2,layout=(1,2))
+end
+
+# ╔═╡ 932b2705-521a-4bc8-b664-07acbf12f65f
+md"""
+`-` 해석 
+- 왼쪽: 어차피 평균이 1인 지수분포의 cdf이므로 생성된 값들은 대부분 5이하일 테니까 $x=5$에서는 cdf의 값이 거의 1에 가까워진다. 
+- 오른쪽: 평균이 5인 지수분포의 cdf이므로 생성된 값들은 대충절반정도는 5이하일것이다. (참고: $x=5$에서의 cdf의 값은 거의 0.6이므로 60퍼정도는 5이하임)
+"""
+
+# ╔═╡ 2ceafaf1-80b1-4e2b-9fc3-fed783ecfcdd
+md"""
+`-` cdf의 y축에서 랜덤변수를 발생시킨다음에 $\rightarrow \downarrow$ 와 같이 이동하여 $x$축에 내린다고 생각해보자. 
+- 왼쪽: 대부분 5이하에 떨어진다! 
+- 오른쪽: 대략 60퍼정도가 5이하에 떨어지고 나머지는 5이상에 떨어질것이다
+"""
+
+# ╔═╡ f6fe899d-2db9-479c-a400-cecd7c709d9a
+md"""
+`-` 느낌왔음. 이걸 구현해보자. 
+"""
+
+# ╔═╡ b69166d5-722e-4549-ade2-08f4c611bdcf
+xend_slider
+
+# ╔═╡ 245c3cec-9d14-4858-86ed-d06f32954796
+let
+	Finv(x) = -log(1-x)
+	Ginv(x) = -5log(1-x)
+	u = rand(5)
+	zeros = u .* 0
+	
+	p1= plot(x-> -exp(-x)+1,0,xend)
+	scatter!(zeros, u) 
+	scatter!(Finv.(u),zeros)
+	p2= plot(x-> -exp(-x/5)+1,0,xend)	
+	scatter!(zeros, u) 
+	scatter!(Ginv.(u),zeros)	
+	
+	plot(p1,p2,layout=(1,2))
+end
+
+# ╔═╡ 4b349ff1-8f3c-4df8-8304-2c64a8c48bd0
+md"""
+`-` 알고리즘정리 (inverse sampling)
+
+확률변수 $X_1,X_2,\dots,X_n \overset{iid}{\sim} F$ 을 생성하고 싶다면? 
+
+1.  균등분포에서 $n$개의 난수를 독립적으로 생성한다. 이를 $U_1,\dots,U_n$이라고 하자. 
+2.  $X_1 = F^{-1}(U_1), \dots, X_n=F^{-1}(U_n)$ 이라고 놓는다. 
+"""
+
+# ╔═╡ e6e96dbe-3310-4d6e-82ec-acefc8787d86
+md"""
+##### 예제1: inverse sampling을 이용하여 평균이 1인 지수분포를 1000개 생성하라. 
+"""
+
+# ╔═╡ 7119e6ea-95d0-4537-9cd8-300349f4d537
+md"""
+(풀이) 
+"""
+
+# ╔═╡ ef0c8f66-5ab6-4f8a-b83c-337bf8caddeb
+rand(10000) # 유니폼에서 샘플추출
+
+# ╔═╡ 71994a9e-7190-48e8-a2ca-675936409abb
+rand(10000) .|> x-> -log(1-x) # inverse cdf에 넣음
+
+# ╔═╡ 37fa0348-9d84-47e1-81bd-cfa05d0ee8a5
+#samplesize = @bind n Slider(100:100:10000)
+
+# ╔═╡ eeb92802-b0c3-4a4d-b3bc-5123e902c071
+let 
+	n=60000
+	u = rand(n)
+	X1 = u .|> x-> -log(1-x) 
+	X2 = rand(Exponential(1),n)
+	p1 = histogram(X1)
+	p2 = histogram(X2)
 	md"""
-	`-` 평균과 분산의 추정 
-	- mean: $p
-	- mean est: $(mean(X))
-	- variance: $(p*(1-p))
-	- variance est: $(var(X))
-	"""
-end 
-
-# ╔═╡ 1a2e694b-322d-48e4-b381-ab2cd277366f
-md"""
-`-` 분산의 그래프 
-"""
-
-# ╔═╡ de89581f-47fd-48e9-a6d9-d22311700e83
-let 
-	p=0:0.01:1 
-	plot(p, p -> p*(1-p))
-end 
-
-# ╔═╡ d39cc97b-f7ad-4e54-a6ed-0497d6346acf
-md"""
-`-` 모수 $p$에 따른 히스토그램 변화관찰 
-"""
-
-# ╔═╡ 579446ac-34d1-4fc6-bf3a-41d1d1f258e4
-@bind p Slider(0:0.01:1, show_value=true)
-
-# ╔═╡ c5aaa184-231d-4c8d-8c5d-1123178fc659
-md"모수를 p=$p 로 선택"
-
-# ╔═╡ b193b333-51e6-44b2-a138-f72bde37010a
-md"히스토그램"
-
-# ╔═╡ 540353a5-3c2e-49fe-83b3-5bc37e8f3655
-histogram(rand(Bernoulli(p),10000),bins=0:0.01:1.01)
-
-# ╔═╡ 58a0f08e-d44a-487c-a41e-0ee8053b249c
-md"""
-- 분산이 가장 클 경우의 히스토그램을 그려보세요 
-- 히스토그램이 잘 퍼져있는지 확인해보세요 
-"""
-
-# ╔═╡ 78f8e0a8-e1aa-4c70-a460-a179456bd8fc
-md"""
-### 이항분포: $X \sim B(n,p)$ 
-"""
-
-# ╔═╡ 82b80b24-6fb2-43c4-a72c-d0c7b46c403c
-md"""
-`-` 이항분포의 요약 
-- X의의미: 성공확률이 p인 n번의 시행에서 성공한 횟수를 X라고 한다. 
-- X의범위: X=0,1,...,n
-- 파라메터의 의미와 범위: n은 시행횟수, p는 성공할 확률; n=1,2,3,4,... p ∈ [0,1]
-- pdf:
-- mgf: (베르누이분포의mgf)ⁿ
-- E(X): np
-- V(X): np(1-p)
-"""
-
-# ╔═╡ c147f8a3-43b7-447c-9d15-fc6635af4221
-md"""
-`-` 대의적정의: $X \sim B(n,p) \Leftrightarrow X \overset{d}{=} Z_1+Z_2+ \dots +Z_n$, where $Z_i \overset{iid}{\sim} Bernoulli(p)$
-"""
-
-# ╔═╡ 33d3125e-3d5f-467c-8488-2e82f9832e51
-md"""
-`-` 이항분포에서 100개의 샘플을 뽑는 방법 (p=0.37, n=8 이라고 가정)
-"""
-
-# ╔═╡ 69dd4150-f82a-40a7-a1e1-ab2c90f024dd
-md"""
-(방법1) 
-"""
-
-# ╔═╡ 682bf567-0e62-475c-9078-6d873b6ac911
-rand(Binomial(8,0.37),100)
-
-# ╔═╡ 4b7789e6-ff5f-4000-b8ff-7d888d4e2e97
-md"""
-(방법2) 베르누이 -> 이항분포
-"""
-
-# ╔═╡ a2ca922b-432a-4215-b51b-32db273852d1
-rand(Bernoulli(0.37),8)
-
-# ╔═╡ aa72e48f-9b28-46d8-9cbc-7cd0c1191879
-[rand(Bernoulli(0.37),8) for i in 1:100]
-
-# ╔═╡ e86e0e87-313a-4851-8cc3-00011d7cc252
-[rand(Bernoulli(0.37),8) for i in 1:100] .|> sum
-
-# ╔═╡ 56c84dde-be00-48c4-a074-6f90c39e7092
-md"""
-(방법3) 균등분포 -> 베르누이분포 -> 이항분포 
-"""
-
-# ╔═╡ 3d63d57c-a54f-4571-a514-c686d6415b70
-rand(8) # 유니폼에서 8개를 뽑는다. 
-
-# ╔═╡ ce2c1125-8114-4b74-a86a-2dacffd4a811
-rand(8) .< 0.37 # 성공확률이 0.37인 베르누이에서 8개의 샘플을 뽑은셈 
-
-# ╔═╡ 12d5fd97-7a1c-405f-87d6-fa5317636852
-[rand(8) .< 0.37 for i in 1:100]
-
-# ╔═╡ 87fcf7c3-0659-486f-9924-2978e2fe45b2
-[rand(8) .< 0.37 for i in 1:100] .|> sum # (n,p)=(8,0.37)인 이항분포에서 100개를 뽑은셈 
-
-# ╔═╡ d7fc8444-1a9c-46f4-9681-ba0857d6ffbc
-let 
-	sample_size=1000000
-	n=100
-	p=0.6
-	X=rand(Binomial(n,p),sample_size)
-	md"""
-	`-` 평균과 분산의 추정 
-	- mean: $(n*p)
-	- mean est: $(mean(X))
-	- var: $(n*p*(1-p))
-	- var est: $(var(X))
+	##### 예시: inverse samepling 기법을 활용한 지수분포 생성
+	샘플수=$(n) 
+	$(plot(p1,p2,layout=(1,2)))
+	- 왼쪽: inverse sampling 결과 
+	- 오른쪽: Exponential 모듈 결과 
 	"""
 end
 
-# ╔═╡ d24f2b08-8997-4cc5-8f87-4a5cbd8290f2
+# ╔═╡ ea307ccf-7e82-4ec8-aa15-97d6a75dfa7b
 md"""
-`-` 분산의 그래프 
+##### 지수분포의 무기억성 
 """
 
-# ╔═╡ 7e1e6e3f-f13a-414d-9b12-b1a610f61444
+# ╔═╡ 69a82202-01fd-4dd2-99a0-89a06d065b3d
+n_slider = @bind n Slider(100:1000:100000,show_value=true)
+
+# ╔═╡ 91903ed7-2512-45d0-a7b5-325656408f4a
+t_sldr = @bind t Slider(1:0.01:5)
+
+# ╔═╡ cb47f65a-c12a-421a-aed0-382c8ee1f6e0
+s_sldr = @bind s Slider(1:0.1:5)
+
+# ╔═╡ bd5760bb-6eec-496d-b625-3b0ede2de701
+let Exp 
+	n=5000000
+	X = rand(Exponential(1),n)
+	p1 = length(X[X.>t])/length(X)
+	p2 = length(X[X.>t+s])/length(X[X.>s])
+	md""" 지수분포 무기억성
+	-  $t=$ $t
+	-  $s=$ $s
+	-  $P(X>t)=$ $(p1)
+	-  $P(X>t+s| X>s)=$ $(p2)
+	"""
+end
+
+# ╔═╡ f35c3b73-7022-488d-8037-b1d89936c914
+md"샘플수 $n$을 선택: $(n_slider)"
+
+# ╔═╡ 508ca187-6277-4b6b-a1e9-53b425a63840
+let 	
+	X = rand(Exponential(1),n)
+	p1 = length(X[X.>1])/length(X[X.>0])
+	p2 = length(X[X.>2])/length(X[X.>1])
+	p3 = length(X[X.>3])/length(X[X.>2])
+	p4 = length(X[X.>4])/length(X[X.>3])
+	p5 = length(X[X.>5])/length(X[X.>4])
+	md""" 지수분포 무기억성 2
+	-  $P(X>1)$ = $(p1)	
+	-  $P(X>2|X>1)$ = $(p2)
+	-  $P(X>3|X>2)$ = $(p3)
+	-  $P(X>4|X>3)$ = $(p4)
+	-  $P(X>5|X>4)$ = $(p5)
+	"""
+end
+
+# ╔═╡ 72f7e854-d825-456d-b61a-13534631d2dd
+md"""
+##### 고등학교 적분계산
+"""
+
+# ╔═╡ de8fe09b-5809-43f7-baac-8a21bc1cabe8
+md"""
+`-` 예제: 아래의 정적분을 계산하라. (부분적분 이용했던 문제!)
+
+$$\int_{0}^{5}xe^{-x}dx=?$$
+
+"""
+
+# ╔═╡ d6fcf3db-e5e5-4e73-9536-529e79372d7b
+md"""
+(손풀이) $\int_{0}^{3} xe^{-x} dx =\left[-xe^{-x}-e^{-x}\right]_0^3=-2e^{-1}-1$
+"""
+
+# ╔═╡ cebad423-361d-4b6c-9642-9d3d136a26c5
+(ℯ^5-16)/ℯ^3
+
+# ╔═╡ 5ca05945-6f64-484a-8692-b0b6084b9bd5
+md"""
+(컴퓨터를 이용한풀이) $\int_{0}^{3} xe^{-x} dx =\int_{0}^{\infty}xI(0\leq x \leq 1) e^{-x}dx.$
+
+따라서 구하는것은 $E[XI(0<X<1)]$ where $X \overset{iid}{\sim} Exp(1)$
+"""
+
+# ╔═╡ c3075364-53d2-449e-b65e-8cf3383c0a1b
+let
+	n = 1000
+	X = rand(Exponential(1),n)
+	X.*(X.<5) |> mean 
+end
+
+# ╔═╡ 9ef259aa-b99c-4f1d-b0cd-cb8c5ec17a48
+md"""
+`-` 예제: 아래의 정적분을 계산하라. (부분적분 이용했던 문제!)
+
+$$\int_{0}^{\infty}x^5e^{-x}dx=?$$
+
+"""
+
+# ╔═╡ c1272083-9a81-4fb0-a77b-5ec7fb66deec
+md"""
+(손풀이) $\left[-e^{-x} (x^5+5x^4+20x^3+60x^2+120x+120)\right]_0^\infty$
+"""
+
+# ╔═╡ 7d876e1a-6e4c-4d1d-8203-e6213c698e14
+let
+	f(x) = -exp(-x)*(x^5+5x^4+20x^3+60x^2+120x+120)
+	f(0)
+end
+
+# ╔═╡ 95033957-bbd1-4ee4-be27-f70bc42c4b35
+exp(-Inf)*()
+
+# ╔═╡ 8abc0468-e271-4026-8e35-76cf4a303ca9
+md"""
+(컴퓨터를 이용한 풀이)
+"""
+
+# ╔═╡ 37eb5c5c-1146-4d39-b910-8b95631d9ed5
 let 
-	n = 10 
-	p = 0:0.01:1 
-	plot(p, p-> n*p*(1-p))
-end 
+	n = 1000000
+	X = rand(Exponential(1),n)
+	X.^5 |> mean 
+end
 
-# ╔═╡ bda96ee2-a212-4a79-b951-20cd16e4ec42
-md"""
-`-` 모수 (n,p)의 변화에 따른 히스토그램 관찰 
-"""
+# ╔═╡ e556dc02-c37e-4a9a-8954-9ee04d35bcea
+let 
+	n = 1000000
+	f(x) = x^5
+	f.(rand(Exponential(1),n))
+	[f.(rand(Exponential(1),n)) for k in 1:100] |> histogram
+end
 
-# ╔═╡ f2e4d54c-9407-4303-a245-2ee53256fe84
-@bind bin_n Slider(1:50,show_value=true)
-
-# ╔═╡ f188dbc4-d2b4-49dd-a082-a7e7df5f3bdc
-@bind bin_p Slider(0:0.01:1,show_value=true)
-
-# ╔═╡ 27723aa3-abcf-4605-a9a9-70b9bdefd2eb
-md"선택된 모수는 (n,p)=($bin_n, $bin_p) 이다."
-
-# ╔═╡ 360bbdcf-0f22-479d-aab3-b7a5f11c8bf4
-histogram(rand(Binomial(bin_n,bin_p),10000))
+# ╔═╡ 67b5e937-a8a9-409f-bb1a-42c7e44bbd7f
+let 
+	n = 1000000 
+	f = x -> x^5*exp(-x)
+	3f.(rand(n)*3) |> mean
+end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1252,52 +1330,55 @@ version = "0.9.1+5"
 """
 
 # ╔═╡ Cell order:
-# ╠═05e369d7-e0b8-4ef4-8831-938423a6717e
-# ╠═3e2405d2-5c92-42cd-bbc6-66c1add0d282
-# ╠═77c4a801-d098-4f45-9b99-4e7e6f55a10b
-# ╠═3e7b4e0d-c52e-4214-a8fb-7ae7b03a60e9
-# ╠═6155f666-e228-463e-9721-39ee899366bf
-# ╠═f94127c6-ca98-4946-babf-cb08768a7b4b
-# ╠═74dbc7ae-3293-495b-bb3c-e633bfa76c33
-# ╠═a302696f-3667-488c-a2c0-a95eca178801
-# ╠═caa9606b-a2b9-4d2b-93c5-453f4525b051
-# ╠═b402c405-c6f6-4f53-886b-05b12021b6c3
-# ╠═bba8738c-2d5c-4d40-bb3d-1a11a57fd9d6
-# ╠═74ab3bea-c2d2-4fe3-acd7-7de9b007b7ef
-# ╠═435bbf1e-531b-4a0e-9b69-3b756e2371b3
-# ╠═27f8e253-01e9-44e6-bb7d-c1de2a8d37c9
-# ╠═d0d7b51a-9edf-426b-b3e4-cded5f91e6c7
-# ╠═22c636b4-18c8-474b-9328-e124417c4fc1
-# ╠═1a2e694b-322d-48e4-b381-ab2cd277366f
-# ╠═de89581f-47fd-48e9-a6d9-d22311700e83
-# ╠═d39cc97b-f7ad-4e54-a6ed-0497d6346acf
-# ╠═c5aaa184-231d-4c8d-8c5d-1123178fc659
-# ╠═579446ac-34d1-4fc6-bf3a-41d1d1f258e4
-# ╠═b193b333-51e6-44b2-a138-f72bde37010a
-# ╠═540353a5-3c2e-49fe-83b3-5bc37e8f3655
-# ╠═58a0f08e-d44a-487c-a41e-0ee8053b249c
-# ╠═78f8e0a8-e1aa-4c70-a460-a179456bd8fc
-# ╠═82b80b24-6fb2-43c4-a72c-d0c7b46c403c
-# ╠═c147f8a3-43b7-447c-9d15-fc6635af4221
-# ╠═33d3125e-3d5f-467c-8488-2e82f9832e51
-# ╠═69dd4150-f82a-40a7-a1e1-ab2c90f024dd
-# ╠═682bf567-0e62-475c-9078-6d873b6ac911
-# ╠═4b7789e6-ff5f-4000-b8ff-7d888d4e2e97
-# ╠═a2ca922b-432a-4215-b51b-32db273852d1
-# ╠═aa72e48f-9b28-46d8-9cbc-7cd0c1191879
-# ╠═e86e0e87-313a-4851-8cc3-00011d7cc252
-# ╠═56c84dde-be00-48c4-a074-6f90c39e7092
-# ╠═3d63d57c-a54f-4571-a514-c686d6415b70
-# ╠═ce2c1125-8114-4b74-a86a-2dacffd4a811
-# ╠═12d5fd97-7a1c-405f-87d6-fa5317636852
-# ╠═87fcf7c3-0659-486f-9924-2978e2fe45b2
-# ╠═d7fc8444-1a9c-46f4-9681-ba0857d6ffbc
-# ╠═d24f2b08-8997-4cc5-8f87-4a5cbd8290f2
-# ╠═7e1e6e3f-f13a-414d-9b12-b1a610f61444
-# ╠═bda96ee2-a212-4a79-b951-20cd16e4ec42
-# ╠═27723aa3-abcf-4605-a9a9-70b9bdefd2eb
-# ╠═f2e4d54c-9407-4303-a245-2ee53256fe84
-# ╠═f188dbc4-d2b4-49dd-a082-a7e7df5f3bdc
-# ╠═360bbdcf-0f22-479d-aab3-b7a5f11c8bf4
+# ╠═5b49d6c1-f23e-462a-89d4-b94f256f40a6
+# ╠═16df0558-714a-4352-b96d-102bc20379d4
+# ╠═3073c0fd-3d92-4659-9e5b-fe3153b0ee66
+# ╠═18f21493-149d-461c-aea3-098362a3eeb1
+# ╠═5ad273b0-6003-4d4e-b9b5-51abc56e1b9c
+# ╠═b7b947ca-ec7e-456a-bf82-cf3812c8ce12
+# ╠═73f33d41-3263-473a-8109-a1337eaf56ad
+# ╠═332d8c33-3c12-447a-847f-10af89d78a95
+# ╠═ef9b70b2-9f21-44e2-a483-826ed7706799
+# ╠═a16f16b6-0d12-43ad-b876-c070fe5f47db
+# ╠═bf8d0027-08d1-4224-a4b8-6f4cf8b3da66
+# ╠═3a5619e4-0340-46b4-a03f-c1758d107eb6
+# ╠═be17f4b0-8392-4259-ace1-f8ceaa33e7f4
+# ╠═f15abd8d-2359-4416-993b-abbe1e6950b7
+# ╠═bd4c8202-cbef-44d5-9654-b3c5ddd4a879
+# ╠═6759f7e0-5c67-4e66-ae3b-1dced387eb5a
+# ╠═91ec411b-3bc9-49dc-8c40-c141ed248238
+# ╠═932b2705-521a-4bc8-b664-07acbf12f65f
+# ╠═2ceafaf1-80b1-4e2b-9fc3-fed783ecfcdd
+# ╠═f6fe899d-2db9-479c-a400-cecd7c709d9a
+# ╠═b69166d5-722e-4549-ade2-08f4c611bdcf
+# ╠═245c3cec-9d14-4858-86ed-d06f32954796
+# ╠═4b349ff1-8f3c-4df8-8304-2c64a8c48bd0
+# ╠═e6e96dbe-3310-4d6e-82ec-acefc8787d86
+# ╠═7119e6ea-95d0-4537-9cd8-300349f4d537
+# ╠═ef0c8f66-5ab6-4f8a-b83c-337bf8caddeb
+# ╠═71994a9e-7190-48e8-a2ca-675936409abb
+# ╠═37fa0348-9d84-47e1-81bd-cfa05d0ee8a5
+# ╠═eeb92802-b0c3-4a4d-b3bc-5123e902c071
+# ╠═ea307ccf-7e82-4ec8-aa15-97d6a75dfa7b
+# ╠═69a82202-01fd-4dd2-99a0-89a06d065b3d
+# ╠═91903ed7-2512-45d0-a7b5-325656408f4a
+# ╠═cb47f65a-c12a-421a-aed0-382c8ee1f6e0
+# ╠═bd5760bb-6eec-496d-b625-3b0ede2de701
+# ╠═f35c3b73-7022-488d-8037-b1d89936c914
+# ╠═508ca187-6277-4b6b-a1e9-53b425a63840
+# ╠═72f7e854-d825-456d-b61a-13534631d2dd
+# ╠═de8fe09b-5809-43f7-baac-8a21bc1cabe8
+# ╠═d6fcf3db-e5e5-4e73-9536-529e79372d7b
+# ╠═cebad423-361d-4b6c-9642-9d3d136a26c5
+# ╠═5ca05945-6f64-484a-8692-b0b6084b9bd5
+# ╠═c3075364-53d2-449e-b65e-8cf3383c0a1b
+# ╠═9ef259aa-b99c-4f1d-b0cd-cb8c5ec17a48
+# ╠═c1272083-9a81-4fb0-a77b-5ec7fb66deec
+# ╠═7d876e1a-6e4c-4d1d-8203-e6213c698e14
+# ╠═95033957-bbd1-4ee4-be27-f70bc42c4b35
+# ╠═8abc0468-e271-4026-8e35-76cf4a303ca9
+# ╠═37eb5c5c-1146-4d39-b910-8b95631d9ed5
+# ╠═e556dc02-c37e-4a9a-8954-9ee04d35bcea
+# ╠═67b5e937-a8a9-409f-bb1a-42c7e44bbd7f
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
