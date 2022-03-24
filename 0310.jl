@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.18.1
+# v0.18.2
 
 using Markdown
 using InteractiveUtils
@@ -284,7 +284,7 @@ a₃
 
 # ╔═╡ 5c347108-86f6-469c-9db3-a9e1a1e3c478
 md"""
-##### Array
+##### array
 """
 
 # ╔═╡ 556a13bc-2d9f-48ef-abe9-144ec33264bd
