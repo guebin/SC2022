@@ -22,6 +22,9 @@ md"""
 # 3월24일 강의노트
 """
 
+# ╔═╡ 61967452-a8e0-46a8-85cb-c0944451c5d2
+PlutoUI.TableOfContents(aside=true)
+
 # ╔═╡ 3f43a098-0653-4cb3-a48e-673e342ae48b
 Plots.plotly()
 
@@ -106,13 +109,13 @@ let
 	
 
 	md"""
-	(방법3) 균등분포 -> 베르누이 -> 이항분포 -> 포아송근사  
+	(방법3) 균등분포 -> 베르누이 -> 이항분포 ≈ 포아송 
 	- 1분동안 맥도날드에 평균 3명이 온다고 생각
 	- 이건 사실 1초에 성공확률이 0.05인 베르누이 시행을 1번 시행하여 1분동안 총 60회 반복한 것으로 이해할 수 있음. 
 	- 좀 더 세밀하게는 $(Δt) 초에 성공확률이 $p 인 베르누이 시행을 1번 시행하여 1분동안 총 $n 회 반복한 것으도 이해할수 있음. (무한반복가능)
 	- 느낌: 하여튼 (1) "엄청 작은 시간"에 (2) "엄청 작은 확률"의 베르누이 시행이 (3) "엄청 많이 독립적으로 반복"되는 느낌을 기억하세요!
 	$(_p)
-	- 위: 유니폼 -> 베르누이 -> 이항분포 -> 포아송 
+	- 위: 유니폼 -> 베르누이 -> 이항분포 ≈ 포아송 
 	- 아래: 포아송
 	"""
 end 
@@ -125,7 +128,7 @@ md"""
 # ╔═╡ 8352dd50-1f7d-4e3d-9365-5af24d43547c
 md"""
 `-` 포아송분포의 합은 다시 포아송분포가 된다. 
-- 이론: $X \sim Poi(\lambda_1), Y\sim Poi(\lambda_2),~ X \perp Y \Rightarrow X + Y \sim P(\lambda_1 + \lambda_2)$ 
+- 이론: $X \sim Poi(\lambda_1), Y\sim Poi(\lambda_2),~ X \perp Y \Rightarrow X + Y \sim Poi(\lambda_1 + \lambda_2)$ 
 - 의미? (1) 1분동안 맥도날드 매장에 들어오는 남자의 수는 평균이 5인 포아송 분포를 따름 (2) 1분동안 맥도날드 매장에 들어오는 여자의 수는 평균이 4.5인 포아송분포를 따름 (3) 남자와 여자가 매장에 오는 사건은 독립 => 1분동안 맥도날드 매장에 오는 사람은 평균이 9.5인 포아송 분포를 따른다는 의미. 
 """
 
@@ -368,7 +371,7 @@ PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 
 [compat]
 Distributions = "~0.25.52"
-Plots = "~1.27.2"
+Plots = "~1.27.3"
 PlutoUI = "~0.7.37"
 """
 
@@ -943,9 +946,9 @@ version = "1.2.0"
 
 [[deps.Plots]]
 deps = ["Base64", "Contour", "Dates", "Downloads", "FFMPEG", "FixedPointNumbers", "GR", "GeometryBasics", "JSON", "Latexify", "LinearAlgebra", "Measures", "NaNMath", "Pkg", "PlotThemes", "PlotUtils", "Printf", "REPL", "Random", "RecipesBase", "RecipesPipeline", "Reexport", "Requires", "Scratch", "Showoff", "SparseArrays", "Statistics", "StatsBase", "UUIDs", "UnicodeFun", "Unzip"]
-git-tree-sha1 = "90021b03a38f1ae9dbd7bf4dc5e3dcb7676d302c"
+git-tree-sha1 = "5f6e1309595e95db24342e56cd4dabd2159e0b79"
 uuid = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
-version = "1.27.2"
+version = "1.27.3"
 
 [[deps.PlutoUI]]
 deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "JSON", "Logging", "Markdown", "Random", "Reexport", "UUIDs"]
@@ -1066,9 +1069,9 @@ version = "2.1.4"
 
 [[deps.StaticArrays]]
 deps = ["LinearAlgebra", "Random", "Statistics"]
-git-tree-sha1 = "6976fab022fea2ffea3d945159317556e5dad87c"
+git-tree-sha1 = "4f6ec5d99a28e1a749559ef7dd518663c5eca3d5"
 uuid = "90137ffa-7385-5640-81b9-e52037218182"
-version = "1.4.2"
+version = "1.4.3"
 
 [[deps.Statistics]]
 deps = ["LinearAlgebra", "SparseArrays"]
@@ -1368,6 +1371,7 @@ version = "0.9.1+5"
 # ╟─dbf8cdd6-7815-49f8-9dd6-5987000792ce
 # ╟─20697867-c74a-4485-bb97-c6a31060669a
 # ╟─64e29d20-aaf5-4fa0-ad03-b283dac52dce
+# ╟─61967452-a8e0-46a8-85cb-c0944451c5d2
 # ╠═521890de-ab23-11ec-0c2f-2dcaee6dc1bc
 # ╠═3f43a098-0653-4cb3-a48e-673e342ae48b
 # ╟─ddae88bf-0b17-40f4-ae33-5cd70aa8a0de
