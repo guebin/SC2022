@@ -93,12 +93,12 @@ md"""
 
 # ╔═╡ b0ca1c8f-272d-4a2f-ac4b-10bd659fceda
 let 
-	samplesize_of_poisson = 10000
+	N = 10000
 	λ=3 
 	n=10000
 	p=λ/n
-	X = rand(Binomial(n,p),samplesize_of_poisson)
-	Y = rand(Poisson(λ),samplesize_of_poisson)
+	X = rand(Binomial(n,p),N)
+	Y = rand(Poisson(λ),N)
 	p1= histogram(X)
 	p2= histogram(Y)
 	plot(p1,p2,layout=(2,1))
@@ -113,14 +113,14 @@ md"""
 # ╔═╡ 4520bf81-0491-4a47-99c4-45680964654c
 let 
 	λ=3
-	n=600
+	n=60000
 	p=λ/n
 	Δt = (60/n) # 단위가 60초니까 60
 	
-	poi_samplesize = 10000
-	X = [(rand(n) .< p) |> sum for k in 1:poi_samplesize]
+	N = 10000
+	X = [(rand(n) .< p) |> sum for k in 1:N]
 	p1= histogram(X)
-	p2= rand(Poisson(λ),poi_samplesize) |> histogram
+	p2= rand(Poisson(λ),N) |> histogram
 	_p = plot(p1,p2,layout=(2,1))
 	
 
@@ -155,19 +155,19 @@ md"""
 
 # ╔═╡ 5d376188-fad1-48fb-86a2-7dcc908c337f
 let 
-	n= 1000
-	X = rand(Poisson(5),n)
-	Y = rand(Poisson(4.5),n)
+	N= 1000
+	X = rand(Poisson(5),N)
+	Y = rand(Poisson(4.5),N)
 	p1 = X.+Y |> histogram 
-	p2 = rand(Poisson(9.5),n) |> histogram
+	p2 = rand(Poisson(9.5),N) |> histogram
 	plot(p1,p2,layout=(2,1))
 end
 
 # ╔═╡ 0ab7a2d2-0d17-4523-8e91-b28624303524
 let
-	n=1000
+	N=1000
 	λ=5 
-	X = rand(Poisson(λ),n) 
+	X = rand(Poisson(λ),N) 
 	md"""
 	### 평균과 분산의 추정 
 	`-` 평균: $λ
@@ -187,10 +187,10 @@ md"""
 
 # ╔═╡ a222e7a1-dd18-4416-92eb-320f926d1d77
 let 
-	n = 10000
+	N = 10000
 	λ = 5 
-	p1=[mean(rand(Poisson(λ),n)) for k in 1:100] |> histogram
-	p2=[var(rand(Poisson(λ),n)) for k in 1:100] |> histogram
+	p1=[mean(rand(Poisson(λ),N)) for k in 1:100] |> histogram
+	p2=[var(rand(Poisson(λ),N)) for k in 1:100] |> histogram
 	#p3=[(mean(rand(Poisson(λ),n))+var(rand(Poisson(λ),n)))/2  for k in 1:100] |> histogram
 	_p=plot(p1,p2,layout=(2,1))
 	md""" 
@@ -302,14 +302,14 @@ end
 
 # ╔═╡ a27efaae-2793-4d8a-8dd6-4900caa80a4a
 let 
-	exp_samplesize = 10000 
+	N = 10000 
 	λ=0.1
 	n=10000
 	p=λ/n
 	Δt = (1/n) # 단위가 시간1이니까 
-	X = [try_until_you_succeed(p) for k in 1:exp_samplesize] .* Δt
+	X = [try_until_you_succeed(p) for k in 1:N] .* Δt
 	p1 = X|> histogram
-	p2 = rand(Exponential(10),exp_samplesize) |> histogram
+	p2 = rand(Exponential(10),N) |> histogram
 	plot(p1,p2,layout=(2,1))
 end 
 

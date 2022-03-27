@@ -224,10 +224,10 @@ rand(8) .< 0.37 # 성공확률이 0.37인 베르누이에서 8개의 샘플을 �
 
 # ╔═╡ d7fc8444-1a9c-46f4-9681-ba0857d6ffbc
 let 
-	sample_size=1000000
+	N=1000000
 	n=100
 	p=0.6
-	X=rand(Binomial(n,p),sample_size)
+	X=rand(Binomial(n,p),N)
 	md"""
 	### 평균과 분산의 추정 
 	- mean: $(n*p)
