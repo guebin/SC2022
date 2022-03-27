@@ -9,17 +9,23 @@ using Plots, Distributions, PlutoUI
 
 # ╔═╡ dbf8cdd6-7815-49f8-9dd6-5987000792ce
 md"""
-# 3월24일 강의영상
+# 3월24일
 """
 
 # ╔═╡ 20697867-c74a-4485-bb97-c6a31060669a
 html"""
-<div notthestyle="position: relative; right: 0; top: 0; z-index: 300;"><iframe src="https://www.youtube.com/embed/playlist?list=PLQqh36zP38-xIz4hvPmHZz0g8g04MJ0xZ" width=600 height=375  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div style="display: flex; justify-content: center;">
+<div  notthestyle="position: relative; right: 0; top: 0; z-index: 300;">
+<iframe src=
+"
+https://www.youtube.com/embed/playlist?list=PLQqh36zP38-xIz4hvPmHZz0g8g04MJ0xZ
+"
+width=600 height=375  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 """
 
 # ╔═╡ 64e29d20-aaf5-4fa0-ad03-b283dac52dce
 md"""
-# 3월24일 강의노트
+## Usings
 """
 
 # ╔═╡ 61967452-a8e0-46a8-85cb-c0944451c5d2
@@ -54,6 +60,7 @@ md"""
 # ╔═╡ 7807af0d-012a-432a-9a64-5df4a633333b
 md"""
 ### [포아송분포의 예시](https://www.statology.org/poisson-distribution-real-life-examples/#:~:text=Example%201%3A%20Calls%20per%20Hour,receives%2010%20calls%20per%20hour.)
+
 `-` 콜센타에 걸려오는 전화의 수, 1시간동안 
 
 `-` 레스토랑에 방문하는 손님의 수, 하루동안 
@@ -67,7 +74,12 @@ md"""
 
 # ╔═╡ 713fc6aa-3cdb-49ad-903c-9127452e69b9
 md"""
-### 평균이 3인 포아송분포에서 100개의 샘플을 뽑는 방법 
+### How to generate it?
+"""
+
+# ╔═╡ 49500e7a-fc16-48f4-acaf-ce6ccd81207e
+md"""
+##### 평균이 3인 포아송분포에서 100개의 샘플을 뽑는 방법 
 """
 
 # ╔═╡ 443fc984-8109-45c3-a6e5-e6e565dd0491
@@ -176,7 +188,7 @@ end
 
 # ╔═╡ f140fb8e-308f-40e4-a199-b0e0d20dc7da
 md"""
-#### 생각해보니까 왜 평균추정값과 분산추정값이 달라야하나? 
+##### 생각해보니까 왜 평균추정값과 분산추정값이 달라야하나? 
 """
 
 # ╔═╡ a222e7a1-dd18-4416-92eb-320f926d1d77
@@ -228,7 +240,12 @@ md"""
 
 # ╔═╡ 885941da-8604-4af0-8b69-6d564348f116
 md"""
-### 평균이 10인 지수분포에서 100개의 샘플을 뽑는 방법 
+### How to generate it? 
+"""
+
+# ╔═╡ cb63ae3e-7de4-4eac-aca3-55561864956d
+md"""
+##### 평균이 10인 지수분포에서 100개의 샘플을 뽑는 방법 
 """
 
 # ╔═╡ 2134273b-fca8-4238-b906-f05948fae7d2
@@ -323,7 +340,7 @@ md"""
 
 # ╔═╡ c2c198a7-4597-49e2-98d7-8776603db7fa
 md"""
-#### Inverse cdf method를 활용하여 지수분포에서 샘플추출 
+##### Inverse cdf method를 활용하여 지수분포에서 샘플추출 
 """
 
 # ╔═╡ cf6a955e-d684-4a16-bc0f-14409f83536a
@@ -1389,15 +1406,16 @@ version = "0.9.1+5"
 
 # ╔═╡ Cell order:
 # ╟─dbf8cdd6-7815-49f8-9dd6-5987000792ce
-# ╟─20697867-c74a-4485-bb97-c6a31060669a
+# ╠═20697867-c74a-4485-bb97-c6a31060669a
 # ╟─64e29d20-aaf5-4fa0-ad03-b283dac52dce
 # ╠═521890de-ab23-11ec-0c2f-2dcaee6dc1bc
 # ╠═61967452-a8e0-46a8-85cb-c0944451c5d2
 # ╠═3f43a098-0653-4cb3-a48e-673e342ae48b
-# ╠═ddae88bf-0b17-40f4-ae33-5cd70aa8a0de
-# ╠═c0e571b7-580a-4b25-ba5b-6cb729ec36b9
-# ╠═7807af0d-012a-432a-9a64-5df4a633333b
-# ╠═713fc6aa-3cdb-49ad-903c-9127452e69b9
+# ╟─ddae88bf-0b17-40f4-ae33-5cd70aa8a0de
+# ╟─c0e571b7-580a-4b25-ba5b-6cb729ec36b9
+# ╟─7807af0d-012a-432a-9a64-5df4a633333b
+# ╟─713fc6aa-3cdb-49ad-903c-9127452e69b9
+# ╟─49500e7a-fc16-48f4-acaf-ce6ccd81207e
 # ╟─443fc984-8109-45c3-a6e5-e6e565dd0491
 # ╠═6d30adc5-4da9-4e85-bd47-e128de6fffb2
 # ╟─9a9ed77b-903e-4587-967c-518343a62e54
@@ -1412,9 +1430,10 @@ version = "0.9.1+5"
 # ╠═f140fb8e-308f-40e4-a199-b0e0d20dc7da
 # ╠═a222e7a1-dd18-4416-92eb-320f926d1d77
 # ╟─ebe47018-7a6d-42a4-a61a-0079b5c077f8
-# ╠═29a2e115-37a7-4f67-a040-a4c1648fdfa6
-# ╠═a185e773-f51e-449b-8d40-de819bd4badf
+# ╟─29a2e115-37a7-4f67-a040-a4c1648fdfa6
+# ╟─a185e773-f51e-449b-8d40-de819bd4badf
 # ╠═885941da-8604-4af0-8b69-6d564348f116
+# ╠═cb63ae3e-7de4-4eac-aca3-55561864956d
 # ╟─2134273b-fca8-4238-b906-f05948fae7d2
 # ╠═1da1e41d-73a6-43f4-9d69-3e28b83da8e0
 # ╟─caa4ea34-e2ae-455a-88a7-6324ff2cc8ef
