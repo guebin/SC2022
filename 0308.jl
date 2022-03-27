@@ -14,7 +14,7 @@ macro bind(def, element)
     end
 end
 
-# ╔═╡ 323735fd-afb1-4e75-9bc9-ab5d01e3d751
+# ╔═╡ ba2bb317-4644-4f2f-9815-3ebda004a05c
 using PlutoUI
 
 # ╔═╡ 69b5eb79-be10-4636-b937-2ffefceb55b1
@@ -22,19 +22,30 @@ using Plots
 
 # ╔═╡ b027731d-eba8-4267-9d32-6b377db1c17f
 md"""
-# 3월8일 강의영상
+# 3월8일
 """
 
 # ╔═╡ fd561cc1-fc59-480e-9dc3-af6252e9f501
 html"""
-<div notthestyle="position: relative; right: 0; top: 0; z-index: 300;"><iframe src="https://www.youtube.com/embed/playlist?list=PLQqh36zP38-wcXVKu5QvvWbAFKGCzJ_vd" width=600 height=375  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div style="display: flex; justify-content: center;">
+<div  notthestyle="position: relative; right: 0; top: 0; z-index: 300;">
+<iframe src=
+"
+https://www.youtube.com/embed/playlist?list=PLQqh36zP38-wcXVKu5QvvWbAFKGCzJ_vd
+"
+width=600 height=375  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 """
 
-# ╔═╡ 815fc6f7-8234-44d0-9476-7bd2fec457f4
-md"# 3월8일 강의노트"
+# ╔═╡ 94e9beb7-4ffd-4009-b353-a0504d4b4d6f
+md"""
+## Usings
+"""
+
+# ╔═╡ 6e4ce13f-2577-4397-ab01-1e592ef71d4d
+PlutoUI.TableOfContents()
 
 # ╔═╡ 26ac3345-784e-4337-9922-68892cef2c53
-md"### 인터렉티브 노트북"
+md"## 인터렉티브 노트북"
 
 # ╔═╡ 35bc89f4-f648-46cf-ae6c-6192df84b7fa
 x=3
@@ -53,7 +64,7 @@ md"인터렉티브하지 않다는 것이 꼭 단점만 있는건 아니다."
 
 # ╔═╡ a524e983-69e6-412a-8594-bf84e53e0b63
 md"""
-### 플루토의 단점
+## 플루토의 단점
 1. 변수이름을 중복해서 쓸 수 없다. (이게 사실은 장점인데 가끔 단점처럼 느껴짐)
 2. 마크다운 쓰는 것이 주피터만큼 편하진 않다. (주피터가 좀 더 편한것 같음)
 3. 주피터의 다양한 기능들을 쓸 수 없다.
@@ -65,7 +76,7 @@ md"""
 """
 
 # ╔═╡ c75a1f66-392e-46b1-a13a-34ee19b5c257
-md"### 플루토에서 여러줄의 코드를 작성하는 방법"
+md"## 플루토에서 여러줄의 코드를 작성하는 방법"
 
 # ╔═╡ 0e07e878-53b9-4015-a543-6f651efd8435
 k=1 #line1
@@ -80,16 +91,16 @@ begin
 end 
 
 # ╔═╡ eb173838-dfd6-4443-bede-a7b20f06fec9
-md"""### 플루투의 마크다운이 주피터보다 좋은점"""
+md"""## 플루투의 마크다운이 주피터보다 좋은점"""
 
 # ╔═╡ c8db96ab-2794-42e2-9346-a114cbece3bc
 md"현재 k는 $k 입니다" 
 
 # ╔═╡ 66efc594-a155-4c44-ace5-86b7981ba7a6
-md"### 위젯사용법(PlutoUI)"
+md"## 위젯사용법(PlutoUI)"
 
 # ╔═╡ 0f94aa2b-6ae7-48d7-9307-fb4f14e61fc4
-md"##### 라디오버튼" 
+md"### 라디오버튼" 
 
 # ╔═╡ db1d3abf-7c2e-482f-b492-2d01d152a4c2
 @bind vote Radio(["이재명","윤석열"])
@@ -109,7 +120,7 @@ end
 md"당신의 선택: $vote"
 
 # ╔═╡ aee28e5e-be1f-4e3c-99e9-acf810c1dfdf
-md"##### 체크박스"
+md"### 체크박스"
 
 # ╔═╡ 5f56d8f6-da33-46f6-80d7-320913c00382
 @bind chckbx CheckBox()
@@ -125,7 +136,7 @@ end
 
 # ╔═╡ 9725f095-c3fd-4415-aa4d-a7884132d62a
 md"""
-##### 글상자
+### 글상자
 """
 
 # ╔═╡ 5179e85e-1448-4e45-b089-f9a79b4606ed
@@ -139,7 +150,7 @@ txtbx
 lowercase(txtbx)
 
 # ╔═╡ 4aab1f70-e98d-485e-ab04-cf67719fe558
-md"##### 커다란 글상자" 
+md"### 커다란 글상자" 
 
 # ╔═╡ 2c65846b-ce7d-4db5-b609-d07e7a400da2
 @bind txtbx2 TextField((30,3))
@@ -148,7 +159,7 @@ md"##### 커다란 글상자"
 txtbx2
 
 # ╔═╡ cda0d6bb-0b7d-499a-914b-b349be322f2e
-md"##### 패스워드 입력창 (특이한 글상자)"
+md"### 패스워드 입력창 (특이한 글상자)"
 
 # ╔═╡ 4d9da63e-78b3-4817-a67a-d965434e0754
 @bind passwd PasswordField()
@@ -157,7 +168,7 @@ md"##### 패스워드 입력창 (특이한 글상자)"
 passwd
 
 # ╔═╡ 1486a668-82ea-4d10-9952-1c954676908a
-md"##### 날짜선택"
+md"### 날짜선택"
 
 # ╔═╡ b9f72c58-0129-43e4-b31a-db80e9a860fa
 @bind dmy DateField()
@@ -178,7 +189,7 @@ dmy > dmy2
 typeof(1),typeof(3.14),typeof(dmy),typeof(dmy2)
 
 # ╔═╡ c31eee02-aa0b-4558-8dea-5c83c1097979
-md"##### 시간선택"
+md"### 시간선택"
 
 # ╔═╡ 82659a1f-9bfd-42dd-826d-329c1fcc28dd
 @bind hm TimeField()
@@ -187,7 +198,7 @@ md"##### 시간선택"
 hm
 
 # ╔═╡ 240349e7-c47d-40ee-ad0d-c0bbdb32de17
-md"##### 드롭다운 선택"
+md"### 드롭다운 선택"
 
 # ╔═╡ f4049186-088a-411c-ab65-8142b836ecec
 @bind vote2 Select(["이재명","윤석열","심상정"])
@@ -208,7 +219,7 @@ md"##### 드롭다운 선택(맵핑)"
 vote3
 
 # ╔═╡ d6191b02-9eb6-4d98-ac46-bc6ae2228606
-md"##### 다중선택" 
+md"### 다중선택" 
 
 # ╔═╡ 85bc4445-2ef7-4909-b8a6-54ce04e5ea73
 @bind enrllmnt MultiSelect(["보험수리학","통계데이터베이스","통계적추론","통계전산"],default=["통계전산"])
@@ -217,7 +228,7 @@ md"##### 다중선택"
 enrllmnt
 
 # ╔═╡ dee6a43f-64dc-4e85-a77f-f5f1ab495531
-md"##### 슬라이더($\star$)"
+md"### 슬라이더($\star$)"
 
 # ╔═╡ 14eee490-ac80-4845-b375-c454cfcebe93
 @bind val1 Slider(50:100)
@@ -259,7 +270,7 @@ md"$ax^2+bx+c=0,\quad x=\frac{-b \pm \sqrt{b^2-4ac}}{2a}$"
 (-b - √(b^2-4a*c) ) / 2a 
 
 # ╔═╡ 7a7b33ea-7a6b-4eef-b5d5-ff776c5372d6
-md"##### 색깔선택"
+md"### 색깔선택"
 
 # ╔═╡ f511209f-755c-47ad-998a-ae94df6e6006
 @bind col ColorStringPicker()
@@ -1190,7 +1201,9 @@ version = "0.9.1+5"
 # ╔═╡ Cell order:
 # ╟─b027731d-eba8-4267-9d32-6b377db1c17f
 # ╟─fd561cc1-fc59-480e-9dc3-af6252e9f501
-# ╟─815fc6f7-8234-44d0-9476-7bd2fec457f4
+# ╠═94e9beb7-4ffd-4009-b353-a0504d4b4d6f
+# ╠═ba2bb317-4644-4f2f-9815-3ebda004a05c
+# ╠═6e4ce13f-2577-4397-ab01-1e592ef71d4d
 # ╟─26ac3345-784e-4337-9922-68892cef2c53
 # ╠═35bc89f4-f648-46cf-ae6c-6192df84b7fa
 # ╠═11ebd532-cdc8-4c76-9c26-e9dc87782da6
@@ -1204,7 +1217,6 @@ version = "0.9.1+5"
 # ╟─eb173838-dfd6-4443-bede-a7b20f06fec9
 # ╠═c8db96ab-2794-42e2-9346-a114cbece3bc
 # ╟─66efc594-a155-4c44-ace5-86b7981ba7a6
-# ╠═323735fd-afb1-4e75-9bc9-ab5d01e3d751
 # ╟─0f94aa2b-6ae7-48d7-9307-fb4f14e61fc4
 # ╠═db1d3abf-7c2e-482f-b492-2d01d152a4c2
 # ╠═44c8d9ca-ca79-4f62-b6a6-b0a19d7044b8
@@ -1221,10 +1233,10 @@ version = "0.9.1+5"
 # ╟─4aab1f70-e98d-485e-ab04-cf67719fe558
 # ╠═2c65846b-ce7d-4db5-b609-d07e7a400da2
 # ╠═4b4ff10b-b052-4899-9d00-d15fe2de3ec0
-# ╟─cda0d6bb-0b7d-499a-914b-b349be322f2e
+# ╠═cda0d6bb-0b7d-499a-914b-b349be322f2e
 # ╠═4d9da63e-78b3-4817-a67a-d965434e0754
 # ╠═7cb4e850-b103-4699-bf40-0f4811648d8c
-# ╟─1486a668-82ea-4d10-9952-1c954676908a
+# ╠═1486a668-82ea-4d10-9952-1c954676908a
 # ╠═b9f72c58-0129-43e4-b31a-db80e9a860fa
 # ╠═3b0fc3e5-727a-4169-9e6b-96ef27c5fb69
 # ╠═72d860b5-94b1-4cc0-860b-f036a5b2f250

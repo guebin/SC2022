@@ -4,21 +4,33 @@
 using Markdown
 using InteractiveUtils
 
+# ╔═╡ 660d6ccc-db1d-4d21-b216-2177fa5fa834
+using PlutoUI
+
 # ╔═╡ 85412e62-9770-4a85-92cb-0b2366ba5a81
 md"""
-# 3월10일 강의영상 
+# 3월10일
 """
 
 # ╔═╡ 29b25571-c231-485a-9957-3dee5a9065e8
 html"""
-<div notthestyle="position: relative; right: 0; top: 0; z-index: 300;"><iframe src="https://www.youtube.com/embed/playlist?list=PLQqh36zP38-zzUFDwoJ9CUCiyDJC6X1In" width=600 height=375  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div style="display: flex; justify-content: center;">
+<div  notthestyle="position: relative; right: 0; top: 0; z-index: 300;">
+<iframe src=
+"
+https://www.youtube.com/embed/playlist?list=PLQqh36zP38-zzUFDwoJ9CUCiyDJC6X1In
+"
+width=600 height=375  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 """
 
 # ╔═╡ bc068777-a366-4552-a8d7-d2fd4429f01c
-md"# 3월10일 강의노트"
+md"## Usings"
+
+# ╔═╡ c6704d37-d245-4f53-8294-a9e68376d7bc
+PlutoUI.TableOfContents(aside=true)
 
 # ╔═╡ 7fd5c088-5ac0-432c-8aa5-251823a15dad
-md"### 변수이름"
+md"## 변수이름"
 
 # ╔═╡ 8688fb1a-e5d1-498f-8fd5-2944191a832e
 md"""
@@ -63,14 +75,14 @@ xₜ = 2.0 # x\_t + tab
 # ╔═╡ a938bbfc-566d-4503-9543-24470a1568a5
 ♂ = "male"
 
+# ╔═╡ 69ab7085-ffd6-41ea-9ac3-861cae5aa6cc
+md"## 기본 자료형"
+
 # ╔═╡ 4e96a402-3eac-4a03-a3fb-050b67e5f165
 최규빈 = "GuebinChoi"
 
-# ╔═╡ 69ab7085-ffd6-41ea-9ac3-861cae5aa6cc
-md"### 자료형"
-
 # ╔═╡ 7a9ec94b-4bf5-45e9-ace2-9d57789af169
-md"##### int, float"
+md"### int, float"
 
 # ╔═╡ aa3c4cfd-e260-47fc-aa96-103995d99216
 123 # int 
@@ -91,7 +103,7 @@ typeof(1.23)
 
 # ╔═╡ 1f09e243-6d8e-450c-a396-5781656ffaf2
 md"""
-##### Inf, NaN
+### Inf, NaN
 """
 
 # ╔═╡ ecd47dbd-784a-448b-8bd9-bdf71b7c6192
@@ -214,7 +226,7 @@ NaN + Inf
 
 # ╔═╡ 6215cb02-5b52-445b-bfa8-eeac87470537
 md"""
-##### 문자열 
+### 문자열 
 """
 
 # ╔═╡ 2ef84c02-f271-4bae-a50e-cfd6738a99ec
@@ -250,7 +262,7 @@ end
 
 # ╔═╡ 43f529e2-dd3f-472d-852b-bba8853ad9d8
 md"""
-##### 튜플 
+### 튜플 
 """
 
 # ╔═╡ ce71647d-fb14-40c3-b3e3-5d094f7e4187
@@ -284,24 +296,29 @@ a₃
 
 # ╔═╡ 5c347108-86f6-469c-9db3-a9e1a1e3c478
 md"""
-##### array
+## array 자료형
+"""
+
+# ╔═╡ 8fa20a15-83dc-411b-bc61-490a4a40f4e3
+md"""
+### 기본사용
 """
 
 # ╔═╡ 556a13bc-2d9f-48ef-abe9-144ec33264bd
-b = [11,22,33]
+b = [11,22,33] # 선언 
 
 # ╔═╡ d738dd15-b1bb-4e55-b788-c9212a488ed1
-b[1]
+b[1] # 원소호출 
 
 # ╔═╡ f0e05ff9-820d-4b95-ad0d-770c72589a3b
-b[1] = 100
+b[1] = 100 # 원소값 편집 
 
 # ╔═╡ 3406a77f-9ebc-4bd2-9082-2dafda0a1f08
-b
+b # 편집결과확인
 
 # ╔═╡ 72c6cdb7-608f-44a6-8f2e-6dfdf4af3bcc
 md"""
-`-` 브로드캐스팅
+### 브로드캐스팅
 """
 
 # ╔═╡ 306a8f60-8cad-49ce-934f-60294c85069b
@@ -372,7 +389,7 @@ md"""
 
 # ╔═╡ e8e7d4c7-70f0-45ab-9469-26cd6f70a7f6
 md"""
-`-` 난수로 벡터선언
+### 난수로 벡터선언
 """
 
 # ╔═╡ d966ce95-faf6-484a-87a8-6ffd273f31ff
@@ -386,7 +403,7 @@ rand([1,2,3,4],2) # rand의 두번째 기능: sample
 
 # ╔═╡ 9c2f38cd-3780-43de-b5d1-5e757613cfbf
 md"""
-`-` 리스트 컴프리헨션
+### 리스트 컴프리헨션
 """
 
 # ╔═╡ 67f92c8d-7167-4d28-8ab0-108b84e70c22
@@ -403,6 +420,10 @@ md"""
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
+PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
+
+[compat]
+PlutoUI = "~0.7.37"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
@@ -412,13 +433,211 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 julia_version = "1.7.2"
 manifest_format = "2.0"
 
-[deps]
+[[deps.AbstractPlutoDingetjes]]
+deps = ["Pkg"]
+git-tree-sha1 = "8eaf9f1b4921132a4cff3f36a1d9ba923b14a481"
+uuid = "6e696c72-6542-2067-7265-42206c756150"
+version = "1.1.4"
+
+[[deps.ArgTools]]
+uuid = "0dad84c5-d112-42e6-8d28-ef12dabb789f"
+
+[[deps.Artifacts]]
+uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
+
+[[deps.Base64]]
+uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
+
+[[deps.ColorTypes]]
+deps = ["FixedPointNumbers", "Random"]
+git-tree-sha1 = "024fe24d83e4a5bf5fc80501a314ce0d1aa35597"
+uuid = "3da002f7-5984-5a60-b8a6-cbb66c0b333f"
+version = "0.11.0"
+
+[[deps.CompilerSupportLibraries_jll]]
+deps = ["Artifacts", "Libdl"]
+uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
+
+[[deps.Dates]]
+deps = ["Printf"]
+uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
+
+[[deps.Downloads]]
+deps = ["ArgTools", "LibCURL", "NetworkOptions"]
+uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
+
+[[deps.FixedPointNumbers]]
+deps = ["Statistics"]
+git-tree-sha1 = "335bfdceacc84c5cdf16aadc768aa5ddfc5383cc"
+uuid = "53c48c17-4a7d-5ca2-90c5-79b7896eea93"
+version = "0.8.4"
+
+[[deps.Hyperscript]]
+deps = ["Test"]
+git-tree-sha1 = "8d511d5b81240fc8e6802386302675bdf47737b9"
+uuid = "47d2ed2b-36de-50cf-bf87-49c2cf4b8b91"
+version = "0.0.4"
+
+[[deps.HypertextLiteral]]
+git-tree-sha1 = "2b078b5a615c6c0396c77810d92ee8c6f470d238"
+uuid = "ac1192a8-f4b3-4bfe-ba22-af5b92cd3ab2"
+version = "0.9.3"
+
+[[deps.IOCapture]]
+deps = ["Logging", "Random"]
+git-tree-sha1 = "f7be53659ab06ddc986428d3a9dcc95f6fa6705a"
+uuid = "b5f81e59-6552-4d32-b1f0-c071b021bf89"
+version = "0.2.2"
+
+[[deps.InteractiveUtils]]
+deps = ["Markdown"]
+uuid = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
+
+[[deps.JSON]]
+deps = ["Dates", "Mmap", "Parsers", "Unicode"]
+git-tree-sha1 = "3c837543ddb02250ef42f4738347454f95079d4e"
+uuid = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+version = "0.21.3"
+
+[[deps.LibCURL]]
+deps = ["LibCURL_jll", "MozillaCACerts_jll"]
+uuid = "b27032c2-a3e7-50c8-80cd-2d36dbcbfd21"
+
+[[deps.LibCURL_jll]]
+deps = ["Artifacts", "LibSSH2_jll", "Libdl", "MbedTLS_jll", "Zlib_jll", "nghttp2_jll"]
+uuid = "deac9b47-8bc7-5906-a0fe-35ac56dc84c0"
+
+[[deps.LibGit2]]
+deps = ["Base64", "NetworkOptions", "Printf", "SHA"]
+uuid = "76f85450-5226-5b5a-8eaa-529ad045b433"
+
+[[deps.LibSSH2_jll]]
+deps = ["Artifacts", "Libdl", "MbedTLS_jll"]
+uuid = "29816b5a-b9ab-546f-933c-edad1886dfa8"
+
+[[deps.Libdl]]
+uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
+
+[[deps.LinearAlgebra]]
+deps = ["Libdl", "libblastrampoline_jll"]
+uuid = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+
+[[deps.Logging]]
+uuid = "56ddb016-857b-54e1-b83d-db4d58db5568"
+
+[[deps.Markdown]]
+deps = ["Base64"]
+uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
+
+[[deps.MbedTLS_jll]]
+deps = ["Artifacts", "Libdl"]
+uuid = "c8ffd9c3-330d-5841-b78e-0817d7145fa1"
+
+[[deps.Mmap]]
+uuid = "a63ad114-7e13-5084-954f-fe012c677804"
+
+[[deps.MozillaCACerts_jll]]
+uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
+
+[[deps.NetworkOptions]]
+uuid = "ca575930-c2e3-43a9-ace4-1e988b2c1908"
+
+[[deps.OpenBLAS_jll]]
+deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
+uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
+
+[[deps.Parsers]]
+deps = ["Dates"]
+git-tree-sha1 = "85b5da0fa43588c75bb1ff986493443f821c70b7"
+uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
+version = "2.2.3"
+
+[[deps.Pkg]]
+deps = ["Artifacts", "Dates", "Downloads", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Serialization", "TOML", "Tar", "UUIDs", "p7zip_jll"]
+uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
+
+[[deps.PlutoUI]]
+deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "JSON", "Logging", "Markdown", "Random", "Reexport", "UUIDs"]
+git-tree-sha1 = "bf0a1121af131d9974241ba53f601211e9303a9e"
+uuid = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
+version = "0.7.37"
+
+[[deps.Printf]]
+deps = ["Unicode"]
+uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
+
+[[deps.REPL]]
+deps = ["InteractiveUtils", "Markdown", "Sockets", "Unicode"]
+uuid = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
+
+[[deps.Random]]
+deps = ["SHA", "Serialization"]
+uuid = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+
+[[deps.Reexport]]
+git-tree-sha1 = "45e428421666073eab6f2da5c9d310d99bb12f9b"
+uuid = "189a3867-3050-52da-a836-e630ba90ab69"
+version = "1.2.2"
+
+[[deps.SHA]]
+uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
+
+[[deps.Serialization]]
+uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
+
+[[deps.Sockets]]
+uuid = "6462fe0b-24de-5631-8697-dd941f90decc"
+
+[[deps.SparseArrays]]
+deps = ["LinearAlgebra", "Random"]
+uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
+
+[[deps.Statistics]]
+deps = ["LinearAlgebra", "SparseArrays"]
+uuid = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
+
+[[deps.TOML]]
+deps = ["Dates"]
+uuid = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
+
+[[deps.Tar]]
+deps = ["ArgTools", "SHA"]
+uuid = "a4e569a6-e804-4fa4-b0f3-eef7a1d5b13e"
+
+[[deps.Test]]
+deps = ["InteractiveUtils", "Logging", "Random", "Serialization"]
+uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[[deps.UUIDs]]
+deps = ["Random", "SHA"]
+uuid = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"
+
+[[deps.Unicode]]
+uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
+
+[[deps.Zlib_jll]]
+deps = ["Libdl"]
+uuid = "83775a58-1f1d-513f-b197-d71354ab007a"
+
+[[deps.libblastrampoline_jll]]
+deps = ["Artifacts", "Libdl", "OpenBLAS_jll"]
+uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
+
+[[deps.nghttp2_jll]]
+deps = ["Artifacts", "Libdl"]
+uuid = "8e850ede-7688-5339-a07c-302acd2aaf8d"
+
+[[deps.p7zip_jll]]
+deps = ["Artifacts", "Libdl"]
+uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 """
 
 # ╔═╡ Cell order:
 # ╟─85412e62-9770-4a85-92cb-0b2366ba5a81
 # ╟─29b25571-c231-485a-9957-3dee5a9065e8
 # ╟─bc068777-a366-4552-a8d7-d2fd4429f01c
+# ╠═660d6ccc-db1d-4d21-b216-2177fa5fa834
+# ╠═c6704d37-d245-4f53-8294-a9e68376d7bc
 # ╟─7fd5c088-5ac0-432c-8aa5-251823a15dad
 # ╟─8688fb1a-e5d1-498f-8fd5-2944191a832e
 # ╠═93015177-90dd-4a75-85d7-d7c4d22545dd
@@ -433,8 +652,8 @@ manifest_format = "2.0"
 # ╠═be0ed6cb-fbb1-427f-bd9b-ab6b2f96bf70
 # ╠═031ccf5a-fac5-4b03-97e1-abf1f88824e8
 # ╠═a938bbfc-566d-4503-9543-24470a1568a5
+# ╠═69ab7085-ffd6-41ea-9ac3-861cae5aa6cc
 # ╠═4e96a402-3eac-4a03-a3fb-050b67e5f165
-# ╟─69ab7085-ffd6-41ea-9ac3-861cae5aa6cc
 # ╟─7a9ec94b-4bf5-45e9-ace2-9d57789af169
 # ╠═aa3c4cfd-e260-47fc-aa96-103995d99216
 # ╠═e5f215a7-cff9-4274-931a-36ff0c6bb63a
@@ -499,6 +718,7 @@ manifest_format = "2.0"
 # ╠═0dc6ff92-b505-4ebc-97d9-a7761262f626
 # ╠═9e83f7e9-9571-4195-b42b-62e12ea4d180
 # ╟─5c347108-86f6-469c-9db3-a9e1a1e3c478
+# ╟─8fa20a15-83dc-411b-bc61-490a4a40f4e3
 # ╠═556a13bc-2d9f-48ef-abe9-144ec33264bd
 # ╠═d738dd15-b1bb-4e55-b788-c9212a488ed1
 # ╠═f0e05ff9-820d-4b95-ad0d-770c72589a3b

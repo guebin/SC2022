@@ -19,30 +19,39 @@ using Distributions, Plots,PlutoUI
 
 # ╔═╡ 05e369d7-e0b8-4ef4-8831-938423a6717e
 md"""
-# 3월22일 강의영상
+# 3월22일
 """
 
 # ╔═╡ 3e2405d2-5c92-42cd-bbc6-66c1add0d282
 html"""
-<div notthestyle="position: relative; right: 0; top: 0; z-index: 300;"><iframe src="https://www.youtube.com/embed/playlist?list=PLQqh36zP38-ycDx8HFZQt_HHG7vLQCHOr" width=600 height=375  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div style="display: flex; justify-content: center;">
+<div  notthestyle="position: relative; right: 0; top: 0; z-index: 300;">
+<iframe src=
+"
+https://www.youtube.com/embed/playlist?list=PLQqh36zP38-ycDx8HFZQt_HHG7vLQCHOr
+"
+width=600 height=375  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 """
 
 # ╔═╡ 77c4a801-d098-4f45-9b99-4e7e6f55a10b
 md"""
-# 3월22일 강의노트 
+## Usings
 """
+
+# ╔═╡ 5bf2d19f-b8bb-43be-bc35-a963a01f71cb
+PlutoUI.TableOfContents()
 
 # ╔═╡ 6155f666-e228-463e-9721-39ee899366bf
 Plots.plotly()
 
 # ╔═╡ f94127c6-ca98-4946-babf-cb08768a7b4b
 md"""
-### 베르누이: $X \sim Bernoulli(p)$ 
+## 베르누이: $X \sim Bernoulli(p)$ 
 """
 
 # ╔═╡ 74dbc7ae-3293-495b-bb3c-e633bfa76c33
 md"""
-`-` 베르누이 분포의 요약 
+### 베르누이 분포의 요약 
 - X의의미: 성공확률이 p인 1번의 시행에서 성공한 횟수를 X라고 한다. 
 - X의범위: X=0 or X=1 
 - 파라메터의 의미와 범위: p는 성공확률을 나타냄, p ∈ [0,1].
@@ -54,7 +63,12 @@ md"""
 
 # ╔═╡ a302696f-3667-488c-a2c0-a95eca178801
 md"""
-`-` 베르누이분포에서 100개의 샘플을 뽑는 방법 (p=0.37로 가정)
+### Hot to generate it? 
+"""
+
+# ╔═╡ b1eb6071-3da2-44ce-bc8e-7ad7f5910bb3
+md"""
+##### 베르누이분포에서 100개의 샘플을 뽑는 방법 (p=0.37로 가정)
 """
 
 # ╔═╡ caa9606b-a2b9-4d2b-93c5-453f4525b051
@@ -96,7 +110,7 @@ let
 	p=0.5
 	X=rand(Bernoulli(p),n)
 	md"""
-	`-` 평균과 분산의 추정 
+	### 평균과 분산의 추정 
 	- mean: $p
 	- mean est: $(mean(X))
 	- variance: $(p*(1-p))
@@ -117,7 +131,7 @@ end
 
 # ╔═╡ d39cc97b-f7ad-4e54-a6ed-0497d6346acf
 md"""
-`-` 모수 $p$에 따른 히스토그램 변화관찰 
+### 모수 $p$에 따른 히스토그램 변화관찰 
 """
 
 # ╔═╡ 579446ac-34d1-4fc6-bf3a-41d1d1f258e4
@@ -140,12 +154,12 @@ md"""
 
 # ╔═╡ 78f8e0a8-e1aa-4c70-a460-a179456bd8fc
 md"""
-### 이항분포: $X \sim B(n,p)$ 
+## 이항분포: $X \sim B(n,p)$ 
 """
 
 # ╔═╡ 82b80b24-6fb2-43c4-a72c-d0c7b46c403c
 md"""
-`-` 이항분포의 요약 
+### 이항분포의 요약 
 - X의의미: 성공확률이 p인 n번의 시행에서 성공한 횟수를 X라고 한다. 
 - X의범위: X=0,1,...,n
 - 파라메터의 의미와 범위: n은 시행횟수, p는 성공할 확률; n=1,2,3,4,... p ∈ [0,1]
@@ -157,12 +171,16 @@ md"""
 
 # ╔═╡ c147f8a3-43b7-447c-9d15-fc6635af4221
 md"""
-`-` 대의적정의: $X \sim B(n,p) \Leftrightarrow X \overset{d}{=} Z_1+Z_2+ \dots +Z_n$, where $Z_i \overset{iid}{\sim} Bernoulli(p)$
+### 대의적정의
+
+`-` $X \sim B(n,p) \Leftrightarrow X \overset{d}{=} Z_1+Z_2+ \dots +Z_n$, where $Z_i \overset{iid}{\sim} Bernoulli(p)$
 """
 
 # ╔═╡ 33d3125e-3d5f-467c-8488-2e82f9832e51
 md"""
-`-` 이항분포에서 100개의 샘플을 뽑는 방법 (p=0.37, n=8 이라고 가정)
+### How to generate it?
+
+##### 이항분포에서 100개의 샘플을 뽑는 방법 (p=0.37, n=8 이라고 가정)
 """
 
 # ╔═╡ 69dd4150-f82a-40a7-a1e1-ab2c90f024dd
@@ -211,7 +229,7 @@ let
 	p=0.6
 	X=rand(Binomial(n,p),sample_size)
 	md"""
-	`-` 평균과 분산의 추정 
+	### 평균과 분산의 추정 
 	- mean: $(n*p)
 	- mean est: $(mean(X))
 	- var: $(n*p*(1-p))
@@ -233,7 +251,7 @@ end
 
 # ╔═╡ bda96ee2-a212-4a79-b951-20cd16e4ec42
 md"""
-`-` 모수 (n,p)의 변화에 따른 히스토그램 관찰 
+### 모수 $(n,p)$의 변화에 따른 히스토그램 관찰 
 """
 
 # ╔═╡ f2e4d54c-9407-4303-a245-2ee53256fe84
@@ -250,7 +268,7 @@ histogram(rand(Binomial(bin_n,bin_p),10000))
 
 # ╔═╡ f4cc7df9-02aa-498b-8a22-5d661bd476b0
 md"""
-### 숙제 
+## 숙제 
 수업시간에 소개한 이항분포를 만드는 3가지 방법으로 (n,p)=(30,0.45)인 이항분포 100를 만들라. 
 세 방법의 히스토그램을 비교해보라. 
 """
@@ -1262,13 +1280,15 @@ version = "0.9.1+5"
 
 # ╔═╡ Cell order:
 # ╟─05e369d7-e0b8-4ef4-8831-938423a6717e
-# ╟─3e2405d2-5c92-42cd-bbc6-66c1add0d282
+# ╠═3e2405d2-5c92-42cd-bbc6-66c1add0d282
 # ╟─77c4a801-d098-4f45-9b99-4e7e6f55a10b
 # ╠═3e7b4e0d-c52e-4214-a8fb-7ae7b03a60e9
+# ╠═5bf2d19f-b8bb-43be-bc35-a963a01f71cb
 # ╠═6155f666-e228-463e-9721-39ee899366bf
-# ╟─f94127c6-ca98-4946-babf-cb08768a7b4b
+# ╠═f94127c6-ca98-4946-babf-cb08768a7b4b
 # ╟─74dbc7ae-3293-495b-bb3c-e633bfa76c33
 # ╟─a302696f-3667-488c-a2c0-a95eca178801
+# ╟─b1eb6071-3da2-44ce-bc8e-7ad7f5910bb3
 # ╟─caa9606b-a2b9-4d2b-93c5-453f4525b051
 # ╠═b402c405-c6f6-4f53-886b-05b12021b6c3
 # ╟─bba8738c-2d5c-4d40-bb3d-1a11a57fd9d6
@@ -1276,7 +1296,7 @@ version = "0.9.1+5"
 # ╠═435bbf1e-531b-4a0e-9b69-3b756e2371b3
 # ╟─27f8e253-01e9-44e6-bb7d-c1de2a8d37c9
 # ╠═d0d7b51a-9edf-426b-b3e4-cded5f91e6c7
-# ╠═22c636b4-18c8-474b-9328-e124417c4fc1
+# ╟─22c636b4-18c8-474b-9328-e124417c4fc1
 # ╟─1a2e694b-322d-48e4-b381-ab2cd277366f
 # ╠═de89581f-47fd-48e9-a6d9-d22311700e83
 # ╟─d39cc97b-f7ad-4e54-a6ed-0497d6346acf

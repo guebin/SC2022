@@ -14,32 +14,38 @@ macro bind(def, element)
     end
 end
 
-# ╔═╡ 0bf98a42-5ab4-4329-9246-82990dfd9488
-using Plots
-
-# ╔═╡ 4cb7be66-1e1b-48dd-b999-4cc60fbd7339
-using PlutoUI
+# ╔═╡ 9beafe50-2ce1-4626-91fb-b5b1325f0b1c
+using PlutoUI,Plots
 
 # ╔═╡ 09cb368b-f689-4c50-adf7-74df18d226dd
 md"""
-# 3월17일 강의영상
+# 3월17일
 """
 
 # ╔═╡ f22510af-b047-4e79-8d5d-e8fd11a9eea7
 html"""
-<div notthestyle="position: relative; right: 0; top: 0; z-index: 300;"><iframe src="https://youtube.com/embed/playlist?list=PLQqh36zP38-wncjcGApF-lIg9Xibea8cP"width=600 height=375  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div style="display: flex; justify-content: center;">
+<div  notthestyle="position: relative; right: 0; top: 0; z-index: 300;">
+<iframe src=
+"
+https://youtube.com/embed/playlist?list=PLQqh36zP38-wncjcGApF-lIg9Xibea8cP
+"
+width=600 height=375  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 """
 
 # ╔═╡ 28c74c5b-00ea-4483-951d-5f3ee26fb894
 md"""
-# 3월17일 강의노트
+## Usings
 """
 
-# ╔═╡ 76c5c29f-a90f-478a-9f98-b3afb11eb0ce
-md"### 숙제풀이"
+# ╔═╡ 8598e32c-4c84-4065-8d39-110185e6e9a6
+PlutoUI.TableOfContents()
 
-# ╔═╡ 60556e4f-affb-4f03-8a8a-460fa01eae13
-md"---"
+# ╔═╡ 1821f7e0-2f71-4350-a6ff-6b07ba2e7283
+Plots.plotly()
+
+# ╔═╡ 76c5c29f-a90f-478a-9f98-b3afb11eb0ce
+md"## 숙제풀이"
 
 # ╔═╡ 30d0741c-8e74-4d38-908c-e0bcfe4fd5ca
 md"[예비학습] 변수의 범위"
@@ -58,12 +64,6 @@ f(3)
 
 # ╔═╡ de6cbedf-99d8-44d0-83ea-818a0a43e47a
 z # z=3 이 아니라 z=0임 
-
-# ╔═╡ 28c91e84-ca8f-41c4-a2eb-a9352accfa0e
-md"---"
-
-# ╔═╡ fd205715-4120-45df-8fe7-343dbcccae5b
-Plots.plotly()
 
 # ╔═╡ ccd9234b-d1a0-4236-ae94-6975c02e3e95
 md"(풀이1: 제가 의도한 풀이)"
@@ -159,14 +159,11 @@ _h(-0.1)(100)
 # ╔═╡ 29015797-b08c-4dd9-be8d-e26a2f7b01c0
 plot(_h(1),-2,2); plot!(_h(-1),-2,2)
 
-# ╔═╡ 9e194198-b101-41e4-b6de-0ffa96afc732
-md"---"
-
 # ╔═╡ 9f336162-5b96-4924-8d12-597d325ee8bf
-md"### 함수고급"
+md"## 함수고급"
 
 # ╔═╡ beae091e-4edd-4afb-819f-070ed46ad322
-md"##### 연산자는 사실 함수였음"
+md"### 연산자는 사실 함수였음"
 
 # ╔═╡ f6e45891-3d89-4890-aa29-045605b7f1c5
 +(2,3)
@@ -181,7 +178,7 @@ myadd = +
 myadd(1,3)
 
 # ╔═╡ 9f3994fe-03fc-4b82-936d-cce75e6325cc
-md"##### 브로드캐스팅"
+md"### 브로드캐스팅"
 
 # ╔═╡ dd6b49c9-2376-465d-a39d-1fb9c3020c05
 plot(0:0.01:2π, sin.(0:0.01:2π)); plot!(0:0.01:2π, sqrt.(0:0.01:2π))
@@ -191,12 +188,12 @@ plot(0:0.01:2π, sin.(0:0.01:2π)); plot!(0:0.01:2π, .√(0:0.01:2π))
 
 # ╔═╡ ec02f852-1c0a-47ed-8d42-20ae7bc43bbc
 md"""
-##### 파이프연산자
+### 파이프연산자
 """
 
 # ╔═╡ e30f919d-4387-49e0-8202-c66e179f5c95
 md"""
-`-` 파이프연산자의 기본
+##### 파이프연산자의 기본
 - `x |> f` 는 `f(x)` 와 같다. 
 - `x |> f |> g`는 `g(f(x))`와 같다. 
 - `x |> f |> g |> `는 `h(g(f(x)))`와 같다. 
@@ -210,7 +207,7 @@ md"""
 
 # ╔═╡ 8c2e4b4c-7f8a-4d70-8bb4-d543e5703f49
 md"""
-`-` 파이프연산자와 브로드캐스트 
+##### 파이프연산자와 브로드캐스트
 """
 
 # ╔═╡ 074402aa-dc21-48b3-8152-8eea32d783a4
@@ -218,7 +215,7 @@ md"""
 
 # ╔═╡ c7849d47-b141-43a4-a1d7-e66a125916c3
 md"""
-`-` 파이프연산자와 브로드캐스트 ver2 
+##### 파이프연산자와 브로드캐스트 ver2 
 """
 
 # ╔═╡ 7a708f2f-0a1b-46f3-89ff-8c766d8824f5
@@ -259,7 +256,7 @@ md"""
 
 # ╔═╡ f0b9e3eb-8df2-48b1-a5dd-23216a69912f
 md"""
-##### 예제: 피보나치수열을 정의하여 보자. 
+### 예제: 피보나치수열을 정의하여 보자. 
 """
 
 # ╔═╡ d7125ccc-82d6-4b30-a275-68e08f2ddef2
@@ -313,7 +310,7 @@ scatter(1:8,a)
 
 # ╔═╡ 120291d7-b4c3-47a8-8c10-99382d04df0c
 md"""
-### 숙제
+## 숙제
 초항이 2이고 공차가 3인 수열을 점화식의 형태로 정의하여 보라. 
 1항부터 10항지의 출력결과를 시각화하라.
 
@@ -1243,18 +1240,17 @@ version = "0.9.1+5"
 
 # ╔═╡ Cell order:
 # ╟─09cb368b-f689-4c50-adf7-74df18d226dd
-# ╟─f22510af-b047-4e79-8d5d-e8fd11a9eea7
+# ╠═f22510af-b047-4e79-8d5d-e8fd11a9eea7
 # ╟─28c74c5b-00ea-4483-951d-5f3ee26fb894
+# ╠═8598e32c-4c84-4065-8d39-110185e6e9a6
+# ╠═9beafe50-2ce1-4626-91fb-b5b1325f0b1c
+# ╠═1821f7e0-2f71-4350-a6ff-6b07ba2e7283
 # ╟─76c5c29f-a90f-478a-9f98-b3afb11eb0ce
-# ╟─60556e4f-affb-4f03-8a8a-460fa01eae13
 # ╟─30d0741c-8e74-4d38-908c-e0bcfe4fd5ca
 # ╠═931aa1c2-0186-40a6-a3f2-e8e505682c0c
 # ╠═d1353080-c111-459e-818e-6e29ae69a714
 # ╠═2020a56c-563a-435a-a76d-478ecb16d8ab
 # ╠═de6cbedf-99d8-44d0-83ea-818a0a43e47a
-# ╟─28c91e84-ca8f-41c4-a2eb-a9352accfa0e
-# ╠═0bf98a42-5ab4-4329-9246-82990dfd9488
-# ╠═fd205715-4120-45df-8fe7-343dbcccae5b
 # ╟─ccd9234b-d1a0-4236-ae94-6975c02e3e95
 # ╠═09583a25-c52a-41ef-a43b-3a49521ee05e
 # ╠═7315268d-1678-4106-affc-31dfa85b9a40
@@ -1285,7 +1281,6 @@ version = "0.9.1+5"
 # ╠═c67305de-6168-4f92-9ea7-86deeffc9746
 # ╠═f1645b5a-efbe-4612-ab5a-2931bec4c3df
 # ╠═29015797-b08c-4dd9-be8d-e26a2f7b01c0
-# ╟─9e194198-b101-41e4-b6de-0ffa96afc732
 # ╟─9f336162-5b96-4924-8d12-597d325ee8bf
 # ╟─beae091e-4edd-4afb-819f-070ed46ad322
 # ╠═f6e45891-3d89-4890-aa29-045605b7f1c5
@@ -1296,7 +1291,7 @@ version = "0.9.1+5"
 # ╠═dd6b49c9-2376-465d-a39d-1fb9c3020c05
 # ╠═07c6d5f7-0c6e-4991-80ee-4b7862c40e42
 # ╟─ec02f852-1c0a-47ed-8d42-20ae7bc43bbc
-# ╟─e30f919d-4387-49e0-8202-c66e179f5c95
+# ╠═e30f919d-4387-49e0-8202-c66e179f5c95
 # ╠═2ee12f8f-e5d7-4292-b568-2a217a453bdb
 # ╠═7eff8d1c-1ed5-4bc0-abd2-5cf9b0e63a94
 # ╟─8c2e4b4c-7f8a-4d70-8bb4-d543e5703f49
@@ -1318,7 +1313,6 @@ version = "0.9.1+5"
 # ╠═d6e31001-5eec-4acb-afd3-c8bb7b822038
 # ╟─c19237ce-0e98-4a20-9e64-e3fe06858578
 # ╟─260a4935-7b4e-4e80-8df2-b85e367fd301
-# ╠═4cb7be66-1e1b-48dd-b999-4cc60fbd7339
 # ╠═dca32ac5-5403-4660-b5ab-5170e3de39d1
 # ╠═72a9be93-4bba-4fa1-b891-b3143ae5bd43
 # ╠═be8c34b7-e099-451e-9531-547f5690930b
