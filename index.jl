@@ -44,6 +44,9 @@ md"""
 
 [3월24일](https://guebin.github.io/SC2022/0324.html)
 - 포아송분포, 지수분포 
+
+[3월29일](https://guebin.github.io/SC2022/0329.html)
+- 지수분포 (inverse cdf, 박스뮬러 알고리즘)
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
