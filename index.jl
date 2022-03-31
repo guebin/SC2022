@@ -47,6 +47,9 @@ md"""
 
 [3월29일](https://guebin.github.io/SC2022/0329.html)
 - 지수분포 (inverse cdf, 박스뮬러 알고리즘)
+
+[3월31일](https://guebin.github.io/SC2022/0331.html)
+- inverse cdf의 이론적 근거, 어느사격수의 이야기 
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
