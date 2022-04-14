@@ -13,13 +13,15 @@ md"""
 """
 
 # ╔═╡ 7c3031c4-b0ec-4025-ae98-9e7e6509649f
-
 html"""
-<div notthestyle="position: relative; right: 0; top: 0; z-index: 300;"><iframe src="
+<div style="display: flex; justify-content: center;">
+<div  notthestyle="position: relative; right: 0; top: 0; z-index: 300;">
+<iframe src=
+"
 https://www.youtube.com/embed/playlist?list=PLQqh36zP38-yjMoBmAl_xzxd8GipR_Ze_
-" width=600 height=375  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+"
+width=600 height=375  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 """
-
 
 # ╔═╡ 6d03774b-30d9-4410-aedb-9e2a03c9d042
 md"""
@@ -1165,7 +1167,7 @@ version = "0.9.1+5"
 """
 
 # ╔═╡ Cell order:
-# ╠═721934a3-d67f-44f0-a861-dfdfdc534da3
+# ╟─721934a3-d67f-44f0-a861-dfdfdc534da3
 # ╟─7c3031c4-b0ec-4025-ae98-9e7e6509649f
 # ╠═6d03774b-30d9-4410-aedb-9e2a03c9d042
 # ╠═59882998-f896-4747-9c89-98052e6f69f0
