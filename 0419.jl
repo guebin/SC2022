@@ -4,179 +4,459 @@
 using Markdown
 using InteractiveUtils
 
-# ╔═╡ 59882998-f896-4747-9c89-98052e6f69f0
-using PlutoUI, Plots,Distributions
+# This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
+macro bind(def, element)
+    quote
+        local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
+        local el = $(esc(element))
+        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
+        el
+    end
+end
 
-# ╔═╡ 721934a3-d67f-44f0-a861-dfdfdc534da3
+# ╔═╡ 9d2a3140-7c5e-4439-93e0-1e02e8417daf
+using PlutoUI,Distributions,Plots
+
+# ╔═╡ b8113ace-bf87-11ec-332c-d57eb9d49518
 md"""
-# 4월14일
+# 4월19일 
 """
 
-# ╔═╡ 7c3031c4-b0ec-4025-ae98-9e7e6509649f
+# ╔═╡ 1cfafdd4-86ff-4e2f-aa50-e9e78f4f4090
 html"""
 <div style="display: flex; justify-content: center;">
 <div  notthestyle="position: relative; right: 0; top: 0; z-index: 300;">
 <iframe src=
 "
-https://www.youtube.com/embed/playlist?list=PLQqh36zP38-yjMoBmAl_xzxd8GipR_Ze_
+https://www.youtube.com/embed/playlist?list=PLQqh36zP38-wxN8yuXPs7sk0zv1VvNJyB
 "
 width=600 height=375  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 """
 
-# ╔═╡ 6d03774b-30d9-4410-aedb-9e2a03c9d042
+# ╔═╡ e72224fa-ebba-48e4-b702-b2d0329610a6
 md"""
-## Usings
+## usings 
 """
 
-# ╔═╡ 70853477-57fb-4e48-b60f-c746c55851cf
+# ╔═╡ 7fd8042e-9af6-4f6c-b25c-ab8ed5f0af93
 PlutoUI.TableOfContents()
 
-# ╔═╡ 35faa92d-82d7-4f1e-b898-e23895db306a
+# ╔═╡ aa3f4785-8e3f-4841-b3cd-fb1077792992
 Plots.plotly()
 
-# ╔═╡ 879caac4-bb95-11ec-31f9-9f79e85fdec2
+# ╔═╡ fe50793a-c255-4cc6-81fe-21d729262786
 md"""
-## 정규분포 
+## 카이제곱분포: $X\sim \chi^2(k)$
 """
 
-# ╔═╡ 46a530d4-ef8d-430c-8b09-320002697a91
+# ╔═╡ 823932ac-0546-427f-8d1a-bb1a452ef29c
 md"""
-### 위치모수와 척도모수 
+### motive 
 """
 
-# ╔═╡ 353df5ed-efa8-41d4-b16b-b55cfaabd0ce
+# ╔═╡ 019f20b3-7920-40e9-b470-4f6392b1c4ac
 md"""
-`-` 정규분포 특징 
-- 이론: $Z\sim N(0,1) \Rightarrow aZ+b \sim N(b,a^2)$
-- 생각보다 이거 엄청 신기한 기능이에요 
-- 정규분포에 어떠한 상수를 더해도 정규분포, 어떠한 상수를 곱해도 정규분포, 더하고 곱해도 정규분포!
+(예제) $X_i \overset{iid}{\sim} N(7,\sigma^2)$일때 아래를 test하고 싶다고 하자. 
+
+$H_0: \sigma^2 =4$ 
+$H_1: \sigma^2 <4$
+
+30개의 샘플을 확보하여 $\xi=\frac{1}{30}\sum_{i=1}^{30}(x_i-7)^2$를 계산하였으며 계산결과 $\xi=2.72$가 나왔다고 하자. $p$-value를 구하여라. 
 """
 
-# ╔═╡ 10b23855-f49b-4604-a196-17a6211a38da
+# ╔═╡ 930005f3-d5dc-4642-ab96-04f9c74a1c8f
 md"""
-`-` 위치모수, 척도모수 
-1. 확률변수 $Z$가 분포A를 따를때 $Z+b$도 분포A를 따름 $\Rightarrow$ 분포A는 위치모수를 가짐 
-2. 확률변수 $Z$가 분포B를 따를때 $aZ$도 분포B를 따름 $\Rightarrow$ 분포A는 척도모수를 가짐 
-3. 확률변수 $Z$가 분포C를 따를때 $aZ+b$도 분포C를 따름 $\Rightarrow$ 분포A는 위치모수와 척도모수를 가짐 
+(풀이1)
 """
 
-# ╔═╡ 901d7ab9-9646-4304-a308-930313de88df
+# ╔═╡ 0fd62af9-1519-4a64-a860-99e862087320
+ξs = [rand(Normal(7,2),30) |> x-> sum((x.-7).^2)/30 for i in 1:14000605]
+
+# ╔═╡ 410876fb-e8d3-413b-b278-9c0d7e76b9a4
+mean(ξs.< 2.72)
+
+# ╔═╡ 01e17c60-fd70-4767-b51b-cfd7d542df9f
 md"""
-`-` 예시: 
-- 분포C: {정규분포, 균등분포, 로지스틱, 이중지수, 코쉬}
-- 분포A: 분포C랑 동일 
-- 분포B: 분포C ∪ {지수분포,감마분포}
-- 분포C - 분포A: 없다고 생각하세요.. 
-- 분포C - 분포B: {지수분포, 감마분포}
+- 생각보다 나올법한 확률이다. 
 """
 
-# ╔═╡ ee152cba-b44f-4214-878c-448881719f36
+# ╔═╡ 90306510-4d75-4189-89f1-97d3a1f83f21
 md"""
-`-` 저런걸 어떻게 알아요? 특정분포가 위치모수를 가지는지 척도모수를 가지는지 어떻게 따져요?
-- 이론: $Z$의 pdf가 $f_Z(x)$ $\Rightarrow$ $aZ+b$의 pdf는 $f_{aZ+b}(x)=\frac{1}{a}f_Z(\frac{x-b}{a})$
-- 증명: 스스로 공부 + 최혜미교수님한테 여쭤보세요.. + 저한테 카톡으로 // 외우는게 편해요 
-- 결국 $f_Z(x)$가 분포C의 가능한 pdf중 하나의 형태일때 $\frac{1}{a}f_Z(\frac{x-b}{a})$ 역시 분포C의 가능한 pdf 중 하나의 형태라면 분포C는 위치모수와 척도모수를 가진다. 
--  $f_Z(x)$가 분포A의 가능한 pdf중 하나의 형태일때 $f_Z(x-b)$ 역시 분포A의 가능한 pdf 중 하나의 형태라면 분포A는 위치모수를 가진다. 
--  $f_Z(x)$가 분포B의 가능한 pdf중 하나의 형태일때 $\frac{1}{a}f_Z(\frac{x}{a})$ 역시 분포B의 가능한 pdf 중 하나의 형태라면 분포B는 척도모수를 가진다. 
+`-` 분산이 4가 아닌것 같다라고 주장하기 위해서는 (95%)
 """
 
-# ╔═╡ 985f92aa-699b-4bbf-afda-20fd7cce80f7
+# ╔═╡ 239b3846-48df-40b1-b223-fbffa87cd5a4
+quantile(ξs,0.05)
+
+# ╔═╡ 076614a8-3c5a-47cc-bcc8-c4074e9776fe
 md"""
-(예제1) $Z \sim Exp(1)$ 이면 $f_Z(x)=e^{-x}$ 이다. 이론에 따라서 
-
-$f_{6Z}(x)=\frac{1}{6}f_Z\big(\frac{x}{6}\big)=\frac{1}{6}e^{-\frac{x}{6}}$
-
-이다. 그런데 이것은 평균이 6인 지수분포의 pdf와 모양이 같다. 일반화하면 
-
-$Z \sim Exp(1/\lambda) \Rightarrow aZ \sim Exp(a/\lambda)$
-
-라고 볼 수 있다. 즉 지수분포를 따르는 화률변수에 임의의 상수값을 곱해도 여전히 지수분포를 따르므로 지수분포는 척도모수를 가진다고 볼 수 있다. 
+(풀이2) $\xi=\frac{1}{30}\sum_{i=1}^{30}(x_i-7)^2$는 어떠한 분포A에서 발생한 샘플이라고 볼 수 있다. 그 A의 분포를 이론적으로 잡아보자. 
+- 이론: $\sum_{i=1}^{n}Z_i^2\sim \chi^2(n)$, where $Z_i\overset{iid}{\sim} N(0,1)$.
+- 관찰: 우리예제의 경우에는 $H_0$가 참이라는 가정하에 $\sum_{i=1}^{30}(\frac{X_i-7}{2})^2\sim \chi^2(30)$
+- 주장: $\xi\times 30/4$는 $\chi^2(30)$에서 뽑힌 샘플이다. 
 """
 
-# ╔═╡ e53a4bf1-4992-48cb-b172-6459df8faeeb
+# ╔═╡ 528f54ca-8c1a-4e99-84bb-e1c91004057f
+ξ = 2.72 
+
+# ╔═╡ f7274989-9cd5-48dd-b501-91719cc07703
+ξ*30/4 
+
+# ╔═╡ 170bf0c7-3055-4c7c-95e2-e2d3d9c3244c
+cdf(Chisq(30),ξ*30/4) # 시뮬레이션값과 비슷 
+
+# ╔═╡ 69d57189-a1d8-4574-9714-d5524ff94c55
 md"""
-(예제2) $Z \sim N(0,\sigma^2)$ 이면 $f_Z(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{1}{2}(\frac{x}{\sigma})^2}$ 이다. 이론에 따라서 
-
-$f_{Z+3}(x)=f_Z(x-3)=\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-3}{\sigma})^2}$
-
-이다. 그런데 이것은 평균이 3이고 분산이 $\sigma^2$인 정규분포의 pdf와 모양이 같다. 일반화하면 
-
-$Z \sim N(0,\sigma^2) \Rightarrow Z+b \sim N(b,\sigma^2)$
-
-라고 볼 수 있다. 즉 정규분포를 따르는 화률변수에 임의의 상수값을 더해도 여전히 정규분포를 따르므로 정규분포는 위치모수를 가진다고 볼 수 있다. 
+`-` 분산이 4는 아닌것같다라고 주장하려면? (95%)
 """
 
-# ╔═╡ 9cf95705-aaa5-43a1-b6e5-d7564635b0f5
+# ╔═╡ 1912ea52-b536-4200-91a1-d9580e635b93
+quantile(Chisq(30),0.05)
+
+# ╔═╡ c8a2897c-1381-4828-8d87-d9e3140788e6
 md"""
-(예제3) $Z \sim Exp(1)$ 이면 $f_Z(x)=e^{-x}$ 이다. 이론에 따라서 
-
-$f_{Z-1}(x)=f_Z\big(x+1\big)=e^{-(x+1)}$
-
-이다. 그런데 이것은 지수분포의 pdf중 한 형태라고 볼 수 없다. 즉 지수분포에서 어떠한 상수를 더한것이 지수분포라고 볼 수 없다. 지수분포는 위치모수를 가지지 않는다. 
+-  $\xi \times 30/4 = 18.49266098195347$ 라는 말이니까 
 """
 
-# ╔═╡ f8bc947d-0be8-4cd8-8277-9b472f282141
+# ╔═╡ 1d5ced10-a8b3-4e2c-9f0f-e2b7d274c8c3
+quantile(Chisq(30),0.05) / 30 *4
+
+# ╔═╡ 3dd308dd-3f64-4a1c-a0e5-96d88d1a68c7
 md"""
-`-` 시뮬레이션 확인1 (정규분포)
+### 참고: 검정의 형식 논리 
 """
 
-# ╔═╡ a0752f04-d338-4fc3-8b7e-79d080d146e9
+# ╔═╡ abf6b2ce-b5b0-4921-8edd-bda6b38ff364
+md"""
+`-` 검정을 진행하는 방법은 아래와 같다. 
+- 기: 누군가가 (혹은 세상이) $H_0$가 참이라고 주장한다. 나는 $H_1$이 참인것 같다. 
+- 승: 누군가와 (혹은 세상과) 싸우기 위하여 샘플을 수집하고 검정통계량을 구한다. 
+- 전: 검정통계량의 분포를 잡아내서 $p$-value를 계산한다. 이 $p$-value는 "니가 틀렸겠지"라는 주장에 대한 카운터. 
+- 결: $H_0$가 참일지 $H_1$이 참일지 판단. 절대적인 기준은 없음. (하지만 굉장히 보수적인 사람이라도 $p$-value가 0.05보다 작으면 $H_1$이 참이라고 인정)
+"""
+
+# ╔═╡ 67d81f4b-4b16-4b0b-aacb-1d38a6e1dbc5
+md"""
+`-` 포인트는 검정통계량의 분포를 잡아내는 것인데, $H_0$가 참이라는 전제하에 시뮬레이팅 해도 되고 이론적인 분포를 손으로 유도해도 된다. 
+- 당연히 컴퓨터가 없던 시절에는 시뮬레이팅이 불가능했으므로 "이론적으로유도+통계표(?)"를 이용해서 $p$-value를 계산해야 했다. 
+"""
+
+# ╔═╡ 9061c67f-5039-4ee2-a749-d51aa8034320
+md"""
+`-` 다양한 분포를 공부하는 이유? 검정통계량의 이론적 분포를 잡아내기 위해서! + α
+- 카이제곱분포를 왜 공부해야? 정규분포를 따르는 샘플의 분산을 test하기 위해서! + α 
+"""
+
+# ╔═╡ 7fa5ef2f-6aa2-4c00-bf4b-fc47c409dd10
+md"""
+### 카이제곱분포 요약 
+- X의의미: 서로 독립인 표준정규분포의 제곱합 
+- X의범위: $x\in (0,\infty)$
+- 파라메터의 의미: $k$는 자유도, 표준정규분포 제곱을 몇개 합쳤는지.. 
+- 파라메터의 범위: $k=1,2,3,4,\dots$ 
+- pdf: 
+- mgf: 
+- E(X): $k$
+- V(X): $2K$
+"""
+
+# ╔═╡ a46d857a-6328-43c2-8aff-7155462c2119
+md"""
+### 대의적정의 
+"""
+
+# ╔═╡ 27a1f077-e674-40ab-889c-06663a133c8a
+md"""
+`-` $X \sim \chi^2(k)\Leftrightarrow X\overset{d}{=}Z_1^2+\dots+Z_k^2$, where $Z_i \overset{iid}{\sim}N(0,1)$.
+"""
+
+# ╔═╡ 46fb4c81-adf5-4b8b-83a9-01bbb37607f1
+md"""
+### How to generate it?
+"""
+
+# ╔═╡ ff5a1ec6-ab09-4137-84ed-068f4d9895ce
+md"""
+##### 자유도가 4인 카이제곱분포에서 100개의 샘플을 얻는 방법
+"""
+
+# ╔═╡ 03f2eacf-c257-48e8-867c-a1775166b98e
+md"""
+(방법1)
+"""
+
+# ╔═╡ e18c1f97-b009-481a-b19e-345be4146ecb
+rand(Chisq(4),100)
+
+# ╔═╡ e2db5fb2-7537-424c-8e69-e6e3247ec51a
+md"""
+(방법2) 정규분포 -> 카이제곱분포 
+"""
+
+# ╔═╡ 9314a572-e10a-4ed3-b882-dbbaaa17c075
+[rand(Normal(0,1),4).^2 |> sum for i in 1:100]
+
+# ╔═╡ cf98d110-505d-44af-b4c3-35e68289fe99
+md"""
+(방법3) 지수분포 -> 카이제곱분포
+- 복습: $X,Y \overset{iid}{\sim} N(0,1) \Rightarrow R^2/2 \sim Exp(1)$, where $R^2=X^2+Y^2$.
+"""
+
+# ╔═╡ 26a5eb9e-b8ed-4580-a5e7-fd2b72f65ec3
+[rand(Exponential(1))*2 + rand(Exponential(1))*2 for i in 1:100]
+# rand(Exponential(1))이 R²/2 
+
+# ╔═╡ a6c65dc1-e84c-4d35-a8f5-2d0c9db6f045
+[rand(Exponential(2)) + rand(Exponential(2)) for i in 1:100]
+
+# ╔═╡ e292a985-98e9-49e1-ac2f-4b7d696026b9
 let 
-	a=2
-	b=3 
-	N=100000
-	( rand(Normal(0,1),N) .|> x-> a*x+b ) |> histogram
-	rand(Normal(b,a),N) |> histogram!
-
+	N=10000
+	X1= rand(Chisq(4),N)
+	X2= [rand(Normal(0,1),4).^2 |> sum for i in 1:N]
+	X3= [rand(Exponential(1))*2 + rand(Exponential(1))*2 for i in 1:N]
+	X4= [rand(Exponential(2)) + rand(Exponential(2)) for i in 1:N]
+	histogram(X1)
+	histogram!(X2)
+	histogram!(X3)
+	histogram!(X4)
 end 
 
-# ╔═╡ 3bf10379-5d95-4942-9ec8-ecb3fe026e24
+# ╔═╡ 1af05070-bb8d-45b5-a590-5900baa8b9ed
 md"""
-`-` 시뮬레이션확인2 (지수분포)
+`-` 정리하면 아래와 같이 된다.
+-  $Y \sim \chi^2(4)$
+-  $Y \overset{d}{=} Z_1^2+Z_2^2+Z_3^2+Z_4^2$, where $Z_i \overset{iid}{\sim} N(0,1)$.
+-  $Y \overset{d}{=} 2\frac{Z_1^2+Z_2^2}{2}+2\frac{Z_3^2+Z_4^2}{2}=2\frac{R_1^2}{2}+2\frac{R_2^2}{2}$, where $R_i^2/2 \overset{iid}{\sim} Exp(1)$.
+-  $Y \overset{d}{=} X_1+X_2$, where $X_1,X_2 \overset{iid}{\sim} Exp(2)$.
 """
 
-# ╔═╡ 52c3c65b-19f2-4670-9bd5-fc0762184237
-let 
-	N = 100000 
-
-	rand(Exponential(12),N) |> histogram
-	rand(Exponential(1),N).*12 |> histogram!
-	rand(Exponential(2),N).*6 |> histogram!
-	rand(Exponential(3),N).*4 |> histogram!
-	rand(Exponential(4),N).*3 |> histogram!
-	rand(Exponential(6),N).*2 |> histogram!
-
-end 
-
-# ╔═╡ 900a6454-c9ed-4592-b891-da3599f5aaf2
-md"""
-### 평균과 분산의 추정 
-"""
-
-# ╔═╡ 47a34341-b69f-496e-acd5-3d14d2a4e0d2
+# ╔═╡ d3975d4c-9751-4a27-953c-8ee603b33eef
 let
-	N=100000 
-	μ=0.5 
-	σ=1.5 
-	X=rand(Normal(μ,σ),N)
+	k=6
 	md"""
-	- 평균: $μ
-	- 평균의 추정치: $(mean(X))
-	- 분산: $(σ^2)
-	- 분산의 추정치: $(var(X))
+	`-` 자유도가 $k 인 카이제곱분포 
+	- 표준정규분포 $k 개를 제곱하여 합친것과 같다. 
+	- 평균이 2인 지수분포 $(k/2) 개를 합친것과 같다 (?)
 	"""
-end 
+end
 
-# ╔═╡ 50bd9f76-9161-4bbe-8332-e6a60139578a
+# ╔═╡ 2030222c-b0e1-4a9d-b1fd-16ace7b47f2f
 md"""
-#### 히스토그램 (생략)
+### note: 표본분산의 분포
+- 이론: $X_1,\dots,X_n \overset{iid}{\sim} N(0,1) \Rightarrow \frac{(n-1)S^2}{\sigma^2}\sim \chi^2(n-1)$
+- 나중에 공부합시다.. 
 """
 
-# ╔═╡ 2ce52cca-e4da-4685-aa0c-c8d969d45d43
+# ╔═╡ 70532d58-2829-4e81-bdda-679c2b9dda77
 md"""
-### 숙제
+### 카이제곱분포의 합
+- 이론: $X \sim \chi^2(k_1),~ Y\sim \chi^2(k_2),~ X \perp Y \Rightarrow X+Y \sim \chi^2(k_1+k_2)$ 
+"""
 
-`-` 평균이 2인 지수분포를 이용하여 평균이 4인 지수분포를 만들어라. 히스토그램도 그려보아라. 
+# ╔═╡ 6ba47796-f396-42b6-abcd-1df06f98da58
+md"""
+### 히스토그램 
+"""
+
+# ╔═╡ 83cadf65-46dd-45b7-a2e1-0b858d719676
+md"자유도=$(@bind k Slider(1:200, show_value=true))"
+
+# ╔═╡ ffe59d85-656e-4056-afa1-fb7e76b59c42
+rand(Chisq(k),1000) |> histogram
+
+# ╔═╡ 7254e500-ffaf-4280-a0cd-14318ec404aa
+md"""
+## 감마분포: $X \sim \Gamma(\alpha,\beta)$
+"""
+
+# ╔═╡ 80f217cc-f981-4625-a9a3-0f8450ab0d13
+md"""
+### 감마분포 요약
+- X의의미: 서로 독립인 지수분포를 $\alpha$개 합친 것, 시간1에 평균적으로 $\lambda$번 발생하는 사건이 있을때 $\alpha$번째 사건이 발생할때까지 걸리는 시간.
+- X의범위: $x \in (0,\infty)$
+- 파라메터의 의미: $\alpha=$ 지수분포를 더한 횟수(의 확장버전), $\beta=\frac{1}{\lambda}=$ 지수분포의 평균
+- 파라메터의 범위: $\alpha>0$, $\beta>0$.
+- pdf: $\frac{1}{\Gamma(\alpha)\beta^{\alpha}}x^{\alpha-1}e^{-x/\beta}$
+- mgf: 
+- E(X): $\alpha\beta$
+- V(X): $\alpha\beta^2$
+"""
+
+# ╔═╡ 04d93dc6-43d3-4081-bca6-9c08f5ee2653
+md"""
+### 대의적 정의 ($\alpha$가 자연수일경우)
+`-` $X \sim \Gamma(\alpha,\beta) \Leftrightarrow X \overset{d}{=} Z_1+\dots+Z_\alpha$, where $Z_i \overset{iid}{\sim} Exp(\beta)$
+"""
+
+# ╔═╡ 36e5c715-ec53-4586-b006-7e51ae83255e
+md"""
+-  $Exp(\beta)$는 평균이 $\beta$인 지수분포 
+"""
+
+# ╔═╡ a3894a73-7fee-43ec-a06a-ff0142ccacc6
+md"""
+### how to generate it?
+"""
+
+# ╔═╡ 7130347c-0a73-4f7d-8c64-2164eb65b37d
+md"""
+##### $\Gamma(3,2)$를 1000개 생성하라. 
+"""
+
+# ╔═╡ e4e7bbcf-7e48-4020-9e19-4cbd2d7d36e3
+md""" 
+α = $(@bind α Slider(1:100, show_value=true, default=3))
+
+β = $(@bind β Slider(0.1:0.1:100, show_value=true, default=2))
+"""
+
+# ╔═╡ 5662230c-64a0-4835-b8a6-7dcf3fe6ae55
+md"""
+(방법1)
+"""
+
+# ╔═╡ 42f1313b-528d-4aec-85bb-86ff6bbb288a
+rand(Gamma(α,β),1000)
+
+# ╔═╡ 4a21db7e-2e84-438f-a8ba-a20360628777
+md"""
+(방법2) 지수분포 -> 감마분포 
+"""
+
+# ╔═╡ 7b37ed60-e13a-41a7-9efb-1c26c9017977
+[rand(Exponential(β),α) |> sum for i in 1:1000]
+
+# ╔═╡ 67508ce7-77d8-4ce0-9a0b-0312ffca76ec
+md"""
+(방법3) 표준정규분포 이용
+"""
+
+# ╔═╡ 2bdeef3c-ad0c-4dcd-8d45-a8d0e88a743f
+[rand(Normal(0,1),2α).^2 |> sum for i in 1:1000]
+# 방법3이 가능한 이유는 2α가 현재 자연수이고 β=2이기 때문 
+
+# ╔═╡ f6d6ca0c-ad73-400a-93d7-086453df8470
+md"""
+(방법4) 카이제곱분포를 이용
+"""
+
+# ╔═╡ bb13a418-685c-41c1-972d-cf2b2a978ec8
+rand(Chisq(2α),1000)
+# 방법4이 가능한 이유는 2α가 현재 자연수이고 β=2이기 때문 
+
+# ╔═╡ 2c195c00-bee6-49d5-9f51-459f37bcebcb
+md"""
+`-` 확인
+"""
+
+# ╔═╡ 195ef5c7-a4fa-4176-a0a7-846ee354ce7f
+let
+	N=10000
+	X1= rand(Gamma(α,β),N)
+	X2= [rand(Exponential(β),α) |> sum for i in 1:N]
+	X3= [rand(Normal(0,1),2α).^2 |> sum for i in 1:N]
+	X4= rand(Chisq(2α),N)
+	histogram([X1,X2,X3,X4])
+end 
+
+# ╔═╡ c01d6d44-9310-46c1-b040-b22bc19b936b
+md"""
+### 감마분포와 카이제곱분포의 관계
+"""
+
+# ╔═╡ cc16de8e-d845-448d-8dbe-c1e8988d48df
+md"""
+`-` 이론: $X \overset{d}{=} Y$, where $X\sim \chi^2(k)$ and $Y\sim \Gamma(\frac{k}{2},2)$.
+"""
+
+# ╔═╡ 906136a9-095c-4ae5-a75d-290f14e2f1a6
+let
+	k=3 
+	histogram(rand(Chisq(k),10000))
+	histogram!(rand(Gamma(k/2,2),10000))
+end 
+
+# ╔═╡ dea33225-75fd-448f-9854-aef9d2973a47
+md"""
+### 히스토그램 
+"""
+
+# ╔═╡ 52606dc6-6e8b-4ab3-88e5-ef0f3bb73fbd
+md"""
+α = $(@bind shape Slider(0.1:0.1:30))
+β = $(@bind scale Slider(0.1:0.1:100))
+"""
+
+# ╔═╡ 4415ff22-04a9-48d5-95c8-333921469951
+histogram(rand(Gamma(shape,scale),10000000), title=md"Gamma($shape, $scale)")
+
+# ╔═╡ f8f2dd38-772f-4afb-9fd6-847f43bce147
+md"""
+### 척도모수 
+"""
+
+# ╔═╡ c2e4e893-4590-49ad-be6b-39731fa1bdd9
+md"""
+`-` 감마분포도 척도모수를 가짐 
+"""
+
+# ╔═╡ 0456d788-ffdb-4457-be96-52a2f4704084
+begin
+	histogram(rand(Gamma(50,6),10000))
+	histogram!(rand(Gamma(50,2)*3,10000))
+end 
+
+# ╔═╡ 0cf5faae-20c8-441c-a98f-3af7789e5367
+md"""
+### 감마분포의 합 
+"""
+
+# ╔═╡ a37b1e80-943b-4db1-9231-0fb0dcd161ce
+md"""
+`-` 이론: $X \sim \Gamma(\alpha_1,\beta), ~ Y\sim \Gamma(\alpha_2,\beta),~ X \perp Y \Rightarrow X+Y \sim \Gamma(\alpha_1+\alpha_2,\beta)$
+"""
+
+# ╔═╡ a4f3b441-91b7-445f-b516-2a20424092a1
+begin
+	histogram(rand(Gamma(25,6),10000))
+	histogram!(rand(Gamma(6,6),10000)+rand(Gamma(25-6,6),10000))
+end
+
+# ╔═╡ c296c866-08b9-4a59-bf6b-e5f8c162c2b9
+md"""
+## 지수분포/감마분포의 표현정정
+"""
+
+# ╔═╡ c1fe1819-20a1-47a8-b96e-bbbd6fec9b00
+md"""
+`-` 지수분포는 따라서 다양하게 표현된다.
+- 경우1: $X\sim Exp(\theta)$, $f(x)=\frac{1}{\theta}e^{-\frac{x}{\theta}}$.
+- 경우2: $X\sim Exp(1/\lambda)$, $f(x)=\lambda e^{-\lambda x}$.
+- 경우3: $X\sim Exp(\lambda)$, $f(x)=\lambda e^{-\lambda x}$.
+
+`-` 기억할것 
+- 경우1: 지수분포의 모수는 평균, 지수분포의 파라메터는 $\theta=\frac{1}{\lambda}$으로 정의하여 새롭게 사용 
+- 경우2: 지수분포의 모수는 평균, 지수분포의 파라메터는 포아송의 $\lambda$를 재활용. 
+- 경우3: 지수분포의 모수는 평균의 역수, 지수분포의 파라메터는 포아송의 $\lambda$를 재활용. 
+
+`-` 노테이션의 숨은의도들 (제 생각)
+- 경우2: 포아송분포의 파라메터도 그대로 쓰고싶고, "지수분포의 모수 = 지수분포의 평균" 과 같이 만들고 싶음 
+- 경우1: 경우2에서는 $X \sim Exp(1/\lambda)$로 표현되어서 모수가 역수로 되어있어 너무 헷갈림. 그냥 포아송분포의 $\lambda$를 버리는 편이 좋겠음. 지수분포의 평균을 의미하는 $\theta$를 새롭게 정의하고 이 $\theta$를 중심으로 pdf를 만듬 
+- 경우3: 경우2에서는 $X \sim Exp(1/\lambda)$로 표현되어서 모수가 역수로 되어있어 너무 헷갈림. 그냥 모수는 그대로 $Exp(\lambda)$를 쓰고 지수분포의 평균을 모수의 역수로 정의하는게 낫겠음. 
+
+`-` 아무튼 여러가지 방식으로 표현합니다..
+- 경우1: 줄리아, 파이썬, 위키
+- 경우2: 제가 공부한 교재? 요즘은 이렇게 잘 안쓰는 것 같음 
+- 경우3: R, 위키
+
+`-` 평균이 $314$인 지수분포의 pdf는 $f(x)=\frac{1}{314}e^{-x/314}$ 이다. <- 이렇게 외웠음
+"""
+
+# ╔═╡ ca700e4d-5810-4c66-8347-2fe2463ccc59
+md"""
+## 숙제
+`-` 평균이 2인 지수분포를 이용하여 자유도가 20인 카이제곱분포를 생성하여라.
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -1167,28 +1447,84 @@ version = "0.9.1+5"
 """
 
 # ╔═╡ Cell order:
-# ╟─721934a3-d67f-44f0-a861-dfdfdc534da3
-# ╟─7c3031c4-b0ec-4025-ae98-9e7e6509649f
-# ╠═6d03774b-30d9-4410-aedb-9e2a03c9d042
-# ╠═59882998-f896-4747-9c89-98052e6f69f0
-# ╠═70853477-57fb-4e48-b60f-c746c55851cf
-# ╠═35faa92d-82d7-4f1e-b898-e23895db306a
-# ╟─879caac4-bb95-11ec-31f9-9f79e85fdec2
-# ╟─46a530d4-ef8d-430c-8b09-320002697a91
-# ╟─353df5ed-efa8-41d4-b16b-b55cfaabd0ce
-# ╟─10b23855-f49b-4604-a196-17a6211a38da
-# ╟─901d7ab9-9646-4304-a308-930313de88df
-# ╟─ee152cba-b44f-4214-878c-448881719f36
-# ╟─985f92aa-699b-4bbf-afda-20fd7cce80f7
-# ╟─e53a4bf1-4992-48cb-b172-6459df8faeeb
-# ╟─9cf95705-aaa5-43a1-b6e5-d7564635b0f5
-# ╟─f8bc947d-0be8-4cd8-8277-9b472f282141
-# ╠═a0752f04-d338-4fc3-8b7e-79d080d146e9
-# ╟─3bf10379-5d95-4942-9ec8-ecb3fe026e24
-# ╠═52c3c65b-19f2-4670-9bd5-fc0762184237
-# ╟─900a6454-c9ed-4592-b891-da3599f5aaf2
-# ╠═47a34341-b69f-496e-acd5-3d14d2a4e0d2
-# ╟─50bd9f76-9161-4bbe-8332-e6a60139578a
-# ╟─2ce52cca-e4da-4685-aa0c-c8d969d45d43
+# ╟─b8113ace-bf87-11ec-332c-d57eb9d49518
+# ╟─1cfafdd4-86ff-4e2f-aa50-e9e78f4f4090
+# ╟─e72224fa-ebba-48e4-b702-b2d0329610a6
+# ╠═9d2a3140-7c5e-4439-93e0-1e02e8417daf
+# ╠═7fd8042e-9af6-4f6c-b25c-ab8ed5f0af93
+# ╠═aa3f4785-8e3f-4841-b3cd-fb1077792992
+# ╟─fe50793a-c255-4cc6-81fe-21d729262786
+# ╟─823932ac-0546-427f-8d1a-bb1a452ef29c
+# ╟─019f20b3-7920-40e9-b470-4f6392b1c4ac
+# ╟─930005f3-d5dc-4642-ab96-04f9c74a1c8f
+# ╠═0fd62af9-1519-4a64-a860-99e862087320
+# ╠═410876fb-e8d3-413b-b278-9c0d7e76b9a4
+# ╟─01e17c60-fd70-4767-b51b-cfd7d542df9f
+# ╟─90306510-4d75-4189-89f1-97d3a1f83f21
+# ╠═239b3846-48df-40b1-b223-fbffa87cd5a4
+# ╟─076614a8-3c5a-47cc-bcc8-c4074e9776fe
+# ╠═528f54ca-8c1a-4e99-84bb-e1c91004057f
+# ╠═f7274989-9cd5-48dd-b501-91719cc07703
+# ╠═170bf0c7-3055-4c7c-95e2-e2d3d9c3244c
+# ╟─69d57189-a1d8-4574-9714-d5524ff94c55
+# ╠═1912ea52-b536-4200-91a1-d9580e635b93
+# ╟─c8a2897c-1381-4828-8d87-d9e3140788e6
+# ╠═1d5ced10-a8b3-4e2c-9f0f-e2b7d274c8c3
+# ╟─3dd308dd-3f64-4a1c-a0e5-96d88d1a68c7
+# ╟─abf6b2ce-b5b0-4921-8edd-bda6b38ff364
+# ╟─67d81f4b-4b16-4b0b-aacb-1d38a6e1dbc5
+# ╟─9061c67f-5039-4ee2-a749-d51aa8034320
+# ╟─7fa5ef2f-6aa2-4c00-bf4b-fc47c409dd10
+# ╟─a46d857a-6328-43c2-8aff-7155462c2119
+# ╟─27a1f077-e674-40ab-889c-06663a133c8a
+# ╟─46fb4c81-adf5-4b8b-83a9-01bbb37607f1
+# ╟─ff5a1ec6-ab09-4137-84ed-068f4d9895ce
+# ╟─03f2eacf-c257-48e8-867c-a1775166b98e
+# ╠═e18c1f97-b009-481a-b19e-345be4146ecb
+# ╟─e2db5fb2-7537-424c-8e69-e6e3247ec51a
+# ╠═9314a572-e10a-4ed3-b882-dbbaaa17c075
+# ╟─cf98d110-505d-44af-b4c3-35e68289fe99
+# ╠═26a5eb9e-b8ed-4580-a5e7-fd2b72f65ec3
+# ╠═a6c65dc1-e84c-4d35-a8f5-2d0c9db6f045
+# ╠═e292a985-98e9-49e1-ac2f-4b7d696026b9
+# ╟─1af05070-bb8d-45b5-a590-5900baa8b9ed
+# ╟─d3975d4c-9751-4a27-953c-8ee603b33eef
+# ╟─2030222c-b0e1-4a9d-b1fd-16ace7b47f2f
+# ╟─70532d58-2829-4e81-bdda-679c2b9dda77
+# ╟─6ba47796-f396-42b6-abcd-1df06f98da58
+# ╠═83cadf65-46dd-45b7-a2e1-0b858d719676
+# ╠═ffe59d85-656e-4056-afa1-fb7e76b59c42
+# ╟─7254e500-ffaf-4280-a0cd-14318ec404aa
+# ╟─80f217cc-f981-4625-a9a3-0f8450ab0d13
+# ╟─04d93dc6-43d3-4081-bca6-9c08f5ee2653
+# ╠═36e5c715-ec53-4586-b006-7e51ae83255e
+# ╠═a3894a73-7fee-43ec-a06a-ff0142ccacc6
+# ╟─7130347c-0a73-4f7d-8c64-2164eb65b37d
+# ╟─e4e7bbcf-7e48-4020-9e19-4cbd2d7d36e3
+# ╟─5662230c-64a0-4835-b8a6-7dcf3fe6ae55
+# ╠═42f1313b-528d-4aec-85bb-86ff6bbb288a
+# ╟─4a21db7e-2e84-438f-a8ba-a20360628777
+# ╠═7b37ed60-e13a-41a7-9efb-1c26c9017977
+# ╟─67508ce7-77d8-4ce0-9a0b-0312ffca76ec
+# ╠═2bdeef3c-ad0c-4dcd-8d45-a8d0e88a743f
+# ╟─f6d6ca0c-ad73-400a-93d7-086453df8470
+# ╠═bb13a418-685c-41c1-972d-cf2b2a978ec8
+# ╟─2c195c00-bee6-49d5-9f51-459f37bcebcb
+# ╠═195ef5c7-a4fa-4176-a0a7-846ee354ce7f
+# ╟─c01d6d44-9310-46c1-b040-b22bc19b936b
+# ╟─cc16de8e-d845-448d-8dbe-c1e8988d48df
+# ╠═906136a9-095c-4ae5-a75d-290f14e2f1a6
+# ╟─dea33225-75fd-448f-9854-aef9d2973a47
+# ╠═52606dc6-6e8b-4ab3-88e5-ef0f3bb73fbd
+# ╠═4415ff22-04a9-48d5-95c8-333921469951
+# ╠═f8f2dd38-772f-4afb-9fd6-847f43bce147
+# ╠═c2e4e893-4590-49ad-be6b-39731fa1bdd9
+# ╠═0456d788-ffdb-4457-be96-52a2f4704084
+# ╟─0cf5faae-20c8-441c-a98f-3af7789e5367
+# ╟─a37b1e80-943b-4db1-9231-0fb0dcd161ce
+# ╠═a4f3b441-91b7-445f-b516-2a20424092a1
+# ╟─c296c866-08b9-4a59-bf6b-e5f8c162c2b9
+# ╟─c1fe1819-20a1-47a8-b96e-bbbd6fec9b00
+# ╟─ca700e4d-5810-4c66-8347-2fe2463ccc59
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
