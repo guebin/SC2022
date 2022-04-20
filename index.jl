@@ -17,6 +17,12 @@ md"""
 - Kakao: [카카오톡채널](http://pf.kakao.com/_zNQxib/chat)
 """
 
+# ╔═╡ 02d4f860-29eb-4fd9-bbc5-4baeb819560d
+md"""
+### Notices
+- [시험관련안내사항](https://guebin.github.io/SC2022/notice1.html)
+"""
+
 # ╔═╡ f589bb03-2bf2-4f65-b351-0e3c53eae11b
 md"""
 ### Lectures
@@ -85,6 +91,7 @@ manifest_format = "2.0"
 # ╔═╡ Cell order:
 # ╟─9ba3fd28-a02f-11ec-2d00-417ff6fef7d3
 # ╟─2cfc8784-d7cf-4ab7-8934-855fecad2b26
+# ╟─02d4f860-29eb-4fd9-bbc5-4baeb819560d
 # ╟─f589bb03-2bf2-4f65-b351-0e3c53eae11b
 # ╟─1f7b4001-be12-44dc-8745-c45ed7d2ad03
 # ╟─00000000-0000-0000-0000-000000000001
