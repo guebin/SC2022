@@ -286,12 +286,12 @@ md"""
 # ╔═╡ 04d93dc6-43d3-4081-bca6-9c08f5ee2653
 md"""
 ### 대의적 정의 ($\alpha$가 자연수일경우)
-`-` $X \sim \Gamma(\alpha,\beta) \Leftrightarrow X \overset{d}{=} Z_1+\dots+Z_\alpha$, where $Z_i \overset{iid}{\sim} Exp(\beta)$
+`-` $X \sim \Gamma(\alpha,\beta) \Leftrightarrow X \overset{d}{=} Z_1+\dots+Z_\alpha$, where $Z_i \overset{iid}{\sim} Exp(\frac{1}{\beta})$
 """
 
 # ╔═╡ 36e5c715-ec53-4586-b006-7e51ae83255e
 md"""
--  $Exp(\beta)$는 평균이 $\beta$인 지수분포 
+-  $Exp(\frac{1}{\beta})$는 평균이 $\beta$인 지수분포 
 """
 
 # ╔═╡ a3894a73-7fee-43ec-a06a-ff0142ccacc6
@@ -1497,8 +1497,8 @@ version = "0.9.1+5"
 # ╟─7254e500-ffaf-4280-a0cd-14318ec404aa
 # ╟─80f217cc-f981-4625-a9a3-0f8450ab0d13
 # ╟─04d93dc6-43d3-4081-bca6-9c08f5ee2653
-# ╠═36e5c715-ec53-4586-b006-7e51ae83255e
-# ╠═a3894a73-7fee-43ec-a06a-ff0142ccacc6
+# ╟─36e5c715-ec53-4586-b006-7e51ae83255e
+# ╟─a3894a73-7fee-43ec-a06a-ff0142ccacc6
 # ╟─7130347c-0a73-4f7d-8c64-2164eb65b37d
 # ╟─e4e7bbcf-7e48-4020-9e19-4cbd2d7d36e3
 # ╟─5662230c-64a0-4835-b8a6-7dcf3fe6ae55

@@ -117,7 +117,7 @@ let
 	X = [(rand(n) .< p) |> sum for k in 1:N]
 	p1= histogram(X)
 	p2= rand(Poisson(λ),N) |> histogram
-	_p = plot(p1,p2,layout=(2,1))
+	_p = plot(p1,p2,layout=(2,1)) 
 	
 
 	md"""
@@ -185,7 +185,7 @@ let
 	p1=[mean(rand(Poisson(λ),N)) for k in 1:100] |> histogram
 	p2=[var(rand(Poisson(λ),N)) for k in 1:100] |> histogram
 	#p3=[(mean(rand(Poisson(λ),n))+var(rand(Poisson(λ),n)))/2  for k in 1:100] |> histogram
-	_p=plot(p1,p2,layout=(2,1))
+	_p=plot(p1,p2,layout=(2,1),xlim=(4.8,5.2))
 	md""" 
 	mean(X),var(X)로 λ를 추정
 	$(_p)
@@ -202,7 +202,7 @@ md"""
 
 # ╔═╡ 29a2e115-37a7-4f67-a040-a4c1648fdfa6
 md"""
-## 지수분포 ($X \sim Exp(1/\lambda)$)
+## 지수분포 ($X \sim Exp(\lambda)$)
 """
 
 # ╔═╡ a185e773-f51e-449b-8d40-de819bd4badf
@@ -210,7 +210,8 @@ md"""
 ### 지수분포의 요약 
 - X의의미: 시간1에 평균적으로 λ번 발생하는 시건이 있을때 첫 번째 이벤트가 발생할때 까지 걸리는 시간. 
 - X의범위: 시간은 양수이므로 X ≥ 0
-- 파라메터의 의미와 범위: (1) λ = 시간1에 평균적으로 발생하는 이벤트의 수 (2) 1/λ = 한번의 이벤트가 발생할때까지 평균적으로 걸리는 시간; λ>0 
+- 파라메터의 의미: (1) λ = 시간1에 평균적으로 발생하는 이벤트의 수 (2) 1/λ = 한번의 이벤트가 발생할때까지 평균적으로 걸리는 시간 
+- 파라메터의 범위: λ>0 
 - pdf: $f(x)=\lambda e^{-\lambda x}$ 
 - mgf: 
 - cdf: $F(x)=1-e^{-\lambda x}$
