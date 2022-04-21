@@ -176,7 +176,7 @@ md"""
 
 # ╔═╡ 595862ae-0ee5-47fc-b388-c3986d2c5357
 md"""
-`-` 이론: $X \sim Exp(1/\lambda) \Rightarrow$ 모든 $t,s > 0$ 에 대하여 $P(X>t)=P(X>t+s|X>s)$가 성립
+`-` 이론: $X \sim Exp(\lambda) \Rightarrow$ 모든 $t,s > 0$ 에 대하여 $P(X>t)=P(X>t+s|X>s)$가 성립
 """
 
 # ╔═╡ 1d8dfc66-6b9d-4d8f-b06e-719897cdba3a
@@ -431,7 +431,7 @@ let
 	#scatter(X,Y)
 	p1=histogram(X)
 	p2=randn(N) |> histogram
-	plot(p1,p2,layout=(2,1))
+	plot(p1,p2,layout=(2,1),xlim=(-5,5))
 end 
 
 # ╔═╡ a62728c4-e91a-4345-b0cb-ce1e243f0c81
@@ -452,7 +452,7 @@ let
 	X = @. √(-2log(1-U₁))*cos(2π*U₂)
 	p1 = histogram(X) 
 	p2 = histogram(randn(N))
-	plot(p1,p2,layout=(2,1))
+	plot(p1,p2,layout=(2,1),xlim=(-5,5))
 end 
 
 # ╔═╡ 0fbbfaea-411d-4cf7-82b4-113038fab29b
@@ -472,7 +472,7 @@ md"""
 """
 
 # ╔═╡ 959b6759-91b6-41b9-a67c-43a09eab0857
-lambda = @bind λ Slider(0.1:0.01:50)
+lambda = @bind λ Slider(0.1:0.01:50,default=10)
 
 # ╔═╡ 1fa64776-6859-4698-bca8-4286bdc01128
 let 

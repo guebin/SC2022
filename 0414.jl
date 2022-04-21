@@ -88,7 +88,7 @@ $f_{6Z}(x)=\frac{1}{6}f_Z\big(\frac{x}{6}\big)=\frac{1}{6}e^{-\frac{x}{6}}$
 
 이다. 그런데 이것은 평균이 6인 지수분포의 pdf와 모양이 같다. 일반화하면 
 
-$Z \sim Exp(1/\lambda) \Rightarrow aZ \sim Exp(a/\lambda)$
+$Z \sim Exp(\lambda) \Rightarrow aZ \sim Exp(\lambda/a)$
 
 라고 볼 수 있다. 즉 지수분포를 따르는 화률변수에 임의의 상수값을 곱해도 여전히 지수분포를 따르므로 지수분포는 척도모수를 가진다고 볼 수 있다. 
 """
