@@ -20,7 +20,9 @@ md"""
 # ╔═╡ 02d4f860-29eb-4fd9-bbc5-4baeb819560d
 md"""
 ### Notices
-- [시험관련안내사항](https://guebin.github.io/SC2022/notice1.html)
+- [시험관련 안내사항](https://guebin.github.io/SC2022/notice1.html)
+- [중간고사 예상유형](https://guebin.github.io/SC2022/mid_prac.html)
+- [중간고사](https://guebin.github.io/SC2022/mid.html) // 2022-04-06 14:00 이후 공개예정 
 """
 
 # ╔═╡ f589bb03-2bf2-4f65-b351-0e3c53eae11b
