@@ -22,7 +22,7 @@ md"""
 ### Notices
 - [시험관련 안내사항](https://guebin.github.io/SC2022/notice1.html)
 - [중간고사 예상유형](https://guebin.github.io/SC2022/mid_prac.html)
-- [중간고사](https://guebin.github.io/SC2022/mid.html) // 2022-04-06 14:00 이후 공개예정 
+- [중간고사](https://guebin.github.io/SC2022/mid.html) -> [해설강의](https://guebin.github.io/SC2022/0428.html)
 """
 
 # ╔═╡ f589bb03-2bf2-4f65-b351-0e3c53eae11b
@@ -79,6 +79,10 @@ md"""
 
 [4월28일](https://guebin.github.io/SC2022/0428.html)
 - 중간고사 해설강의
+
+[5월3일](https://guebin.github.io/SC2022/0503.html)
+- 선형대수학 intro: 통계학과에서 바라보는 행렬, 정규분포의 합과 평균, 회귀모형과 사영행렬
+- 이미지자료를 의미하는 행렬: 최하니, 하니의 트랜스포즈, 하니의 서브매트릭스, RGB{N0f8}, channelview, colorview, RGB{Float64}, 루트하니, 후광하니, 스무딩 하니, 샤프한 하니 
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
