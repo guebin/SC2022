@@ -23,6 +23,9 @@ https://www.youtube.com/embed/playlist?list=PLQqh36zP38-wVkXbNqaC9MDXhrRIKVfXu
 width=600 height=375  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 """
 
+# ╔═╡ a8260ce7-b754-4423-a626-a3db25cf12ed
+Plots.plotly()
+
 # ╔═╡ 0ccda176-3037-4c56-8d22-432597c8014b
 md"""
 ## 1. 줄리아문법 (5점)
@@ -66,7 +69,7 @@ md"""
 # ╔═╡ c2d413c7-d19d-4868-aa35-6b1d86d85741
 let 
 	f(x)=max(0,x)
-	plot(f,-5,5)
+	plot(f,-5,5) 
 end
 
 # ╔═╡ ab443d25-6865-48e5-a5ff-998d8c743890
@@ -103,7 +106,7 @@ md"""
 # ╔═╡ cedec46d-b5fa-42ea-b45d-06c0b8707f3b
 let 
 	X = rand(Exponential(1),1000) 
-	mean(@. (0.5)^X * exp(X)) # ∫(1/2)ˣ
+	mean(@. (0.5)^X * exp(X)) 
 end 
 
 # ╔═╡ 333fc0c4-648a-4c6d-9803-d5e0b5eb6640
@@ -206,7 +209,7 @@ md"""
 [sum(rand(Exponential(2),10) .*2)  for i in 1:1000] # 평균이2인 지수분포 
 
 # ╔═╡ e4f4d6e4-847d-4295-bf9c-cdfc261657f3
-[sum(rand(Exponential(0.5),10) .*8)  for i in 1:1000] # 평균이2인 지수분포  # 평균이1/2인 지수분포 
+[sum(rand(Exponential(0.5),10) .*8)  for i in 1:1000] # 평균이1/2인 지수분포 
 
 # ╔═╡ 501ce3c3-891c-48d6-a9a5-c035072719fb
 md"""
@@ -1496,6 +1499,7 @@ version = "0.9.1+5"
 # ╟─771b13aa-2bdd-400a-87e3-cc5bae383cfe
 # ╟─d1feebb2-87f1-4cdb-a5ec-9d4755673682
 # ╠═a6609191-8981-4d00-a5ef-b311d8791a55
+# ╠═a8260ce7-b754-4423-a626-a3db25cf12ed
 # ╟─0ccda176-3037-4c56-8d22-432597c8014b
 # ╟─6f27a359-bf9e-48b8-a4fd-26c9d499ba8e
 # ╠═af42267f-4682-48a9-af8e-8c1419bfbfae
