@@ -43,7 +43,7 @@ md"""
 
 # ╔═╡ f3aad4d3-1f07-4b4b-b9b1-ea573ed5eaa7
 md"""
-`-` 보충노트: https://github.com/guebin/SC2022/blob/main/SC2022_0510_supp.pdf
+`-` [보충노트](https://github.com/guebin/SC2022/blob/main/SC2022_0510_supp.pdf)
 """
 
 # ╔═╡ 47dbb323-cbac-4552-8e80-9d80adb5170c
