@@ -86,6 +86,9 @@ md"""
 
 [5월10일](https://guebin.github.io/SC2022/0510.html)
 - SVD (이론, 실습)
+
+[5월12일](https://guebin.github.io/SC2022/0512.html)
+- 이미지자료에서의 SVD
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
