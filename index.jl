@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.18.2
+# v0.19.4
 
 using Markdown
 using InteractiveUtils
@@ -89,6 +89,9 @@ md"""
 
 [5월12일](https://guebin.github.io/SC2022/0512.html)
 - 이미지자료에서의 SVD
+
+[5월17일](https://guebin.github.io/SC2022/0517.html)
+- PCA: 데이터프레임에서의 SVD
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
