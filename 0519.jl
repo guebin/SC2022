@@ -69,6 +69,14 @@ md"""
 `-` ${\bf U}$와 ${\bf D}$를 구하고 ${\bf \tilde U}$와 ${\bf \tilde D}$를 구하고 곱한다. 
 """
 
+# ╔═╡ 83e16950-3d5f-4eeb-a15a-46855a16ddc6
+begin
+	U,d,V = svd(X)
+	Ũ = U[:,1:2] # p=3, q=2 설정 
+	D̃ = Diagonal(d[1:2])
+	Z = Ũ * D̃ 
+end
+
 # ╔═╡ 4057a796-d001-4a91-b877-adfd7240b903
 md"""
 ### 방법2: ${\bf X}{\bf \tilde V}$ 계산
@@ -77,7 +85,14 @@ md"""
 # ╔═╡ 6ed3b3e5-6add-40ca-b58c-dc7a53389c6b
 md"""
 `-` 관찰: ${\bf Z}={\bf \tilde U}{\bf \tilde D}={\bf X}{\bf \tilde V}$
+- 증명: [보충자료(pdf)](https://github.com/guebin/SC2022/blob/main/SC2022_0519_supp.pdf)
 """
+
+# ╔═╡ e4251a72-bab1-43ac-8cc3-08d7e24405b9
+let 
+	Ṽ = V[:,1:2] 
+	[Ũ*D̃  X*Ṽ]
+end 
 
 # ╔═╡ ac09e9fe-9e6e-4d29-b3a6-70296f2ec825
 md"""
@@ -95,24 +110,10 @@ md"""
 """
 
 # ╔═╡ 6901a2a9-163e-4602-a7a1-58fb6d2c1e44
-U,d,V = svd(X)
-
-# ╔═╡ 83e16950-3d5f-4eeb-a15a-46855a16ddc6
-begin
-	#U,d,V = svd(X)
-	Ũ = U[:,1:2] # p=3, q=2 설정 
-	D̃ = Diagonal(d[1:2])
-	Z = Ũ * D̃ 
+let
+	U,d,V = svd(X)
+	V
 end
-
-# ╔═╡ e4251a72-bab1-43ac-8cc3-08d7e24405b9
-let 
-	Ṽ = V[:,1:2] 
-	[Ũ*D̃  X*Ṽ]
-end 
-
-# ╔═╡ f07d420e-ad67-4d81-867d-56e034421925
-V
 
 # ╔═╡ 321d4559-022f-4ec4-8ef9-288af6973803
 md"""
@@ -120,10 +121,9 @@ md"""
 """
 
 # ╔═╡ 60a9d85f-6117-4540-b1d0-359b8cf0ccff
-λ,Ψ = eigen(X'X)
-
-# ╔═╡ 77896b12-c249-472c-bd77-84fdeac6edf4
-V,Ψ
+let
+	λ,Ψ = eigen(X'X)
+end
 
 # ╔═╡ 0f200543-8a25-4b7d-92f4-c5972eccaa96
 md"""
@@ -1323,17 +1323,15 @@ version = "0.9.1+5"
 # ╟─1c47fdea-a511-43e6-9a2e-bdd044560682
 # ╟─6784fa45-f3de-4d95-82c6-016ff856daab
 # ╠═83e16950-3d5f-4eeb-a15a-46855a16ddc6
-# ╠═4057a796-d001-4a91-b877-adfd7240b903
-# ╠═6ed3b3e5-6add-40ca-b58c-dc7a53389c6b
+# ╟─4057a796-d001-4a91-b877-adfd7240b903
+# ╟─6ed3b3e5-6add-40ca-b58c-dc7a53389c6b
 # ╠═e4251a72-bab1-43ac-8cc3-08d7e24405b9
 # ╟─ac09e9fe-9e6e-4d29-b3a6-70296f2ec825
 # ╟─137f5a6b-2c47-4359-9a30-565a1575e9bd
 # ╟─84ae5e8f-39e5-42fd-b5f3-7ca2b3009702
 # ╠═6901a2a9-163e-4602-a7a1-58fb6d2c1e44
-# ╠═f07d420e-ad67-4d81-867d-56e034421925
 # ╟─321d4559-022f-4ec4-8ef9-288af6973803
 # ╠═60a9d85f-6117-4540-b1d0-359b8cf0ccff
-# ╠═77896b12-c249-472c-bd77-84fdeac6edf4
 # ╟─0f200543-8a25-4b7d-92f4-c5972eccaa96
 # ╟─ec1262be-0742-4b09-9543-5888f5f695c3
 # ╠═3e559a77-5869-49bf-b190-98e3557a9a79

@@ -92,6 +92,9 @@ md"""
 
 [5월17일](https://guebin.github.io/SC2022/0517.html)
 - PCA: 데이터프레임에서의 SVD
+
+[5월19일](https://guebin.github.io/SC2022/0519.html)
+- PCA: 차원축소를 구현하는 여러가지 코드
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
