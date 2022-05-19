@@ -12,6 +12,18 @@ md"""
 # 5월19일
 """
 
+# ╔═╡ 4ddf3f91-3555-4161-9d8d-96e0c4d01ec1
+html"""
+<div style="display: flex; justify-content: center;">
+<div  notthestyle="position: relative; right: 0; top: 0; z-index: 300;">
+<iframe src=
+"
+https://www.youtube.com/embed/playlist?list=PLQqh36zP38-zrmY65Jz7UERkrKdMJ8PKx
+"
+width=600 height=375  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+"""
+	
+
 # ╔═╡ 59d319dd-9907-4fca-b520-cb740aa56f67
 md"""
 ## usings
@@ -1299,6 +1311,7 @@ version = "0.9.1+5"
 
 # ╔═╡ Cell order:
 # ╟─afe1d00d-ce53-427a-811b-79537f1111cd
+# ╟─4ddf3f91-3555-4161-9d8d-96e0c4d01ec1
 # ╟─59d319dd-9907-4fca-b520-cb740aa56f67
 # ╠═00fdf61c-d290-4aa4-b027-2a641393fde6
 # ╠═9cc9037a-de94-41aa-8762-edc3540ad424
