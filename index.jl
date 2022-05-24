@@ -32,7 +32,7 @@ md"""
 
 # ╔═╡ 1f7b4001-be12-44dc-8745-c45ed7d2ad03
 md"""
-[5월24일](https://guebin.github.io/SC2022/0519.html)
+[5월24일](https://guebin.github.io/SC2022/0524.html)
 - 고유값과 고유벡터 (1)
 
 [5월19일](https://guebin.github.io/SC2022/0519.html)
