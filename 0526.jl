@@ -4,431 +4,443 @@
 using Markdown
 using InteractiveUtils
 
-# This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
-macro bind(def, element)
-    quote
-        local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
-        local el = $(esc(element))
-        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
-        el
-    end
-end
+# ╔═╡ b8ef974e-5c2a-4e12-903b-d3034f0d14ae
+using LinearAlgebra,Plots,PlutoUI
 
-# ╔═╡ 15442a71-00fe-48ed-ae51-def2f2d8876e
-using LinearAlgebra, PlutoUI, Plots
-
-# ╔═╡ e08c8300-db18-11ec-3f60-19c9638fa2d2
+# ╔═╡ e99a9f9e-dc95-11ec-0090-a94738118068
 md"""
-# 5월24일
+# 5월26일
 """
 
-# ╔═╡ 90db85a9-9864-4e63-98ca-7edb77f1932f
+# ╔═╡ 76bbd329-1a4d-4a59-a836-982e9dbee14a
 html"""
 <div style="display: flex; justify-content: center;">
 <div  notthestyle="position: relative; right: 0; top: 0; z-index: 300;">
 <iframe src=
 "
-https://www.youtube.com/embed/playlist?list=PLQqh36zP38-zjEXJRTGfKk4kWO5T4IlYy
+https://www.youtube.com/embed/playlist?list=PLQqh36zP38-z50hlplH8xsVzahDECEeYV
 "
 width=600 height=375  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 """
 
-# ╔═╡ c84fb7f0-e572-46ab-b0a3-7612c1870815
+# ╔═╡ 07709962-23e2-47f1-8073-36067aa5dc76
 md"""
 ## usings
 """
 
-# ╔═╡ 8308a4c4-46b0-4407-aba5-d8b174c2f152
-Plots.plotly()
-
-# ╔═╡ 8b5ce365-94e4-4875-ac48-d7d6f4b7409c
+# ╔═╡ 7480aba2-fcee-4e63-9b06-ef6e1d7f7bec
 PlutoUI.TableOfContents()
 
-# ╔═╡ 9d9020be-5c18-48f6-bf87-d3623f568673
+# ╔═╡ eaf4ea77-d5fe-4eec-b98f-1bb46b8c8fca
+Plots.plotly()
+
+# ╔═╡ a0cfda3c-97c0-4f3e-b770-df39fa2812b8
 md"""
-## 지난시간 summary
+## 지난시간 숙제
 """
 
-# ╔═╡ 05c1b786-159f-4ebd-9748-65c5194133f6
+# ╔═╡ c5c67bcf-8e76-452f-ac6d-79705e1300d4
 md"""
-### 몇 가지 용어의 약속 (책에 없는 용어도 있음)
+### 숙제풀이
 """
 
-# ╔═╡ 65396179-2be2-4ba2-84a6-38db6a4335c5
+# ╔═╡ 5cbade18-07a1-4785-a7cb-2b954f638070
 md"""
-(1) ${\bf X}$의 svd 분해꼴로 얻어지는 결과를 각각 ${\bf X}$의 u-matrix, d-matrix, v-matrix 라고 부르자. 
-- 참고로 ${\bf X}$의 u-matrix, v-matrix 유일하지 않음. 
-- u-matrix와 v-matrix의 column들의 순서를 임의로 바꿀수 있으므로 ${\bf X}$의 d-matrix 역시 유일하진 않음. 그렇지만 순서를 정렬한다면 유일함. 
+정사각행렬 ${\bf A}_{2\times 2}$가 0행렬인 경우에 ${\bf A}$의 고유벡터들이 span하는 공간은 몇차원인가?
 """
 
-# ╔═╡ 318c6975-764e-47e5-abe7-0ba7b9883d20
-md"""
-(코드예시)
-"""
-
-# ╔═╡ a411e2b7-b659-44d1-8146-16d15f59e0e4
+# ╔═╡ 8f53bd3f-6f4d-412d-b491-ddf47ee0628a
 let 
-	X = [1 2 ; 3 4]
-	U,d,V = svd(X)
-	U # u-matrix of X 
-	Diagonal(d) # d-matrix of X 
-	V # v-matrix of X
+	A=[0 0; 0 0]
+	eigen(A)
 end 
 
-# ╔═╡ 867a6ec4-fb9c-4001-910f-9080ecfcddbc
+# ╔═╡ f16b4417-d8b5-4aa2-b0dd-57844567046e
 md"""
-(2) 정사각행렬 ${\bf A}$가 고유값분해가 가능할때 ${\bf A}$의 서로독립인 고유벡터를 column-wise하게 합친 행렬을 ${\bf A}$의 **고유벡터행렬(eigenvector matrix)**이라고 하자. 그리고 고유벡터행렬의 each columns에 대응하는 고유값을 순서대로 나열하여 대각선의 원소에 넣은 대각행렬을 **고유값행렬(eigenvalue matrix)**라고 하자. 
-- 참고로 ${\bf X}$의 고유벡터행렬은 유일하지 않음. 예를들어 매트릭스 ${\bf \Psi}$가 ${\bf X}$의 고유벡터행렬이면 $-{\bf \Psi}$ 역시 ${\bf X}$의 고유벡터행렬임. 
-- 고유벡터의 순서를 바꿀수 있기에 고유값행렬도 유일하지는 않음. 하지만 고유값을 순서대로 정리한다면 유일함.
-
+(풀이1) ${\bf A}$의 고유벡터들을 $v_1,v_2$로 두고 임의의 $c_1,c_2$에 대하여 $c_1v_1+c_2v_2$가 그리는 자취를 직접 찍어본다. 
 """
 
-# ╔═╡ 67b61ca4-a06b-4f1d-8cab-0d4ba12dfae6
-md"""
-(코드예시)
-"""
-
-# ╔═╡ 11d55eb6-67af-4146-abe0-c34dba602e71
+# ╔═╡ 3f8df3c3-f66b-413c-a3e6-2a96f365b74e
 let 
-	A = [1 2; 2 1]
-	λ, Ψ = eigen(A)
-	Ψ # eigenvector-matrix of A 
-	Diagonal(λ) # eigenvalue-matrix of A 
+	v1 = [1,0]
+	v2 = [0,1]
+	span = zeros(2,21*21) 
+	i=1
+	for c1 in -5:0.5:5 
+		for c2 in -5:0.5:5 
+			span[:,i] = c1*v1 + c2*v2
+			i =i+1
+		end
+	end
+	scatter(span[1,:],span[2,:],alpha=0.2)
+end 
+
+# ╔═╡ 4b68f08f-e871-4b93-a32e-0cc4b83ca939
+md"""
+(풀이2) $c_1v_1$이 확장하는 영역과 $c_2v_2$가 확장하는 영역이 같은 직선에 있는지 따져본다. 
+- 즉 $v_1$의 스칼라배로 $v_2$를 만들 수 있는지 (혹은 $v_2$의 스칼라배로 $v_1$을 만들 수 있는지) 따져본다. 
+- 즉 $v_1,v_2$가 linearly dependent한 관계인지 따져본다. 
+"""
+
+# ╔═╡ 6d055720-8315-4fa6-92fe-6eb49f5e1149
+md"""
+(풀이3) ${\bf A}$의 고유벡터행렬의 rank를 조사한다. (rank()는 선형독립인 column들의 숫자를 자동으로 계산해주는 함수?)
+"""
+
+# ╔═╡ fd0691e2-bdac-444c-9f9d-75a89bc10166
+let 
+	A = [0 0 ; 0 0]
+	rank(eigvecs(A))
 end
 
-# ╔═╡ 6f9a1a8e-717b-4953-804a-e8647743fbd4
+# ╔═╡ 10452003-839a-45a5-939d-94b4828bc31a
 md"""
-### 지난시간 요약
+### rank의 개념 (보충학습)
 """
 
-# ╔═╡ 598d1691-16cf-4803-a5af-d87abec1a02e
+# ╔═╡ c2b95dea-0495-4689-8689-ee0ccd9e0be3
 md"""
-#### 지난시간까지의 굵진한 내용 요약
+`-` 매트릭스 ${\bf A}= \begin{bmatrix} 1 & 2 \\ 0 & 1 \\ 3 & 3\end{bmatrix}$ 의 rank는 얼마인가?
 """
 
-# ╔═╡ fa178a75-8119-4d2c-9f63-94420591e7a5
+# ╔═╡ b38d834e-aebb-484d-93e2-6222932aaddd
 md"""
-(1) 임의의 매트릭스 ${\bf X}_{n\times p}$는 항상 SVD분해가 가능하다. 
+(풀이1) julia 함수이용
 """
 
-# ╔═╡ c1e1aded-6005-4b01-bab1-8f75a3811dc4
-md"""
-(2) ${\bf X}_{n \times p}$가 이미지일때: SVD를 이용하면 ${\bf X}_{n\times p} \approx {\bf \hat{X}}_{n\times p}$ 인 ${\bf \hat{X}}_{n\times p}$를 구할 수 있다. (압축하니)
-"""
-
-# ╔═╡ 752ebf31-3ec1-4033-a3d1-0bddd8ac3232
-md"""
-(3) ${\bf X}_{n \times p}$가 데이터프레임일때: SVD를 이용하면 ${\bf X}_{n \times p}$보다 rank가 작은 매트릭스 ${\bf Z}_{n \times q <p}$ 를 찾을 수 있다. ${\bf Z}_{n\times q}$는 적당한 변환 ${\bf B}_{q\times p }$에 의하여 ${\bf Z}_{n\times q}{\bf B}_{q\times p}={\bf \hat{X}}_{n\times p} \approx {\bf X}_{n\times p}$ 이 된다는 특징이 있다. 
-"""
-
-# ╔═╡ 3a85c442-10cd-46ac-943f-6912018b008c
-md"""
-#### ${\bf Z}$와 ${\bf B}$에 대한 암기사항
-"""
-
-# ╔═╡ 330e2f3a-4d66-417f-aaf5-b92ba0a79c55
-md"""
-(1) ${\bf X}={\bf U}{\bf D}{\bf V}^\top$ 일때 ${\bf Z}={\bf \tilde U}{\bf \tilde D}={\bf X}{\bf \tilde V}$ 와 같이 구할 수 있다. 
-- 이때 ${\bf \tilde U}$, ${\bf \tilde D}$, ${\bf \tilde V}$의 정의는 지난강의노트 참고
-"""
-
-# ╔═╡ 713775f6-ccce-4b7a-bda3-e828aebcd6a1
-md"""
-(2) ${\bf X}$의 v-martrix를 구하는 방법이 다양하다. 
-- 방법1: ${\bf X}$의 svd를 이용하여 직접구한다. 
-- 방법2: ${\bf X}'{\bf X}$에 svd를 수행한다. 그러면 신기하게도 ${\bf X}'{\bf X}$의 v-matrix와 u-matrix는 항상 서로 값이 같게 나온다. (왜?) 그리고 더 신기하게도 이때의 ${\bf X}'{\bf X}$의 v-matrixs를 (혹은 u-matrix를)  ${\bf X}$의 v-matrix라고 주장할 수 있다. (왜?)
-- 방법3: ${\bf X}'{\bf X}$의 고유벡터행렬을 구하면 그 행렬을 ${\bf X}$의 v-matrix라고 주장할 수 있다. (왜?)
-"""
-
-# ╔═╡ 006740e0-f12c-4312-b181-30d5e6f82ec3
-md"""
-## Eigenvalue Decomposition
-"""
-
-# ╔═╡ cba26403-d491-4eae-be95-7a11984c2b0e
-md"""
-### 고유값과 고유벡터의 정의
-"""
-
-# ╔═╡ fe5876ba-30f9-470d-bd42-4c188fa580f3
-md"""
-`-` 임의의 정사각행렬 ${\bf A}_{n\times n}$에 대하여 어떠한 벡터 ${\psi}_{n\times 1}\neq 0$ 가 적당한한 값 $\lambda$에 대하여 
-
-$${\bf A}{\psi} = \lambda \psi$$
-
-를 만족하면 $\psi$를 $\lambda$의 고유벡터라고 하고 $\lambda$는 $\psi$에 대응하는 고유값이라고 한다. 
-- note: 0-벡터는 고유벡터로 인정하지 않음 $\to$ 고유값을 찾는방법? $\det({\bf A}-\lambda {\bf I})=0$을 만족하는 $\lambda$를 풀면된다. 
-"""
-
-# ╔═╡ bca97f96-16d9-4c2d-8d6b-6bd5c7400706
-md"""
-(예제1) 첫번째 고유값
-"""
-
-# ╔═╡ ee444ee9-9a95-4b8f-999d-60d1c16df56f
+# ╔═╡ f6c6e1b7-1e5e-4d98-87fc-5fe27fda17fb
 let 
-	A = [1 2 ; 2 1]
-	I = [1 0 ; 0 1]
-	λ = -1 
-	det(A-λ*I) 
-end
+	A = [1 2 ; 0 1 ; 3 3]
+	rank(A) # A의 column들이 span하는 공간의 차원
+end 
 
-# ╔═╡ 4a687148-264d-46b4-a1e4-7d3e94288e57
+# ╔═╡ 638365e6-ca44-42db-a930-a5d4e40a909e
 md"""
--  $\lambda = -1$일때 $\det ({\bf A}-\lambda {\bf I})=0$ 이므로 $\lambda =-1$은 ${\bf A}$의 고유값이다.
+(풀이2) ${\bf A}$의 열은 2개이고 서로를 스칼라배하여 표현할 수 없으므로 둘은 선형독립. ${\bf A}$는 선형독립인 열을 2개 가지고 있으므로 rank=2. 
 """
 
-# ╔═╡ 17bce861-3ef6-4050-bc79-67da0ea689b8
+# ╔═╡ ca0dacd4-1d6c-4401-87a4-15e6a8da3d70
 md"""
-(예제2) 두번째 고유값
+(풀이3) 그려보자.. 
 """
 
-# ╔═╡ 6349ab90-43fd-4a19-87d2-aa2483d3faea
+# ╔═╡ eeaa3ece-15bf-40a2-89c0-42de6673853e
 let 
-	A = [1 2 ; 2 1]
-	I = [1 0 ; 0 1]
-	λ = 3
-	det(A-λ*I) 
-end
+	A1= [1,0,3]
+	A2= [2,1,3]
+	span = zeros(3,21*21) 
+	i=1
+	for c1 in -5:0.5:5 
+		for c2 in -5:0.5:5 
+			span[:,i] = c1*A1 + c2*A2
+			i =i+1
+		end
+	end
+	scatter3d(span[1,:],span[2,:],span[3,:],color=:gray80,markersize=:1)
+end 
 
-# ╔═╡ d7d62756-2dab-4a0f-817a-e1acd83a3b74
+# ╔═╡ 4f58cd8b-3d6a-4d84-9101-e5d7baa30f5a
 md"""
--  $\lambda = 3$일때 $\det ({\bf A}-\lambda {\bf I})=0$ 이므로 $\lambda =3$은 ${\bf A}$의 고유값이다.
+- 3차원 공간에 있지만 결국 2차원 평면을 span하므로 rank=2. 
 """
 
-# ╔═╡ 9bb72ff3-9307-4904-a8b7-e3021b64c343
+# ╔═╡ 872120de-4ff2-46b8-9c8f-cb93b4a39497
 md"""
-(예제3) 첫번째 고유값에 대응하는 고유벡터
+`-` 의문: 왜 rank는 선형독립인 col-vec의 숫자로 정의할까? 선형독립인 row-vector의 수로 정의하면 안되는 걸까?  -> 상관없음. 둘은 항상 같음. 
 """
 
-# ╔═╡ df8db08d-bdda-461b-93cf-e183fc460a41
+# ╔═╡ 04314c22-fe76-4708-83fb-2e17c102b5f7
 let 
-	A = [1 2 ; 2 1]
-	ψ = [-1,1]
-	λ = -1 
-	A*ψ == λ*ψ
-end
+	A = [1 2 ; 0 1 ; 3 3]
+	rank(A') # 이것은 A의 row들이 span하는 공간의 차원이 된다. = A'의 col들이 span하는 공간의 차원
+end 
 
-# ╔═╡ db0b8cb1-2978-4441-9d5c-5e244f31eb0a
+# ╔═╡ abfa8046-570a-4e16-adf4-19f95f169479
 md"""
--  $\psi = \begin{bmatrix} -1 \\ 1 \end{bmatrix}$은 $\lambda=-1$에 대응하는 ${\bf A}$의 고유벡터이다. 
+## Eigenvalue Decomposition (이어서)
 """
 
-# ╔═╡ 8d7119f8-1ef7-4295-a962-d14b1b624689
+# ╔═╡ b01e16db-5743-4bb9-941a-64d450f1259d
 md"""
-(예제4) 첫번째 고유값에 대응하는 또 다른 고유벡터
+### 서로 다른 고유값에 대응하는 고유벡터 
 """
 
-# ╔═╡ 2a3b32af-8c6e-495b-9cb6-872d3a64dcd5
-let 
-	A = [1 2 ; 2 1]
-	ψ = [-2,2]
-	λ = -1 
-	A*ψ == λ*ψ
-end
-
-# ╔═╡ 064f317c-a22d-4220-a944-7d2979dc3515
+# ╔═╡ 2c0df270-2242-485e-9906-7816e7b8a560
 md"""
--  $\psi = \begin{bmatrix} -2 \\ 2 \end{bmatrix}$ 역시 $\lambda=-1$에 대응하는 ${\bf A}$의 고유벡터이다. 
+`-` 이론: 서로 다른 고유값에 대응하는 고유벡터는 항상 선형독립이다. 
 """
 
-# ╔═╡ d7dba18d-7ee2-41df-b970-d6b92599b22f
+# ╔═╡ 8d51400d-1cf5-48bc-a65b-51ed267d38f2
 md"""
-`-` 예제3,4의 관찰: $\psi$가 ${\bf A}$의 고유벡터이라면 $-\psi, \frac{1}{\sqrt{2}}\psi,\dots$ 모두 ${\bf A}$의 고유벡터이다. 그리고 이때 $\psi, -\psi, \frac{1}{\sqrt{2}}\psi$에 대응하는 고유값은 모두 같다. 
+(왜?) 서로 다른 고유값에 대응하는 고유벡터가 linearly dependent 하다고 가정하자. 매트릭스 ${\bf A}$의 서로 다른 고유값을 $\lambda_1,\lambda_2$라고 한다면 아래가 성립하게 만드는 적당한 $\psi_1,\psi_2$가 존재한다. 
+
+$${\bf A}\psi_1 = \lambda_1 \psi_1$$
+
+$${\bf A}\psi_2 = \lambda_2 \psi_2$$
+
+그런데 $\psi_1,\psi_2$는 linearly dependent 하다고 가정하였으므로 적당한 $c_1\neq0$, $c_2\neq 0$ 이 존재하여 아래를 만족한다. 
+
+$c_1\psi_1+c_2\psi_2=0.$
+
+따라서 $\psi_2 = \frac{-c_1}{c_2}\psi_1=c^*\psi_1$ 꼴로 표현할 수 있다. 이때 $c^*\neq 0$ 이다. 이제 $\psi_2 =c^*\psi_1$를 아래에 대입하자. 
+
+$${\bf A}\psi_2 = \lambda_2 \psi_2$$
+
+그러면 
+
+$${\bf A}c^*\psi_1 = \lambda_2 c^*\psi_1$$
+
+이 되고 양변을 $c^*$로 나누면 ($c^*\neq 0$이므로 나눌 수 있다)
+
+$${\bf A}\psi_1 = \lambda_2 \psi_1$$
+
+따라서 고유값, 고유벡터의 정의에 의하여 $\lambda_2$는 $\psi_1$에 대응하는 고유값이다. 그런데 $\psi_1$에 대응하는 고유값은 $\lambda_1$이므로 $\lambda_1= \lambda_2$가 된다. 이는 서로 다른 고유값이라는 가정에 모순이 된다. 
 """
 
-# ╔═╡ b85ea93b-70b9-4ba3-894f-8864626fcca1
+# ╔═╡ deae33b2-6883-4060-adc1-554bc3fe1223
 md"""
-(예제5) 두번째 고유값에 대응하는 고유벡터
+### 대각화가능행렬
 """
 
-# ╔═╡ 23b12658-c5af-4b28-a49c-ae6b10815de0
-let 
-	A = [1 2 ; 2 1]
-	ψ = [1,1]
-	λ = 3 
-	A*ψ == λ*ψ
-end
-
-# ╔═╡ 40b14b87-6d3e-47c4-9177-dfeeb116c858
+# ╔═╡ c1623588-b6b4-44e4-8944-22abb6c488b7
 md"""
--  $\psi = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$ 은 $\lambda=3$에 대응하는 ${\bf A}$의 고유벡터이다.
+#### $2\times 2$ 매트릭스에 대한 몇가지 관찰
 """
 
-# ╔═╡ 3ede1cfb-87d6-40a7-884c-0da963c24d92
+# ╔═╡ a4952768-5b79-4708-b7e4-2b8b53a690e1
 md"""
-### 고유값의 존재 
+`-` (관찰) ${\bf A}_{2\times 2}$ 매트릭스를 상상하자. 아래와 같은 사실들을 생각할 수 있다. 
+
+(1) 반드시 2개의 고유값이 존재한다. (2차방정식의 근은 항상 2개 있으니까) 
+
+(2) 2개의 고유값이 서로 다를 이유는 없다. (중근이 있으니까) 
 """
 
-# ╔═╡ 003a2f97-46cf-4465-83f9-0ad4c64b8c59
-md"""
-`-` **고유값이 없는 정사각행렬은 없다.**
-
-(왜?) 행를 ${\bf A}_{n\times n}$의 고유값이 없다는 의미는 $\det({\bf A}-\lambda {\bf I})=0$를 만족하는 $\lambda$가 없다는 의미이다. 그런데 임의의 $n$차 다항식의 해는 항상 존재한다 (대수학의 기본정리). 
-"""
-
-# ╔═╡ fdba1f70-d0c2-4765-91fd-452fdfe487b9
-md"""
-`-` 그런데 $n$차 다항식의 해가 중복근일 수도 있으므로 ${\bf A}$가 서로 다른 $n$개의 고유값을 가질 필요는 없다.
-"""
-
-# ╔═╡ 80393f7b-c7d2-4972-9ed6-6d06439760ee
-md"""
-(예제1) 2개의 고유값이 겹치는 예제
-"""
-
-# ╔═╡ 0757d40b-2402-445e-ad4c-2daaec0b1b75
+# ╔═╡ 938ca770-863b-4a77-ad95-cab91986ebc6
 let 
 	A = [1 0; 0 1]
 	eigvals(A)
 end
 
-# ╔═╡ a9970ddd-eba6-4eb6-9a32-a6bcc154ed68
+# ╔═╡ 56b0fe4d-3d99-406d-a098-e74685035445
 md"""
-(예제2) 2개의 고유값이 겹치는 두번째 예제
+(3) 하나의 고유값이 정해지면 그것에 대응하는 고유벡터가 반드시 하나는 존재한다. (증명했어요)
+- 하나의 고유벡터가 존재한다는 것은 무한개이 고유벡터가 존재한다는 말과 같다. ($\psi$가 ${\bf A}$의 고유벡터이면 $\sqrt{3}\psi$ 역시 ${\bf A}$의 고유벡터이니까)
+
+(4) 중복된 고유값에 대응하는 고유벡터들이 span하는 공간은 최소 1차원이다. 그렇지만 반드시 1차원일 필요는 없다. (즉 2차원도 가능하다는 의미)
 """
 
-# ╔═╡ 719cdcf6-d062-48d3-9371-a6419aa69522
+# ╔═╡ 670b94b7-d1a9-45c4-a54b-1453f07e78f0
 let 
-	A = [0 0; 0 0]
-	eigvals(A)
+	A = [0 0 ; 0 0]
+	eigen(A)
 end
 
-# ╔═╡ 7e88ea4a-61ff-4fb6-bf6b-14aed6570cce
+# ╔═╡ 5d5396a3-df5d-4bf1-8d73-5160b9c05370
+let 
+	A = [1 0 ; 0 1]
+	eigen(A)
+end
+
+# ╔═╡ f21e1f3c-6b0c-445d-9001-310a7e6cd828
 md"""
-### 고유벡터의 존재
+(5) 두개의 서로 다른 고유값이 존재한다면 ${\bf A}$의 모든 고유벡터들이 span하는 공간은 반드시 2차원이다. (서로 다른 고유값에 대응하는 고유벡터는 항상 linearly independent 하니까, 이것도 증명했죠)
 """
 
-# ╔═╡ fa606cc4-7cf2-457f-889a-3a4bdeaaab31
+# ╔═╡ d9766244-bcfd-4e24-8747-d36b842ba4c5
 md"""
-`-` **하나의 고유값에 대응하는 고유벡터가 반드시 하나는 존재한다.** 
+#### 관찰결과의 종합
 """
 
-# ╔═╡ 85302350-4d8f-4a26-8901-b308fd0b7e20
+# ╔═╡ a80a3165-25e0-47bd-8079-7a3dd9705284
 md"""
-(왜?) 행렬 ${\bf A}$는 항상 $n$개의 고유값을 가진다. 그중에서 하나의 고유값 $\lambda^*$를 fix하자. 고정된 고유값 $\lambda^*$에 대응하는 고유벡터가 없다는 의미는 
+`-` (종합) 위의 사실들을 잘 종합하면 임의의 매트릭스 ${\bf A}_{n\times n}$의 고유벡터들이 span하는 공간이 $n$차원이 아닐 경우는 아래의 경우 뿐이다. 
 
-$$({\bf A}-\lambda^*{\bf I})\psi =0$$
+> 고유값이 일단 중복근을 가져야 한다. 그리고 중복근에 대응하는 고유벡터들이 span하는 공간이 중복근의 중첩수보다 작다. 
 
-를 만족하는 $\psi$는 오직 $\psi=0$ 뿐이라는 것을 의미한다. 그런데 이는 사실이 아니다. 왜냐하면 $\lambda^*$는 ${\bf A}$의 고유값이므로 
-
-$$\det({\bf A}-\lambda^*{\bf I})=0$$
-
-를 만족한다. 따라서 행렬 ${\bf A}-\lambda^*{\bf I}$는 역행렬이 없는 행렬이 되고 이렇게 되면 ${\bf A}-\lambda^*{\bf I}$의 column 들은 선형독립이 아니게 된다. 따라서 $({\bf A}-\lambda^*{\bf I})\psi=0$을 만족하는 $\psi\neq0$가 있다.
+그리고 이 경우를 "${\bf A}_{n\times n}$를 대각화할 수 없다"라고 부른다. 
 """
 
-# ╔═╡ 465232b9-61e3-419e-a38e-e26472fa389d
-md"""
-(보충학습) 벡터 $V_1,V_2,\dots,V_n$이 선형독립이 아니라는 의미는 적당한 $c_1,c_2,\dots,c_n$이 존재하여 
-
-$$c_1 V_1 + c_2V_2 + \dots + c_nV_n=0$$
-
-을 만족한다는 의미이다. (단, 이때 $c_1,\dots c_n$이 모두 0은 아니라고 가정한다.)
-"""
-
-# ╔═╡ 3fbd4bb7-d325-4982-ab0a-def127f91434
-md"""
-- (응용버전) 적당한 매트릭스 ${\bf V}=[V_1~ V_2~ \dots ~ V_n]$에 대하여 ${\bf c} \neq 0$인 벡터 ${\bf c}= (c_1,\dots,c_n)^\top$이 존재하여 $${\bf V}{\bf c}=0$$  만족하면 ${\bf V}$의 column들은 선형독립이 아니라고 볼 수 있다.
-"""
-
-# ╔═╡ 2b4c2b61-53b6-4585-9e5e-774a0cb9bc9f
-md"""
-### 고유벡터의 차원
-"""
-
-# ╔═╡ 10a68b69-f319-48ac-acfb-c71964edd2e7
-md"""
-`-` "하나의 고유값에 반드시 하나의 고유벡터는 존재한다"라는 말은 사실 무한개의 고유벡터가 존재한다는 것을 의미한다. 왜냐하면 $\psi$가 고유벡터이면 $\sqrt{2}\psi$도 고유벡터이기 때문이다. 
-"""
-
-# ╔═╡ cac169f2-0fd8-4ca9-9932-4ed751f834bf
-md"""
-`-` 아래의 예제들을 관찰하자.
-"""
-
-# ╔═╡ 23729642-3a1e-4f22-b05b-356fad1bf54a
+# ╔═╡ 5ba8cbae-f3c8-49da-8a70-b81f1ebbb7fb
 md"""
 (예제1)
 """
 
-# ╔═╡ bc325027-c401-410d-be4e-2e99e5077269
+# ╔═╡ f1db9c3d-a431-49cf-ab2a-a4ff2fff7c1c
 let 
-	A = [1 0 
-		 0 2]
-	eigen(A)
+	A = [0 1 0 0 0
+		 0 0 0 0 0
+		 0 0 0 1 -2 
+		 0 0 0 1 0
+		 0 0 1 1 3]
+	eigen(A) 
 end
 
-# ╔═╡ 73808ba1-63b7-4157-b606-26814a864f2f
+# ╔═╡ ff802e48-151c-4653-b3cb-f99c33e532e2
 md"""
--  $\begin{bmatrix} 1 \\ 0 \end{bmatrix}$ 이 고유벡터 이므로 $\begin{bmatrix} 0.5 \\ 0 \end{bmatrix}$, $\begin{bmatrix} -3.14 \\ 0 \end{bmatrix}$ 등도 고유벡터이다. 
+- 고유값 $\lambda=0$, $\lambda=1$이 각각 중복수가 2인 중복근 
+- 대각화 가능하려면 $\lambda=0$ 에 대응하는 고유벡터들과 $\lambda=1$ 에 대응하는 고유벡터들이 span하는 공간이 모두 2차원 이어야 함. 
+- 그런데 지금은 둘다 1차원만 span $\to$ 따라서 ${\bf A}$는 대각화 할 수 없음 (이때 ${\bf A}$의 고유벡터행렬의 rank는 3)
 """
 
-# ╔═╡ 2243a0ee-3329-4b06-883c-6dd8bfd44551
-md"""
--  $\begin{bmatrix} 0 \\ 1 \end{bmatrix}$ 이 고유벡터 이므로 $\begin{bmatrix} 0 \\ 5.3 \end{bmatrix}$, $\begin{bmatrix} 0 \\ -\sqrt{3} \end{bmatrix}$ 등도 고유벡터이다. 
-"""
-
-# ╔═╡ 14c834bd-61ef-45d8-8aa1-cfee057f1e3d
+# ╔═╡ 2eb6c292-837c-467c-bbed-08cfa2313510
 md"""
 (예제2)
 """
 
-# ╔═╡ cbdabff5-c038-4f7a-ac35-545aa7127bd3
+# ╔═╡ 01450a53-9ab9-4f20-a97f-593994fb71cc
 let 
-	B = [1 1 
-		 0 1]
-	eigen(B)
+	A = [0 1 0 0 0
+		 0 0 0 0 0
+		 0 0 0 1 -2 
+		 0 0 0 1 0
+		 0 0 1 -1 3]
+	eigen(A) 
 end
 
-# ╔═╡ 212b9778-dee0-45a2-a4a8-b75f4fa7a0bb
+# ╔═╡ 8ec0961e-d473-4cc8-addf-0dab19992451
 md"""
--  $\begin{bmatrix} 1 \\ 0 \end{bmatrix}$ 이 고유벡터 이므로 $\begin{bmatrix} -1 \\ 0 \end{bmatrix}$, $\begin{bmatrix} -3.14 \\ 0 \end{bmatrix}$ 등도 고유벡터이다. 
+- 이번에도 고유값 $\lambda=0$, $\lambda=1$이 각각 중복수가 2인 중복근 
+- 대각화 가능하려면 $\lambda=0$ 에 대응하는 고유벡터들과 $\lambda=1$ 에 대응하는 고유벡터들이 span하는 공간이 모두 2차원 이어야 함. 
+-  $\lambda=1$ 에 대응하는 고유벡터는 2차원을 span하지만 $\lambda=0$ 에 대응하는 고유벡터는 1차원만 span한다. 따라서 대각화 불가능. (이때 ${\bf A}$의 고유벡터 행렬의 rank는 4)
 """
 
-# ╔═╡ 8657dff6-92e6-45df-853d-d13ee2959138
+# ╔═╡ 0cc7937f-7fdd-4aae-8a55-afae0e91ea0a
 md"""
-`-` 예제1,2 모두 무한개의 고유벡터를 가지는 것은 맞지만 차원이 다르다. 예제2의 경우 $\begin{bmatrix} 1 \\ 0\end{bmatrix}$을 basis로 한 벡터들의 조합을 만들 수 있지만 예제1의 경우 $\begin{bmatrix} 1 \\ 0\end{bmatrix}$을 basis로 한 벡터들의 조합을 만들 수 있고 추가적으로 $\begin{bmatrix} 0 \\ 1\end{bmatrix}$를 basis로 한 벡터들의 조합도 만들 수 있기 때문이다. 
+(예제3)
 """
 
-# ╔═╡ fa6d45e7-3921-4b86-a757-1c1eddda5438
+# ╔═╡ 695a1995-1d87-42b0-8e2d-0ea2f9b84aac
+let 
+	A = [1 0 0 0 0
+		 0 0 0 0 0
+		 0 0 0 1 -2 
+		 0 0 0 1 0
+		 0 0 1 -1 3]
+	λ, Ψ = eigen(A)
+end
+
+# ╔═╡ 21d1cb2e-cf87-4b08-8d9a-380fdf263b46
 md"""
-`-` 예제1이 가질 수 있는 고유벡터 조합들이 예제2보다 더 풍부하다. 이 느낌을 좀 더 수학적으로 표현할 수 있을까? $\to$ 예제1의 고유벡터들로 조합할 수 있는 (=고유벡터들의 조합으로 확장할 수 있는, 고유벡터로 span하는) 점들은 2차원 평면을 만들지만 예제2의 고유벡터로 조합할 수 있는 (=고유벡터들의 조합으로 확장할 수 있는, 고유벡터로 span하는) 점들은 1차원 직선을 만든다. 
+`-` 이번에는 고유값 $\lambda=0,1,2$ 이고 $\lambda=1$은 3개의 고유값이 겹쳐있다. 즉 $\lambda=1$의 중복수가 3이다. 
+
+`-` 이렇게 되면 $\lambda=1$에 대응하는 고유벡터들이 3차원을 span해줘야 행렬 ${\bf A}$가 대각화 가능해진다. 그런데 놀랍게도 3차원을 span한다! ($\lambda=1$ 대응하는 3개의 고유벡터는 모두 선형독립!) 따라서 이 행렬은 대각화 가능하다 (이때 ${\bf A}$의 고유벡터행렬의 rank는 5, full rank)
 """
 
-# ╔═╡ f32f1283-1689-4372-b89b-697604efe6fc
+# ╔═╡ 766229c2-12ad-4863-aefb-d913970f4e87
 md"""
-(예제3) 예제1,2의 고유벡터로 조합할 수 있는 (=고유벡터들의 조합으로 확장할 수 있는, 고유벡터로 span하는) 점들을 시각화 하라. 예제1의 매트릭스를 임의로 바꿔보면서 관찰해보라. 
+(예제4)
 """
 
-# ╔═╡ 71dbec22-42b4-4cbf-9e86-e8952ec127c4
-md"c1 $(@bind c1 Slider(-5:0.1:5,show_value=true))"
+# ╔═╡ 56d26011-aa1e-4452-bf8d-904497f2eb14
+let 
+	A = [1 0 0 0 0
+		 0 2 0 0 0
+		 0 0 3 1 -2 
+		 0 0 0 4 0
+		 0 0 0 0 5]
+	λ, Ψ = eigen(A)
+end
 
-# ╔═╡ 95674f32-720c-48bc-8d88-f8ed33b270ae
-md"c2 $(@bind c2 Slider(-5:0.1:5,show_value=true))"
-
-# ╔═╡ 0a987b69-88dc-4ba2-af1c-c39cb5d85019
-let
-	A = [1 5 
-		 2 2]
-	B = [1 1 
-		 0 1]
-	f = Ψ -> [Ψ[:,i] for i in 1:2]
-	v1, v2= A |> eigvecs |> f
-	u1, u2= B |> eigvecs |> f
-	Bdx, Bdy = [-5,5,-5,5]*v1' + [5,5,-5,-5]*v2' |> f
-	Ax,Ay = c1*v1 + c2*v2
-	Bx,By = c1*u1 + c2*u2
-	scatter(xlim=(-11,11),ylim=(-11,11))
-	scatter!(Bdx,Bdy,markershape=:cross,alpha=0.2,color=:"red")
-	scatter!([Ax],[Ay],markershape=:cross,color=:"red")
-	scatter!([Bx],[By],color=:"blue")
-end 
-
-# ╔═╡ de97e015-f2d8-453e-9f71-e748eab4159e
+# ╔═╡ 0f96f8ac-d622-42ba-8aaa-bec64f99b120
 md"""
-## 숙제 
+- 모든 고유값이 다 다르므로 ${\bf A}$의 고유벡터행렬은 full rank matrix이다. 그리고 ${\bf A}$는 대각화 가능행렬이다. 
+"""
 
-정사각행렬 ${\bf A}_{2\times 2}$가 0행렬인 경우에 ${\bf A}$의 고유벡터들이 span하는 공간이 몇차원인가? 
+# ╔═╡ 88849587-1978-44b1-83dd-5f1642f84a52
+md"""
+#### 대각화 가능여부를 체크하는 알고리즘
+"""
+
+# ╔═╡ 4af41e92-3d3d-4618-bef3-d39c6c07c479
+md"""
+`-` (알고리즘) 대각화 가능여부를 체크하는 방법을 정리하면 아래와 같다. 
+
+(1) 정사각행렬 ${\bf A}$의 모든 고유값을 구해본다. 중복되는 고유값이 있는지 체크한다. 
+- 중복근이 없다 $\to$ 대각화가능 
+- 중복근이 있다 $\to$ (2)로 넘어간다. 
+
+(2) 중북근이 있다 -> 중복근 $\lambda_1,\lambda_2\dots,\lambda_k$에 대응하는 고유벡터들이 각 중복근의 중복수와 같은 차원만큼 공간을 span 한다면 대각화 가능하다. 그렇지 않으면 불가능하다. 
+"""
+
+# ╔═╡ eff9b202-7b9a-4ea8-b119-218bbe52988f
+md"""
+#### 대각화가능, 고유값분해 가능
+"""
+
+# ╔═╡ b92a732e-2ada-4fc3-9bea-869d4fde2518
+md"""
+`-` 매트릭스 ${\bf A}$를 대각화가능 과정, 대각화 가능행렬이라는 말의 의미 ($\star$)
+
+행렬 ${\bf A}_{n\times n}$의 고유값이 $\lambda_1,\dots,\lambda_n$ 이라고 하자. (이떄 모든 고유값이 서로 다른 값을 필요는 없음) 그리고 대응하는 고유벡터를 각각 $\psi_1,\dots,\psi_n$ 라고 하자. 정의에 따라서 아래식이 만족한다. 
+
+$$\begin{cases} 
+{\bf A}\psi_1= \psi_1\lambda_1 \\ 
+{\bf A}\psi_2= \psi_2\lambda_2 \\ 
+\dots \\ 
+{\bf A}\psi_n= \psi_n\lambda_n \\ 
+\end{cases}$$
+
+이것을 매트릭스 버전으로 쓰면 아래와 같이 쓸 수 있다. 
+
+${\bf A}[\psi_1 ~ \psi_2 ~ \dots ~ \psi_n] = [\psi_1 ~ \psi_2 ~ \dots ~ \psi_n]\text{diag}(\lambda_1,\lambda_2,\dots,\lambda_n)$
+
+이때 ${\bf \Psi}=[\psi_1 ~ \psi_2 ~ \dots ~ \psi_n]$ 그리고 ${\bf \Lambda}=\text{diag}(\lambda_1,\lambda_2,\dots,\lambda_n)$ 이라고 하면 아래와 같이 표현가능하다. 
+
+
+${\bf A}{\bf \Psi} = {\bf \Psi}{\bf \Lambda}$
+
+만약에 ${\bf \Psi}$가 full rank matrix 이면 ${\bf \Psi}^{-1}$ 이 존재하게되는데 (이건 모르면 그냥 외우세요) ${\bf \Psi}^{-1}$를 양변의 앞에 곱하면 
+
+${\bf \Psi}^{-1}{\bf A}{\bf \Psi}= {\bf \Lambda}$
+
+가 된다. 행렬 ${\bf \Psi}^{-1}$ 와 ${\bf \Psi}$ 를 "변환"으로 해석하면 위의 식은 "행렬 ${\bf A}$에 적당한 변환을 하면 대각행렬 ${\bf \Lambda}$로 만들 수 있다" 라는 의미가 된다. 이러한 행렬 ${\bf A}$를 대각화 가능행렬이라고 한다. 
+"""
+
+# ╔═╡ 8864f5e9-78d0-45f7-9204-a164fe723527
+md"""
+- 참고로 아래의 표현은 조건없이 그냥 가능하다. 
+
+$${\bf A}{\bf \Psi}={\bf \Psi}{\bf \Lambda}$$
+"""
+
+# ╔═╡ d7d51b3e-0a84-422a-bdda-bc2dc4df3d78
+md"""
+`-` 이론: ${\bf A}$가 대각화가능행렬 $\Leftrightarrow$ ${\bf A}$의 고유벡터행렬이 full rank matrix
+"""
+
+# ╔═╡ 8906e718-dc5e-40ae-aa1e-47b5e6b77445
+md"""
+`-` 위의 이론의 다른표현: ${\bf A}$의 고유벡터행렬 ${\bf \Psi}$가 full rank matrix 이면 아래와 같이 표현 가능하다. 
+
+$${\bf A} = {\bf \Psi}{\bf \Lambda}{\bf \Psi}^{-1}$$
+
+이러한 상황을 "${\bf A}$가 대각화가능하다" 혹은 "${\bf A}$가 고유값분해 가능하다", "${\bf A}$의 고유값분해가 존재한다" 라고 표현한다. 
+"""
+
+# ╔═╡ e73df797-b43f-404e-b7e8-d2edc88d528e
+md"""
+## 숙제
+"""
+
+# ╔═╡ e6e801ca-b870-4ffa-aac9-91a2c97a220f
+md"""
+정사각행렬 ${\bf A}$에 대하여 다음을 읽고 참 거짓을 판단하라. (기말고사에 낼거에요)
+
+(1) ${\bf A}$의 고유값중 하나의 값이라도 0이면 고유벡터행렬이 full rank matrix가 아니다. 
+
+(2) ${\bf A}$가 대각화가능하다는 말은 항상 ${\bf A}$가 $n$개의 서로 다른 고유값을 가진다는 말이다. 
+
+(3) ${\bf A}$가 서로 다른 $n$개의 고유값을 가지면 ${\bf A}$의 고유벡터들이 span하는 공간은 $n$차원이다. 
+
+(4) ${\bf A}$는 반드시 $n$개의 고유값을 가지며 이 고유값은 모두 실수이다. 
+
+(5) 서로 다른 고유값에 대응하는 고유벡터는 항상 선형독립이다. 
+"""
+
+# ╔═╡ 846f6dbe-93b9-4f65-a982-be0e8d427ed1
+md"""
+> *제가 시간조정을 잘못하여 금일 강의분이 길게 촬영되었습니다. 추가된 강의분은 다음 강의에 반영하여 짧게 촬영하도록 하곘습니다.*
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -1384,75 +1396,66 @@ version = "0.9.1+5"
 """
 
 # ╔═╡ Cell order:
-# ╟─e08c8300-db18-11ec-3f60-19c9638fa2d2
-# ╟─90db85a9-9864-4e63-98ca-7edb77f1932f
-# ╟─c84fb7f0-e572-46ab-b0a3-7612c1870815
-# ╠═15442a71-00fe-48ed-ae51-def2f2d8876e
-# ╠═8308a4c4-46b0-4407-aba5-d8b174c2f152
-# ╠═8b5ce365-94e4-4875-ac48-d7d6f4b7409c
-# ╟─9d9020be-5c18-48f6-bf87-d3623f568673
-# ╟─05c1b786-159f-4ebd-9748-65c5194133f6
-# ╟─65396179-2be2-4ba2-84a6-38db6a4335c5
-# ╟─318c6975-764e-47e5-abe7-0ba7b9883d20
-# ╠═a411e2b7-b659-44d1-8146-16d15f59e0e4
-# ╟─867a6ec4-fb9c-4001-910f-9080ecfcddbc
-# ╟─67b61ca4-a06b-4f1d-8cab-0d4ba12dfae6
-# ╠═11d55eb6-67af-4146-abe0-c34dba602e71
-# ╟─6f9a1a8e-717b-4953-804a-e8647743fbd4
-# ╟─598d1691-16cf-4803-a5af-d87abec1a02e
-# ╟─fa178a75-8119-4d2c-9f63-94420591e7a5
-# ╟─c1e1aded-6005-4b01-bab1-8f75a3811dc4
-# ╟─752ebf31-3ec1-4033-a3d1-0bddd8ac3232
-# ╟─3a85c442-10cd-46ac-943f-6912018b008c
-# ╟─330e2f3a-4d66-417f-aaf5-b92ba0a79c55
-# ╟─713775f6-ccce-4b7a-bda3-e828aebcd6a1
-# ╟─006740e0-f12c-4312-b181-30d5e6f82ec3
-# ╟─cba26403-d491-4eae-be95-7a11984c2b0e
-# ╟─fe5876ba-30f9-470d-bd42-4c188fa580f3
-# ╟─bca97f96-16d9-4c2d-8d6b-6bd5c7400706
-# ╠═ee444ee9-9a95-4b8f-999d-60d1c16df56f
-# ╟─4a687148-264d-46b4-a1e4-7d3e94288e57
-# ╟─17bce861-3ef6-4050-bc79-67da0ea689b8
-# ╠═6349ab90-43fd-4a19-87d2-aa2483d3faea
-# ╟─d7d62756-2dab-4a0f-817a-e1acd83a3b74
-# ╟─9bb72ff3-9307-4904-a8b7-e3021b64c343
-# ╠═df8db08d-bdda-461b-93cf-e183fc460a41
-# ╟─db0b8cb1-2978-4441-9d5c-5e244f31eb0a
-# ╟─8d7119f8-1ef7-4295-a962-d14b1b624689
-# ╠═2a3b32af-8c6e-495b-9cb6-872d3a64dcd5
-# ╟─064f317c-a22d-4220-a944-7d2979dc3515
-# ╟─d7dba18d-7ee2-41df-b970-d6b92599b22f
-# ╟─b85ea93b-70b9-4ba3-894f-8864626fcca1
-# ╠═23b12658-c5af-4b28-a49c-ae6b10815de0
-# ╟─40b14b87-6d3e-47c4-9177-dfeeb116c858
-# ╟─3ede1cfb-87d6-40a7-884c-0da963c24d92
-# ╟─003a2f97-46cf-4465-83f9-0ad4c64b8c59
-# ╟─fdba1f70-d0c2-4765-91fd-452fdfe487b9
-# ╟─80393f7b-c7d2-4972-9ed6-6d06439760ee
-# ╠═0757d40b-2402-445e-ad4c-2daaec0b1b75
-# ╟─a9970ddd-eba6-4eb6-9a32-a6bcc154ed68
-# ╠═719cdcf6-d062-48d3-9371-a6419aa69522
-# ╟─7e88ea4a-61ff-4fb6-bf6b-14aed6570cce
-# ╟─fa606cc4-7cf2-457f-889a-3a4bdeaaab31
-# ╟─85302350-4d8f-4a26-8901-b308fd0b7e20
-# ╟─465232b9-61e3-419e-a38e-e26472fa389d
-# ╟─3fbd4bb7-d325-4982-ab0a-def127f91434
-# ╟─2b4c2b61-53b6-4585-9e5e-774a0cb9bc9f
-# ╟─10a68b69-f319-48ac-acfb-c71964edd2e7
-# ╟─cac169f2-0fd8-4ca9-9932-4ed751f834bf
-# ╟─23729642-3a1e-4f22-b05b-356fad1bf54a
-# ╠═bc325027-c401-410d-be4e-2e99e5077269
-# ╟─73808ba1-63b7-4157-b606-26814a864f2f
-# ╟─2243a0ee-3329-4b06-883c-6dd8bfd44551
-# ╟─14c834bd-61ef-45d8-8aa1-cfee057f1e3d
-# ╠═cbdabff5-c038-4f7a-ac35-545aa7127bd3
-# ╟─212b9778-dee0-45a2-a4a8-b75f4fa7a0bb
-# ╟─8657dff6-92e6-45df-853d-d13ee2959138
-# ╟─fa6d45e7-3921-4b86-a757-1c1eddda5438
-# ╟─f32f1283-1689-4372-b89b-697604efe6fc
-# ╠═71dbec22-42b4-4cbf-9e86-e8952ec127c4
-# ╠═95674f32-720c-48bc-8d88-f8ed33b270ae
-# ╠═0a987b69-88dc-4ba2-af1c-c39cb5d85019
-# ╟─de97e015-f2d8-453e-9f71-e748eab4159e
+# ╟─e99a9f9e-dc95-11ec-0090-a94738118068
+# ╟─76bbd329-1a4d-4a59-a836-982e9dbee14a
+# ╟─07709962-23e2-47f1-8073-36067aa5dc76
+# ╠═b8ef974e-5c2a-4e12-903b-d3034f0d14ae
+# ╠═7480aba2-fcee-4e63-9b06-ef6e1d7f7bec
+# ╠═eaf4ea77-d5fe-4eec-b98f-1bb46b8c8fca
+# ╟─a0cfda3c-97c0-4f3e-b770-df39fa2812b8
+# ╟─c5c67bcf-8e76-452f-ac6d-79705e1300d4
+# ╟─5cbade18-07a1-4785-a7cb-2b954f638070
+# ╠═8f53bd3f-6f4d-412d-b491-ddf47ee0628a
+# ╟─f16b4417-d8b5-4aa2-b0dd-57844567046e
+# ╠═3f8df3c3-f66b-413c-a3e6-2a96f365b74e
+# ╟─4b68f08f-e871-4b93-a32e-0cc4b83ca939
+# ╟─6d055720-8315-4fa6-92fe-6eb49f5e1149
+# ╠═fd0691e2-bdac-444c-9f9d-75a89bc10166
+# ╟─10452003-839a-45a5-939d-94b4828bc31a
+# ╟─c2b95dea-0495-4689-8689-ee0ccd9e0be3
+# ╟─b38d834e-aebb-484d-93e2-6222932aaddd
+# ╠═f6c6e1b7-1e5e-4d98-87fc-5fe27fda17fb
+# ╟─638365e6-ca44-42db-a930-a5d4e40a909e
+# ╠═ca0dacd4-1d6c-4401-87a4-15e6a8da3d70
+# ╠═eeaa3ece-15bf-40a2-89c0-42de6673853e
+# ╟─4f58cd8b-3d6a-4d84-9101-e5d7baa30f5a
+# ╟─872120de-4ff2-46b8-9c8f-cb93b4a39497
+# ╠═04314c22-fe76-4708-83fb-2e17c102b5f7
+# ╟─abfa8046-570a-4e16-adf4-19f95f169479
+# ╟─b01e16db-5743-4bb9-941a-64d450f1259d
+# ╟─2c0df270-2242-485e-9906-7816e7b8a560
+# ╟─8d51400d-1cf5-48bc-a65b-51ed267d38f2
+# ╟─deae33b2-6883-4060-adc1-554bc3fe1223
+# ╟─c1623588-b6b4-44e4-8944-22abb6c488b7
+# ╟─a4952768-5b79-4708-b7e4-2b8b53a690e1
+# ╠═938ca770-863b-4a77-ad95-cab91986ebc6
+# ╟─56b0fe4d-3d99-406d-a098-e74685035445
+# ╠═670b94b7-d1a9-45c4-a54b-1453f07e78f0
+# ╠═5d5396a3-df5d-4bf1-8d73-5160b9c05370
+# ╟─f21e1f3c-6b0c-445d-9001-310a7e6cd828
+# ╟─d9766244-bcfd-4e24-8747-d36b842ba4c5
+# ╟─a80a3165-25e0-47bd-8079-7a3dd9705284
+# ╟─5ba8cbae-f3c8-49da-8a70-b81f1ebbb7fb
+# ╠═f1db9c3d-a431-49cf-ab2a-a4ff2fff7c1c
+# ╟─ff802e48-151c-4653-b3cb-f99c33e532e2
+# ╟─2eb6c292-837c-467c-bbed-08cfa2313510
+# ╠═01450a53-9ab9-4f20-a97f-593994fb71cc
+# ╟─8ec0961e-d473-4cc8-addf-0dab19992451
+# ╟─0cc7937f-7fdd-4aae-8a55-afae0e91ea0a
+# ╠═695a1995-1d87-42b0-8e2d-0ea2f9b84aac
+# ╟─21d1cb2e-cf87-4b08-8d9a-380fdf263b46
+# ╟─766229c2-12ad-4863-aefb-d913970f4e87
+# ╠═56d26011-aa1e-4452-bf8d-904497f2eb14
+# ╟─0f96f8ac-d622-42ba-8aaa-bec64f99b120
+# ╟─88849587-1978-44b1-83dd-5f1642f84a52
+# ╟─4af41e92-3d3d-4618-bef3-d39c6c07c479
+# ╟─eff9b202-7b9a-4ea8-b119-218bbe52988f
+# ╟─b92a732e-2ada-4fc3-9bea-869d4fde2518
+# ╟─8864f5e9-78d0-45f7-9204-a164fe723527
+# ╟─d7d51b3e-0a84-422a-bdda-bc2dc4df3d78
+# ╟─8906e718-dc5e-40ae-aa1e-47b5e6b77445
+# ╟─e73df797-b43f-404e-b7e8-d2edc88d528e
+# ╟─e6e801ca-b870-4ffa-aac9-91a2c97a220f
+# ╟─846f6dbe-93b9-4f65-a982-be0e8d427ed1
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
