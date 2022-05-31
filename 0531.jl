@@ -191,31 +191,18 @@ md"""
 `-` 관찰1: 어떠한 실대칭행렬 ${\bf A}_{n\times n}$의 모든 고유값이 양수이면 ${\bf A}$는 positive definite matrix가 된다. (즉 모든 non-zero vector ${\bf y}$에 대해서 ${\bf y}^\top {\bf A}{\bf y}>0$을 만족한다.)
 """
 
-# ╔═╡ 25b10a23-ea92-4cc3-8985-540b76ff5406
+# ╔═╡ 7befd7ef-7ab9-4a00-a9d8-52cde80c23e6
 md"""
 (왜?) 
 """
 
-# ╔═╡ a2f1b307-a5d2-4a81-8a20-a281acef0997
+# ╔═╡ 71d85e9f-a649-4584-8cbd-d43dedba97cb
 md"""
-(예비학습) 모든 원소가 실수인 임의의 벡터 ${\bf v}=(v_1,\dots v_n)^\top\neq 0$에 대하여 항상 ${\bf v}^\top {\bf v}>0$ 이 만족한다. 
-"""
+모든 임의의 ${\bf y}$에 대하여 아래가 성리하므로.
 
-# ╔═╡ 694ca405-00c6-49ce-9c01-d7ad06f9b24c
-md"""
-(증명) 실대칭행렬이고 모든 고유값이 양수이므로 아래와 같이 성립한다. 
+$${\bf y}^\top{\bf A}{\bf y}={\bf y}^\top{\bf \Psi}{\bf \Lambda}{\bf \Psi}^\top{\bf y}={\bf x}^\top {\bf \Lambda}{\bf x}=\sum_{i=1}^{n}x_i^2\lambda_i>0$$
 
-$${\bf A}={\bf \Psi}{\bf \Lambda}{\bf \Psi}^\top={\bf \Psi}{\bf \Lambda}^{1/2}{\bf \Psi}^\top {\bf \Psi}{\bf \Lambda}^{1/2}{\bf \Psi}^\top$$
-
-첫번째등호는 ${\bf A}$가 직교대각화가 가능하기 때문에 성립하고 두번째 등호는 모든 고유값이 양수이고 ${\bf \Psi}$가 직교행렬이기 때문에 성립한다. 여기에서 ${\bf \Psi}{\bf \Lambda}^{1/2}{\bf \Psi}^\top$는 대칭행렬임을 유의하자. 즉 아래가 성립한다. 
-
-${\bf \Psi}{\bf \Lambda}^{1/2}{\bf \Psi}^\top  = \big({\bf \Psi}{\bf \Lambda}^{1/2}{\bf \Psi}^\top\big)^\top$
-
-따라서 원한다면 ${\bf A}={\bf B}^\top {\bf B}$, where ${\bf B}= {\bf \Psi}{\bf \Lambda}^{1/2}{\bf \Psi}^\top$ 와 같은 형태로 써도 무방하다. 이제 임의의 non-zero vector ${\bf y}$에 대하여 ${\bf y}^\top {\bf A}{\bf y}$ 를 계산하면 아래와 같이 표현할 수 있다. 
-
-${\bf y}^\top {\bf A}{\bf y}={\bf y}^\top {\bf B}^\top {\bf B} {\bf y}=({\bf B}{\bf y})^\top ({\bf B}{\bf y})>0$
-
-마지막 부등호는 예비학습에 의하여 성립한다. 
+단 여기에서 ${\bf x}={\bf \Psi}^\top{\bf y}$ 이다. 
 """
 
 # ╔═╡ 706c2e23-626e-44e0-a443-70023ffbccc6
@@ -508,9 +495,8 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─dc456627-72c5-4acf-89af-aa1ba01d2ba4
 # ╟─fb480817-66f5-468b-b6c6-9bf145fc86c4
 # ╟─3e069b39-28fb-4404-b292-8a54c2a25a8a
-# ╟─25b10a23-ea92-4cc3-8985-540b76ff5406
-# ╟─a2f1b307-a5d2-4a81-8a20-a281acef0997
-# ╟─694ca405-00c6-49ce-9c01-d7ad06f9b24c
+# ╟─7befd7ef-7ab9-4a00-a9d8-52cde80c23e6
+# ╟─71d85e9f-a649-4584-8cbd-d43dedba97cb
 # ╟─706c2e23-626e-44e0-a443-70023ffbccc6
 # ╟─f8ccc269-0ea0-4601-ab4b-04b6aa1526ec
 # ╟─b44292d9-2a3f-49d6-bcc2-8fb5b72e9e6c
