@@ -32,6 +32,9 @@ md"""
 
 # ╔═╡ 1f7b4001-be12-44dc-8745-c45ed7d2ad03
 md"""
+[5월31일](https://guebin.github.io/SC2022/0531.html)
+- Spectral theorem, Positive definite matrix
+
 [5월26일](https://guebin.github.io/SC2022/0526.html)
 - 고유값과 고유벡터 (2)
 
