@@ -22,6 +22,17 @@ md"""
 # 5월31일
 """
 
+# ╔═╡ 1d6ec17b-eca2-4289-8cfe-04a67bcac2c6
+html"""
+<div style="display: flex; justify-content: center;">
+<div  notthestyle="position: relative; right: 0; top: 0; z-index: 300;">
+<iframe src=
+"
+https://www.youtube.com/embed/playlist?list=PLQqh36zP38-wnOQs50fgN-0fqnhc84Oc-
+"
+width=600 height=375  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+"""
+
 # ╔═╡ d3ccc0c6-e092-11ec-3296-b5a32d51eade
 md"""
 ## usings
@@ -469,6 +480,7 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 
 # ╔═╡ Cell order:
 # ╟─27d01165-2aa4-4b86-93ba-c7109636e692
+# ╟─1d6ec17b-eca2-4289-8cfe-04a67bcac2c6
 # ╟─d3ccc0c6-e092-11ec-3296-b5a32d51eade
 # ╠═b868981c-dffb-4165-8e69-97889bc25312
 # ╠═26300fa0-9f73-4874-9e60-d7b82f05cc71
