@@ -205,6 +205,11 @@ $${\bf y}^\top{\bf A}{\bf y}={\bf y}^\top{\bf \Psi}{\bf \Lambda}{\bf \Psi}^\top{
 단 여기에서 ${\bf x}={\bf \Psi}^\top{\bf y}$ 이다. 
 """
 
+# ╔═╡ 350200af-c763-4bc3-8b7f-be8422988009
+md"""
+> 이전증명을 삭제하고 이 증명으로 수정하였습니다. 이 증명으로 공부하세요!!
+"""
+
 # ╔═╡ 706c2e23-626e-44e0-a443-70023ffbccc6
 md"""
 `-` 관찰2: 어떠한 실대칭행렬 ${\bf A}$가 positive definite matrix 이면 (즉 모든 non-zero vector ${\bf y}$에 대하여 ${\bf y}^\top {\bf A}{\bf y}>0$이 성립한다면) ${\bf A}$의 모든 고유값은 양수이다. 
@@ -497,6 +502,7 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─3e069b39-28fb-4404-b292-8a54c2a25a8a
 # ╟─7befd7ef-7ab9-4a00-a9d8-52cde80c23e6
 # ╟─71d85e9f-a649-4584-8cbd-d43dedba97cb
+# ╟─350200af-c763-4bc3-8b7f-be8422988009
 # ╟─706c2e23-626e-44e0-a443-70023ffbccc6
 # ╟─f8ccc269-0ea0-4601-ab4b-04b6aa1526ec
 # ╟─b44292d9-2a3f-49d6-bcc2-8fb5b72e9e6c
