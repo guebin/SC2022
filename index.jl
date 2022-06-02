@@ -32,6 +32,9 @@ md"""
 
 # ╔═╡ 1f7b4001-be12-44dc-8745-c45ed7d2ad03
 md"""
+[6월2일](https://guebin.github.io/SC2022/0602.html)
+- SVD 
+
 [5월31일](https://guebin.github.io/SC2022/0531.html)
 - Spectral theorem, Positive definite matrix
 
