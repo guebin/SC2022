@@ -64,7 +64,7 @@ md"""
 
 # ╔═╡ ea557115-904f-4d28-a136-8f700d3ffb41
 md"""
-`-` 이론: (정사각)행렬 ${\bf A}_{n\times n}$가 실대칭행렬이고 positive semidefinite matrix 이면 ${\bf A}$의 고유값분해와 SVD가 일치한다. 즉 
+`-` 이론: (정사각)행렬 ${\bf A}_{n\times n}$가 실대칭행렬이고 positive semidefinite matrix 이면 ${\bf A}$의 고유값분해와 SVD가 일치한다. 즉 아래를 만족하는 ${\bf \Psi}, {\bf \Lambda}, {\bf U}, {\bf D}, {\bf V}$ 를 선택할 수 있다. 
 
 ${\bf A}={\bf \Psi}{\bf \Lambda}{\bf \Psi}^\top={\bf U}{\bf D}{\bf V}^\top$
 
