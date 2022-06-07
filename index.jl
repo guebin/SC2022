@@ -32,6 +32,9 @@ md"""
 
 # ╔═╡ 1f7b4001-be12-44dc-8745-c45ed7d2ad03
 md"""
+[6월7일](https://guebin.github.io/SC2022/0607.html)
+- 변환을 의미하는 행렬
+
 [6월2일](https://guebin.github.io/SC2022/0602.html)
 - SVD 
 
