@@ -23,6 +23,8 @@ md"""
 - [시험관련 안내사항](https://guebin.github.io/SC2022/notice1.html)
 - [중간고사 예상유형](https://guebin.github.io/SC2022/mid_prac.html)
 - [중간고사](https://guebin.github.io/SC2022/mid.html) -> [해설강의](https://guebin.github.io/SC2022/0428.html)
+- [기말고사 예상유형](https://guebin.github.io/SC2022/final_prac.html)
+- [기말고사](https://guebin.github.io/SC2022/final.html) -> [해설강의]()
 """
 
 # ╔═╡ f589bb03-2bf2-4f65-b351-0e3c53eae11b
