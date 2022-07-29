@@ -1,0 +1,6 @@
+[SliderServer]
+host = "0.0.0.0"
+port = 2345
+
+[Export]
+slider_server_url = "https://guebin.github.io/SC2022/"
